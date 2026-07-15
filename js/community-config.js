@@ -9,7 +9,7 @@
  * The anon key is designed to be used in browsers. Never place a service-role key here.
  */
 window.RAILTYPE_COMMUNITY_CONFIG = {
-  enabled: false,
+  enabled: true,
   supabaseUrl: "https://yskkbhusdxulyilueoep.supabase.co",
   anonKey: "sb_publishable_2NTLx6H1AYgXc2TAM45eZA_wc-Yf3o6",
   table: "public_runs",
