@@ -1,0 +1,218 @@
+[
+  {
+    "line": 8,
+    "station": "별내",
+    "region": "namyangju",
+    "lat": 37.64232,
+    "lng": 127.1276,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "다산",
+    "region": "namyangju",
+    "lat": 37.62429,
+    "lng": 127.14973,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "동구릉",
+    "region": "guri",
+    "lat": 37.61105,
+    "lng": 127.13793,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "구리",
+    "region": "guri",
+    "lat": 37.60262,
+    "lng": 127.1407,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "장자호수공원",
+    "region": "guri",
+    "lat": 37.58738,
+    "lng": 127.13794,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "암사역사공원",
+    "region": "seoul",
+    "lat": 37.55695,
+    "lng": 127.13702,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "암사",
+    "region": "seoul",
+    "lat": 37.550127,
+    "lng": 127.127521,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "천호",
+    "region": "seoul",
+    "lat": 37.53792,
+    "lng": 127.123179,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "강동구청",
+    "region": "seoul",
+    "lat": 37.530348,
+    "lng": 127.120461,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "몽촌토성",
+    "region": "seoul",
+    "lat": 37.517692,
+    "lng": 127.11274,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "잠실",
+    "region": "seoul",
+    "lat": 37.514649,
+    "lng": 127.104267,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "석촌",
+    "region": "seoul",
+    "lat": 37.505396,
+    "lng": 127.106995,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "송파",
+    "region": "seoul",
+    "lat": 37.49978,
+    "lng": 127.11212,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "가락시장",
+    "region": "seoul",
+    "lat": 37.493004,
+    "lng": 127.118279,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "문정",
+    "region": "seoul",
+    "lat": 37.485931,
+    "lng": 127.122473,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "장지",
+    "region": "seoul",
+    "lat": 37.478609,
+    "lng": 127.126229,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "복정",
+    "region": "seoul",
+    "lat": 37.471016,
+    "lng": 127.126746,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "남위례",
+    "region": "seongnam",
+    "lat": 37.462839,
+    "lng": 127.139047,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "산성",
+    "region": "seongnam",
+    "lat": 37.456886,
+    "lng": 127.149927,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "남한산성입구",
+    "region": "seongnam",
+    "lat": 37.451568,
+    "lng": 127.159845,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "단대오거리",
+    "region": "seongnam",
+    "lat": 37.445057,
+    "lng": 127.156735,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "신흥",
+    "region": "seongnam",
+    "lat": 37.440952,
+    "lng": 127.14759,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "수진",
+    "region": "seongnam",
+    "lat": 37.437575,
+    "lng": 127.140936,
+    "inside": true,
+    "distanceMetersApprox": 0
+  },
+  {
+    "line": 8,
+    "station": "모란",
+    "region": "seongnam",
+    "lat": 37.433888,
+    "lng": 127.129921,
+    "inside": true,
+    "distanceMetersApprox": 0
+  }
+]

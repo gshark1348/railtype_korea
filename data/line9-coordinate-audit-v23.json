@@ -1,0 +1,324 @@
+{
+  "version": "23.0",
+  "line": 9,
+  "coordinateSystem": "WGS84 / EPSG:4326",
+  "stationCount": 38,
+  "expressStationCount": 16,
+  "primaryReference": {
+    "provider": "국가철도공단",
+    "dataset": "수도권9호선 역위치 20250630",
+    "rows": 38,
+    "license": "이용허락범위 제한 없음"
+  },
+  "extensionCrossCheck": {
+    "provider": "서울교통공사",
+    "dataset": "9호선 2_3단계 역사 좌표 20260131",
+    "rows": 13
+  },
+  "stations": [
+    {
+      "code": "901",
+      "name": "개화",
+      "english": "GAEHWA",
+      "lat": 37.578608,
+      "lng": 126.798153,
+      "express": false
+    },
+    {
+      "code": "902",
+      "name": "김포공항",
+      "english": "GIMPO INT'L AIRPORT",
+      "lat": 37.562434,
+      "lng": 126.801058,
+      "express": true
+    },
+    {
+      "code": "903",
+      "name": "공항시장",
+      "english": "AIRPORT MARKET",
+      "lat": 37.563726,
+      "lng": 126.810678,
+      "express": false
+    },
+    {
+      "code": "904",
+      "name": "신방화",
+      "english": "SINBANGHWA",
+      "lat": 37.567532,
+      "lng": 126.816601,
+      "express": false
+    },
+    {
+      "code": "905",
+      "name": "마곡나루",
+      "english": "MAGONGNARU",
+      "lat": 37.566778,
+      "lng": 126.82731,
+      "express": true
+    },
+    {
+      "code": "906",
+      "name": "양천향교",
+      "english": "YANGCHEON HYANGGYO",
+      "lat": 37.568381,
+      "lng": 126.841333,
+      "express": false
+    },
+    {
+      "code": "907",
+      "name": "가양",
+      "english": "GAYANG",
+      "lat": 37.561391,
+      "lng": 126.854456,
+      "express": true
+    },
+    {
+      "code": "908",
+      "name": "증미",
+      "english": "JEUNGMI",
+      "lat": 37.557402,
+      "lng": 126.861939,
+      "express": false
+    },
+    {
+      "code": "909",
+      "name": "등촌",
+      "english": "DEUNGCHON",
+      "lat": 37.550632,
+      "lng": 126.865689,
+      "express": false
+    },
+    {
+      "code": "910",
+      "name": "염창",
+      "english": "YEOMCHANG",
+      "lat": 37.546936,
+      "lng": 126.874916,
+      "express": true
+    },
+    {
+      "code": "911",
+      "name": "신목동",
+      "english": "SINMOKDONG",
+      "lat": 37.544277,
+      "lng": 126.88308,
+      "express": false
+    },
+    {
+      "code": "912",
+      "name": "선유도",
+      "english": "SEONYUDO",
+      "lat": 37.53802,
+      "lng": 126.893525,
+      "express": false
+    },
+    {
+      "code": "913",
+      "name": "당산",
+      "english": "DANGSAN",
+      "lat": 37.533406,
+      "lng": 126.902809,
+      "express": true
+    },
+    {
+      "code": "914",
+      "name": "국회의사당",
+      "english": "NATIONAL ASSEMBLY",
+      "lat": 37.528247,
+      "lng": 126.917821,
+      "express": false
+    },
+    {
+      "code": "915",
+      "name": "여의도",
+      "english": "YEOUIDO",
+      "lat": 37.521624,
+      "lng": 126.924191,
+      "express": true
+    },
+    {
+      "code": "916",
+      "name": "샛강",
+      "english": "SAETGANG",
+      "lat": 37.517274,
+      "lng": 126.928422,
+      "express": false
+    },
+    {
+      "code": "917",
+      "name": "노량진",
+      "english": "NORYANGJIN",
+      "lat": 37.513534,
+      "lng": 126.941005,
+      "express": true
+    },
+    {
+      "code": "918",
+      "name": "노들",
+      "english": "NODEUL",
+      "lat": 37.512887,
+      "lng": 126.953222,
+      "express": false
+    },
+    {
+      "code": "919",
+      "name": "흑석",
+      "english": "HEUKSEOK",
+      "lat": 37.50877,
+      "lng": 126.963708,
+      "express": false
+    },
+    {
+      "code": "920",
+      "name": "동작",
+      "english": "DONGJAK",
+      "lat": 37.502936,
+      "lng": 126.979306,
+      "express": true
+    },
+    {
+      "code": "921",
+      "name": "구반포",
+      "english": "GUBANPO",
+      "lat": 37.501364,
+      "lng": 126.987332,
+      "express": false
+    },
+    {
+      "code": "922",
+      "name": "신반포",
+      "english": "SINBANPO",
+      "lat": 37.503415,
+      "lng": 126.995925,
+      "express": false
+    },
+    {
+      "code": "923",
+      "name": "고속터미널",
+      "english": "EXPRESS BUS TERMINAL",
+      "lat": 37.50481,
+      "lng": 127.004943,
+      "express": true
+    },
+    {
+      "code": "924",
+      "name": "사평",
+      "english": "SAPYEONG",
+      "lat": 37.504206,
+      "lng": 127.015259,
+      "express": false
+    },
+    {
+      "code": "925",
+      "name": "신논현",
+      "english": "SINNONHYEON",
+      "lat": 37.504598,
+      "lng": 127.02506,
+      "express": true
+    },
+    {
+      "code": "926",
+      "name": "언주",
+      "english": "EONJU",
+      "lat": 37.507287,
+      "lng": 127.033868,
+      "express": false
+    },
+    {
+      "code": "927",
+      "name": "선정릉",
+      "english": "SEONJEONGNEUNG",
+      "lat": 37.51098,
+      "lng": 127.043593,
+      "express": true
+    },
+    {
+      "code": "928",
+      "name": "삼성중앙",
+      "english": "SAMSEONG JUNGANG",
+      "lat": 37.513011,
+      "lng": 127.053282,
+      "express": false
+    },
+    {
+      "code": "929",
+      "name": "봉은사",
+      "english": "BONGEUNSA",
+      "lat": 37.514219,
+      "lng": 127.060245,
+      "express": true
+    },
+    {
+      "code": "930",
+      "name": "종합운동장",
+      "english": "SPORTS COMPLEX",
+      "lat": 37.511426,
+      "lng": 127.076275,
+      "express": true
+    },
+    {
+      "code": "931",
+      "name": "삼전",
+      "english": "SAMJEON",
+      "lat": 37.504738,
+      "lng": 127.088025,
+      "express": false
+    },
+    {
+      "code": "932",
+      "name": "석촌고분",
+      "english": "SEOKCHON GOBUN",
+      "lat": 37.502558,
+      "lng": 127.097033,
+      "express": false
+    },
+    {
+      "code": "933",
+      "name": "석촌",
+      "english": "SEOKCHON",
+      "lat": 37.505431,
+      "lng": 127.106979,
+      "express": true
+    },
+    {
+      "code": "934",
+      "name": "송파나루",
+      "english": "SONGPANARU",
+      "lat": 37.51041,
+      "lng": 127.112195,
+      "express": false
+    },
+    {
+      "code": "935",
+      "name": "한성백제",
+      "english": "HANSEONG BAEKJE",
+      "lat": 37.516404,
+      "lng": 127.116503,
+      "express": false
+    },
+    {
+      "code": "936",
+      "name": "올림픽공원",
+      "english": "OLYMPIC PARK",
+      "lat": 37.516269,
+      "lng": 127.130288,
+      "express": true
+    },
+    {
+      "code": "937",
+      "name": "둔촌오륜",
+      "english": "DUNCHON O-RYUN",
+      "lat": 37.519683,
+      "lng": 127.138397,
+      "express": false
+    },
+    {
+      "code": "938",
+      "name": "중앙보훈병원",
+      "english": "VHS MEDICAL CENTER",
+      "lat": 37.528807,
+      "lng": 127.148488,
+      "express": true
+    }
+  ]
+}

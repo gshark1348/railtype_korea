@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="520" viewBox="0 0 1440 520" role="img" aria-labelledby="title desc">
+  <title id="title">RAILTYPE KOREA GIS data pipeline</title>
+  <desc id="desc">Official station coordinates, administrative boundaries, and river references are normalized, simplified, validated, and rendered as an SVG typing game.</desc>
+  <rect width="1440" height="520" fill="#f7f4ee"/>
+  <style>
+    .title{font:700 34px Arial,sans-serif;fill:#171717}.sub{font:400 16px Arial,sans-serif;fill:#726c63}
+    .box{fill:#fffdfa;stroke:#c8c0b5;stroke-width:2}.head{font:700 18px Arial,sans-serif;fill:#171717}
+    .body{font:400 14px Arial,sans-serif;fill:#726c63}.tag{font:700 11px Arial,sans-serif;letter-spacing:1px;fill:#ef7c1c}
+    .arrow{stroke:#8d867d;stroke-width:3;fill:none;marker-end:url(#a)}.line{stroke:#ef7c1c;stroke-width:8;fill:none;stroke-linecap:round}
+    .river{fill:#b8d9e8;stroke:#76b2cc;stroke-width:2}.dot{fill:#fffdfa;stroke:#ef7c1c;stroke-width:4}
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8d867d"/></marker></defs>
+  <text x="60" y="62" class="title">From public GIS data to an interactive rail-typing map</text>
+  <text x="60" y="92" class="sub">공식 좌표 수집 → 좌표계 정규화 → 폴리곤 가공 → 공간 검증 → SVG 주행 렌더링</text>
+
+  <g transform="translate(60 145)">
+    <rect class="box" width="220" height="220" rx="24"/>
+    <text x="24" y="38" class="tag">01 · SOURCE</text>
+    <text x="24" y="74" class="head">공식 공간 데이터</text>
+    <text x="24" y="108" class="body">• 역사 위·경도</text><text x="24" y="134" class="body">• SGIS 행정경계</text>
+    <text x="24" y="160" class="body">• VWorld 실폭하천</text><text x="24" y="186" class="body">• S-Map 시각 교차검수</text>
+  </g>
+  <path class="arrow" d="M295 255H355"/>
+  <g transform="translate(370 145)">
+    <rect class="box" width="220" height="220" rx="24"/>
+    <text x="24" y="38" class="tag">02 · NORMALIZE</text>
+    <text x="24" y="74" class="head">좌표계 정규화</text>
+    <text x="24" y="108" class="body">런타임: WGS84</text><text x="24" y="134" class="body">EPSG:4326</text>
+    <text x="24" y="166" class="body">거리·토폴로지 검증:</text><text x="24" y="192" class="body">UTM-K · EPSG:5179</text>
+  </g>
+  <path class="arrow" d="M605 255H665"/>
+  <g transform="translate(680 145)">
+    <rect class="box" width="220" height="220" rx="24"/>
+    <text x="24" y="38" class="tag">03 · GEOMETRY</text>
+    <text x="24" y="74" class="head">벡터 지형 가공</text>
+    <text x="24" y="108" class="body">• 시·군 경계 dissolve</text><text x="24" y="134" class="body">• topology-preserving simplify</text>
+    <text x="24" y="160" class="body">• 한강 multi-ring polygon</text><text x="24" y="186" class="body">• 섬을 interior hole로 처리</text>
+  </g>
+  <path class="arrow" d="M915 255H975"/>
+  <g transform="translate(990 145)">
+    <rect class="box" width="220" height="220" rx="24"/>
+    <text x="24" y="38" class="tag">04 · VALIDATE</text>
+    <text x="24" y="74" class="head">공간 무결성 검사</text>
+    <text x="24" y="108" class="body">• polygon validity</text><text x="24" y="134" class="body">• station-in-water test</text>
+    <text x="24" y="160" class="body">• nearest bank distance</text><text x="24" y="186" class="body">• route structure audit</text>
+  </g>
+  <path class="arrow" d="M1225 255H1285"/>
+  <g transform="translate(1300 145)">
+    <rect class="box" width="100" height="220" rx="24"/>
+    <text x="18" y="38" class="tag">05</text>
+    <path class="river" d="M10 95C32 75 49 113 69 94S93 83 96 103V139C75 120 58 152 39 133S16 128 10 145Z"/>
+    <path class="line" d="M18 176C35 153 50 188 65 167S88 151 91 183"/>
+    <circle class="dot" cx="18" cy="176" r="7"/><circle class="dot" cx="50" cy="177" r="7"/><circle class="dot" cx="91" cy="183" r="7"/>
+    <text x="18" y="211" class="head">SVG</text>
+  </g>
+
+  <text x="60" y="432" class="head">Runtime output</text>
+  <text x="60" y="462" class="sub">역명을 정확히 입력할 때마다 노드·선로·열차 위치가 같은 지리 좌표를 기준으로 함께 갱신됩니다.</text>
+</svg>

@@ -1,0 +1,186 @@
+{
+  "version": "24.0.0",
+  "coordinateSystem": "WGS84 / EPSG:4326",
+  "featureCount": 25,
+  "validCount": 25,
+  "invalidCount": 0,
+  "geometryChanged": false,
+  "policy": "Existing SGIS/KOSTAT-derived municipal polygons were retained because all features passed topology validity; v24 changes the separate river layer.",
+  "features": [
+    {
+      "id": "yeoncheon",
+      "valid": true,
+      "geometryType": "MultiPolygon",
+      "parts": 4,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "dongducheon",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "yangju",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "uijeongbu",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "goyang",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "bucheon",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "incheon",
+      "valid": true,
+      "geometryType": "MultiPolygon",
+      "parts": 25,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "gwangmyeong",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "anyang",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "gunpo",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "uiwang",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "suwon",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "hwaseong",
+      "valid": true,
+      "geometryType": "MultiPolygon",
+      "parts": 3,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "osan",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "pyeongtaek",
+      "valid": true,
+      "geometryType": "MultiPolygon",
+      "parts": 2,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "cheonan",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "asan",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "namyangju",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "gwacheon",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "ansan",
+      "valid": true,
+      "geometryType": "MultiPolygon",
+      "parts": 3,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "hanam",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "siheung",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "guri",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "seongnam",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    },
+    {
+      "id": "seoul",
+      "valid": true,
+      "geometryType": "Polygon",
+      "parts": 1,
+      "validity": "Valid Geometry"
+    }
+  ]
+}

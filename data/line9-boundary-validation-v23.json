@@ -1,0 +1,314 @@
+{
+  "version": "23.0",
+  "line": 9,
+  "region": "서울특별시",
+  "stationCount": 38,
+  "insideCount": 38,
+  "outsideCount": 0,
+  "stations": [
+    {
+      "code": "901",
+      "name": "개화",
+      "lat": 37.578608,
+      "lng": 126.798153,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "902",
+      "name": "김포공항",
+      "lat": 37.562434,
+      "lng": 126.801058,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "903",
+      "name": "공항시장",
+      "lat": 37.563726,
+      "lng": 126.810678,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "904",
+      "name": "신방화",
+      "lat": 37.567532,
+      "lng": 126.816601,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "905",
+      "name": "마곡나루",
+      "lat": 37.566778,
+      "lng": 126.82731,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "906",
+      "name": "양천향교",
+      "lat": 37.568381,
+      "lng": 126.841333,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "907",
+      "name": "가양",
+      "lat": 37.561391,
+      "lng": 126.854456,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "908",
+      "name": "증미",
+      "lat": 37.557402,
+      "lng": 126.861939,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "909",
+      "name": "등촌",
+      "lat": 37.550632,
+      "lng": 126.865689,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "910",
+      "name": "염창",
+      "lat": 37.546936,
+      "lng": 126.874916,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "911",
+      "name": "신목동",
+      "lat": 37.544277,
+      "lng": 126.88308,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "912",
+      "name": "선유도",
+      "lat": 37.53802,
+      "lng": 126.893525,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "913",
+      "name": "당산",
+      "lat": 37.533406,
+      "lng": 126.902809,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "914",
+      "name": "국회의사당",
+      "lat": 37.528247,
+      "lng": 126.917821,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "915",
+      "name": "여의도",
+      "lat": 37.521624,
+      "lng": 126.924191,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "916",
+      "name": "샛강",
+      "lat": 37.517274,
+      "lng": 126.928422,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "917",
+      "name": "노량진",
+      "lat": 37.513534,
+      "lng": 126.941005,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "918",
+      "name": "노들",
+      "lat": 37.512887,
+      "lng": 126.953222,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "919",
+      "name": "흑석",
+      "lat": 37.50877,
+      "lng": 126.963708,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "920",
+      "name": "동작",
+      "lat": 37.502936,
+      "lng": 126.979306,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "921",
+      "name": "구반포",
+      "lat": 37.501364,
+      "lng": 126.987332,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "922",
+      "name": "신반포",
+      "lat": 37.503415,
+      "lng": 126.995925,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "923",
+      "name": "고속터미널",
+      "lat": 37.50481,
+      "lng": 127.004943,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "924",
+      "name": "사평",
+      "lat": 37.504206,
+      "lng": 127.015259,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "925",
+      "name": "신논현",
+      "lat": 37.504598,
+      "lng": 127.02506,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "926",
+      "name": "언주",
+      "lat": 37.507287,
+      "lng": 127.033868,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "927",
+      "name": "선정릉",
+      "lat": 37.51098,
+      "lng": 127.043593,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "928",
+      "name": "삼성중앙",
+      "lat": 37.513011,
+      "lng": 127.053282,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "929",
+      "name": "봉은사",
+      "lat": 37.514219,
+      "lng": 127.060245,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "930",
+      "name": "종합운동장",
+      "lat": 37.511426,
+      "lng": 127.076275,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "931",
+      "name": "삼전",
+      "lat": 37.504738,
+      "lng": 127.088025,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "932",
+      "name": "석촌고분",
+      "lat": 37.502558,
+      "lng": 127.097033,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "933",
+      "name": "석촌",
+      "lat": 37.505431,
+      "lng": 127.106979,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "934",
+      "name": "송파나루",
+      "lat": 37.51041,
+      "lng": 127.112195,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "935",
+      "name": "한성백제",
+      "lat": 37.516404,
+      "lng": 127.116503,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "936",
+      "name": "올림픽공원",
+      "lat": 37.516269,
+      "lng": 127.130288,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "937",
+      "name": "둔촌오륜",
+      "lat": 37.519683,
+      "lng": 127.138397,
+      "region": "seoul",
+      "insideBoundary": true
+    },
+    {
+      "code": "938",
+      "name": "중앙보훈병원",
+      "lat": 37.528807,
+      "lng": 127.148488,
+      "region": "seoul",
+      "insideBoundary": true
+    }
+  ]
+}

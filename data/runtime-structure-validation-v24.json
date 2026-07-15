@@ -1,0 +1,11 @@
+{
+  "version": "24.0.0",
+  "htmlParsed": true,
+  "duplicateIdCount": 0,
+  "geometryScriptBeforeApp": true,
+  "riverPolygonCount": 1,
+  "riverHoleCount": 4,
+  "legacyEmbeddedRiverConstantsPresent": false,
+  "routeSplineDefaultTension": 0.38,
+  "assetVersion24Count": 13
+}

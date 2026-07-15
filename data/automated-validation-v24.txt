@@ -1,0 +1,10 @@
+RAILTYPE KOREA v24
+river_valid=True
+river_validity=Valid Geometry
+station_coordinate_combinations=458
+stations_inside_water=0
+nearest_station_to_water=청담 line=7 distance_m=36.1
+municipality_features=25
+municipality_valid=25
+municipality_invalid=0
+route_spline_tension=0.38

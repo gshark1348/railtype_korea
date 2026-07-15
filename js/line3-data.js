@@ -1,0 +1,52 @@
+/*
+ * RAILTYPE KOREA · 수도권 전철 3호선 데이터 · v21.0 공식 좌표 재검증
+ * 서울 지하철 3호선 역 데이터.
+ * 좌표는 WGS84 위·경도이며 서울시 역사마스터 및 서울교통공사 공개 좌표를 바탕으로 구성했습니다.
+ * 선로의 세부 곡선은 인포그래픽 표현을 위해 역 좌표 사이를 직선 보간합니다.
+ */
+window.LINE_3_STATIONS = [
+  { code: "309", name: "대화", en: "DAEHWA", lat: 37.676087, lng: 126.747569 },
+  { code: "310", name: "주엽", en: "JUYEOP", lat: 37.670072, lng: 126.761334 },
+  { code: "311", name: "정발산", en: "JEONGBALSAN", lat: 37.659477, lng: 126.773359 },
+  { code: "312", name: "마두", en: "MADU", lat: 37.652206, lng: 126.777620 },
+  { code: "313", name: "백석", en: "BAEKSEOK", lat: 37.643114, lng: 126.787870 },
+  { code: "314", name: "대곡", en: "DAEGOK", lat: 37.631626, lng: 126.811024 },
+  { code: "315", name: "화정", en: "HWAJEONG", lat: 37.634592, lng: 126.832650 },
+  { code: "316", name: "원당", en: "WONDANG", lat: 37.653324, lng: 126.843041 },
+  { code: "317", name: "원흥", en: "WONHEUNG", lat: 37.650658, lng: 126.872642 },
+  { code: "318", name: "삼송", en: "SAMSONG", lat: 37.653083, lng: 126.895558 },
+  { code: "319", name: "지축", en: "JICHUK", lat: 37.648281, lng: 126.912551 },
+  { code: "320", name: "구파발", en: "GUPABAL", lat: 37.636612, lng: 126.918827 },
+  { code: "321", name: "연신내", en: "YEONSINNAE", lat: 37.618855, lng: 126.920859 },
+  { code: "322", name: "불광", en: "BULGWANG", lat: 37.610554, lng: 126.929843 },
+  { code: "323", name: "녹번", en: "NOKBEON", lat: 37.600882, lng: 126.935758 },
+  { code: "324", name: "홍제", en: "HONGJE", lat: 37.588851, lng: 126.944092 },
+  { code: "325", name: "무악재", en: "MUAKJAE", lat: 37.582658, lng: 126.950131 },
+  { code: "326", name: "독립문", en: "DONGNIMMUN", lat: 37.574534, lng: 126.957902 },
+  { code: "327", name: "경복궁", en: "GYEONGBOKGUNG", lat: 37.575844, lng: 126.973576 },
+  { code: "328", name: "안국", en: "ANGUK", lat: 37.576562, lng: 126.985470 },
+  { code: "329", name: "종로3가", en: "JONGNO 3-GA", lat: 37.571537, lng: 126.991237 },
+  { code: "330", name: "을지로3가", en: "EULJIRO 3-GA", lat: 37.566299, lng: 126.992616 },
+  { code: "331", name: "충무로", en: "CHUNGMURO", lat: 37.561302, lng: 126.995473 },
+  { code: "332", name: "동대입구", en: "DONGGUK UNIV.", lat: 37.558160, lng: 127.005273 },
+  { code: "333", name: "약수", en: "YAKSU", lat: 37.554674, lng: 127.010628 },
+  { code: "334", name: "금호", en: "GEUMHO", lat: 37.548269, lng: 127.015785 },
+  { code: "335", name: "옥수", en: "OKSU", lat: 37.541653, lng: 127.017303 },
+  { code: "336", name: "압구정", en: "APGUJEONG", lat: 37.526169, lng: 127.028502 },
+  { code: "337", name: "신사", en: "SINSA", lat: 37.516438, lng: 127.020247 },
+  { code: "338", name: "잠원", en: "JAMWON", lat: 37.512989, lng: 127.011613 },
+  { code: "339", name: "고속터미널", en: "EXPRESS BUS TERMINAL", lat: 37.504953, lng: 127.004916 },
+  { code: "340", name: "교대", en: "SEOUL NAT'L UNIV. OF EDUCATION", lat: 37.493060, lng: 127.013796 },
+  { code: "341", name: "남부터미널", en: "NAMBU BUS TERMINAL", lat: 37.484940, lng: 127.016289 },
+  { code: "342", name: "양재", en: "YANGJAE", lat: 37.484660, lng: 127.035130 },
+  { code: "343", name: "매봉", en: "MAEBONG", lat: 37.487114, lng: 127.046907 },
+  { code: "344", name: "도곡", en: "DOGOK", lat: 37.491129, lng: 127.055694 },
+  { code: "345", name: "대치", en: "DAECHI", lat: 37.494601, lng: 127.063449 },
+  { code: "346", name: "학여울", en: "HANGNYEOUL", lat: 37.496757, lng: 127.070541 },
+  { code: "347", name: "대청", en: "DAECHEONG", lat: 37.493607, lng: 127.079526 },
+  { code: "348", name: "일원", en: "IRWON", lat: 37.483890, lng: 127.084160 },
+  { code: "349", name: "수서", en: "SUSEO", lat: 37.487507, lng: 127.101324 },
+  { code: "350", name: "가락시장", en: "GARAK MARKET", lat: 37.492368, lng: 127.118101 },
+  { code: "351", name: "경찰병원", en: "NATIONAL POLICE HOSPITAL", lat: 37.495754, lng: 127.124198 },
+  { code: "352", name: "오금", en: "OGEUM", lat: 37.502288, lng: 127.128344 }
+];

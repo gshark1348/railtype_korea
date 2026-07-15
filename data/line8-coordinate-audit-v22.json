@@ -1,0 +1,199 @@
+{
+  "version": "22.0.0",
+  "line": 8,
+  "route": "별내–모란",
+  "uniqueStations": 24,
+  "coordinateSystem": "WGS84 / EPSG:4326",
+  "officialSources": [
+    {
+      "provider": "국가철도공단",
+      "dataset": "국가철도공단_수도권8호선_역위치_20250630",
+      "rows": 24,
+      "url": "https://www.data.go.kr/data/15041334/fileData.do"
+    },
+    {
+      "provider": "서울교통공사",
+      "dataset": "1–8호선 역사 좌표(위경도) 정보",
+      "referenceDate": "2025-08-14",
+      "url": "https://www.data.go.kr/data/15099316/fileData.do"
+    },
+    {
+      "provider": "서울 열린데이터광장",
+      "dataset": "서울교통공사 역정보·역사마스터",
+      "purpose": "2024 별내선 6개 역 좌표 교차 검증"
+    }
+  ],
+  "stationRows": [
+    {
+      "code": "804",
+      "name": "별내",
+      "en": "BYEOLLAE",
+      "lat": 37.64232,
+      "lng": 127.1276
+    },
+    {
+      "code": "805",
+      "name": "다산",
+      "en": "DASAN",
+      "lat": 37.62429,
+      "lng": 127.14973
+    },
+    {
+      "code": "806",
+      "name": "동구릉",
+      "en": "DONGGUREUNG",
+      "lat": 37.61105,
+      "lng": 127.13793
+    },
+    {
+      "code": "807",
+      "name": "구리",
+      "en": "GURI",
+      "lat": 37.60262,
+      "lng": 127.1407
+    },
+    {
+      "code": "808",
+      "name": "장자호수공원",
+      "en": "JANGJA LAKE PARK",
+      "lat": 37.58738,
+      "lng": 127.13794
+    },
+    {
+      "code": "809",
+      "name": "암사역사공원",
+      "en": "AMSA HISTORY PARK",
+      "lat": 37.55695,
+      "lng": 127.13702
+    },
+    {
+      "code": "810",
+      "name": "암사",
+      "en": "AMSA",
+      "lat": 37.550127,
+      "lng": 127.127521
+    },
+    {
+      "code": "811",
+      "name": "천호",
+      "en": "CHEONHO",
+      "lat": 37.53792,
+      "lng": 127.123179
+    },
+    {
+      "code": "812",
+      "name": "강동구청",
+      "en": "GANGDONG-GU OFFICE",
+      "lat": 37.530348,
+      "lng": 127.120461
+    },
+    {
+      "code": "813",
+      "name": "몽촌토성",
+      "en": "MONGCHONTOSEONG",
+      "lat": 37.517692,
+      "lng": 127.11274
+    },
+    {
+      "code": "814",
+      "name": "잠실",
+      "en": "JAMSIL",
+      "lat": 37.514649,
+      "lng": 127.104267
+    },
+    {
+      "code": "815",
+      "name": "석촌",
+      "en": "SEOKCHON",
+      "lat": 37.505396,
+      "lng": 127.106995
+    },
+    {
+      "code": "816",
+      "name": "송파",
+      "en": "SONGPA",
+      "lat": 37.49978,
+      "lng": 127.11212
+    },
+    {
+      "code": "817",
+      "name": "가락시장",
+      "en": "GARAK MARKET",
+      "lat": 37.493004,
+      "lng": 127.118279
+    },
+    {
+      "code": "818",
+      "name": "문정",
+      "en": "MUNJEONG",
+      "lat": 37.485931,
+      "lng": 127.122473
+    },
+    {
+      "code": "819",
+      "name": "장지",
+      "en": "JANGJI",
+      "lat": 37.478609,
+      "lng": 127.126229
+    },
+    {
+      "code": "820",
+      "name": "복정",
+      "en": "BOKJEONG",
+      "lat": 37.471016,
+      "lng": 127.126746
+    },
+    {
+      "code": "821",
+      "name": "남위례",
+      "en": "NAMWIRYE",
+      "lat": 37.462839,
+      "lng": 127.139047
+    },
+    {
+      "code": "822",
+      "name": "산성",
+      "en": "SANSEONG",
+      "lat": 37.456886,
+      "lng": 127.149927
+    },
+    {
+      "code": "823",
+      "name": "남한산성입구",
+      "en": "NAMHANSANSEONG",
+      "lat": 37.451568,
+      "lng": 127.159845
+    },
+    {
+      "code": "824",
+      "name": "단대오거리",
+      "en": "DANDAEOGEORI",
+      "lat": 37.445057,
+      "lng": 127.156735
+    },
+    {
+      "code": "825",
+      "name": "신흥",
+      "en": "SINHEUNG",
+      "lat": 37.440952,
+      "lng": 127.14759
+    },
+    {
+      "code": "826",
+      "name": "수진",
+      "en": "SUJIN",
+      "lat": 37.437575,
+      "lng": 127.140936
+    },
+    {
+      "code": "827",
+      "name": "모란",
+      "en": "MORAN",
+      "lat": 37.433888,
+      "lng": 127.129921
+    }
+  ],
+  "duplicateNames": [],
+  "missingCoordinates": [],
+  "note": "Existing 18 stations use the official Seoul Metro coordinate table; the six Byeollae extension stations are cross-checked against current Seoul/open railway station data."
+}

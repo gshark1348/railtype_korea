@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f4ef" />
+  <meta name="description" content="대한민국 철도 노선과 종착역 방향을 선택하고 역명을 입력해 지도 위에 선로를 완성하는 타자 연습 프로토타입" />
+  <title>RAILTYPE KOREA — Type the Stations, Trace the Rails</title>
+  <link rel="stylesheet" href="./styles.css?v=24.0.0" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand" id="brandButton" type="button" aria-label="홈으로 이동">
+        <span class="brand-mark">R</span>
+        <span class="brand-text">
+          <strong>RAILTYPE <em>KOREA</em></strong>
+          <small>TYPE THE STATIONS · TRACE THE RAILS</small>
+        </span>
+      </button>
+
+      <div class="header-status" aria-label="현재 플레이 상태">
+        <span><i class="status-icon timer-icon"></i><b id="headerTimer">00:00</b></span>
+        <span><i class="status-icon accuracy-icon"></i><b id="headerAccuracy">100%</b></span>
+        <span><i class="status-icon station-icon"></i><b id="headerProgress">0 / 44</b></span>
+        <button class="icon-button" id="statsButton" type="button" aria-label="기록 열기">☰</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="screen home-screen is-active" id="homeScreen">
+        <div class="hero-grid">
+          <article class="hero-copy panel">
+            <p class="eyebrow">KOREA GEOGRAPHIC RAIL TYPING</p>
+            <h1 id="heroTitle">서울 위에<br><span>3호선</span>을 개척하세요.</h1>
+            <p class="hero-description">
+              노선을 고르고, 방향을 정하고, 출발하세요. 타이핑 한 글자 한 글자가 선로를 놓습니다.
+              정확히 입력한 역명만이 지도 위에 새겨지며, 도시는 당신의 손끝에서 완성됩니다.
+            </p>
+            <div class="hero-actions">
+              <button class="primary-button" id="startButton" type="button">3호선 시작하기 <span>→</span></button>
+              <button class="secondary-button" id="demoButton" type="button">모션 데모</button>
+            </div>
+            <div class="hero-meta">
+              <span><b id="heroStationCount">44</b> STATIONS</span>
+              <span><b>WGS84</b> GEO POSITION</span>
+              <span><b>AUTO</b> MAP FOCUS</span>
+            </div>
+          </article>
+
+          <article class="map-panel panel home-map-panel">
+            <div class="map-heading">
+              <div>
+                <span class="section-label" id="homeAreaLabel">SEOUL · GOYANG</span>
+                <h2 id="homeMapTitle">3호선 지리 인포그래픽</h2>
+              </div>
+              <span class="line-chip" id="homeLineChip"><i>3</i> LINE 03</span>
+            </div>
+            <div class="map-stage home-map-stage">
+              <svg id="homeMapSvg" class="geo-map" viewBox="0 0 1200 760" role="img" aria-label="한강과 서울 지형, 3호선 실제 역 위치를 표현한 지도"></svg>
+              <div class="map-note">
+                <strong id="homeMapStatus">대화역에서 시작</strong>
+                <span id="homeMapSubstatus">역을 입력하면 실제 위치에 노선이 생성됩니다.</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <section class="line-select-panel panel" aria-labelledby="selectLineTitle">
+          <div class="line-select-copy">
+            <div>
+              <span class="section-label">SELECT LINE</span>
+              <h2 id="selectLineTitle">노선을 선택하세요.</h2>
+            </div>
+            <p>대한민국 철도 노선을 지역과 운영 체계별로 살펴볼 수 있습니다. 현재 완성된 1·2·3·4·5·6·7·8·9호선은 바로 주행할 수 있으며, 나머지 노선은 향후 순차적으로 추가됩니다.</p>
+          </div>
+          <div class="line-buttons" id="lineButtons"></div>
+        </section>
+      </section>
+
+      <section class="screen game-screen" id="gameScreen">
+        <div class="game-grid">
+          <article class="map-panel panel game-map-panel">
+            <div class="map-heading game-map-heading">
+              <div class="current-line-title">
+                <span class="round-line-number" id="gameLineNumber">3</span>
+                <div>
+                  <span class="section-label">GEOGRAPHIC ROUTE</span>
+                  <h2 id="gameRouteTitle">대화 → 오금</h2>
+                </div>
+              </div>
+              <div class="map-legend" aria-label="지도 범례">
+                <span><i class="legend river"></i>한강</span>
+                <span><i class="legend complete"></i>완료</span>
+                <span><i class="legend target"></i>입력 대상</span>
+              </div>
+            </div>
+
+            <div class="map-stage game-map-stage" id="mapStage">
+              <svg id="gameMapSvg" class="geo-map" viewBox="0 0 1200 760" role="img" aria-label="현재까지 완성된 서울 지하철 노선"></svg>
+              <div class="map-corner-label north-west" id="northWestLabel">GOYANG</div>
+              <div class="map-corner-label south-east" id="southEastLabel">SEOUL</div>
+              <div class="map-controls" aria-label="지도 보기 설정">
+                <button id="focusCurrentButton" type="button">현재 역</button>
+                <button id="showFullRouteButton" type="button">전체 노선</button>
+                <button id="toggleAutoFollowButton" class="is-active" type="button" aria-pressed="true">자동 추적 ON</button>
+              </div>
+              <div class="coordinate-badge" id="coordinateBadge">37.676087° N · 126.747569° E</div>
+              <div class="city-segment-indicator" id="citySegmentIndicator">CURRENT AREA · GOYANG / 고양시 · 일산서구</div>
+              <div class="map-scale-note">공식 역사 위·경도 · 실폭수계 검증 폴리곤 · 저긴장도 보간</div>
+            </div>
+          </article>
+
+          <aside class="control-column">
+            <article class="typing-panel panel" id="typingPanel">
+              <div class="typing-topline">
+                <span class="section-label">NEXT STATION</span>
+                <span class="station-code" id="stationCode">309</span>
+              </div>
+
+              <div class="station-context" id="stationContext">
+                <div class="station-context-head">
+                  <span class="station-context-icon" id="stationContextIcon" aria-hidden="true">🏙️</span>
+                  <span id="stationContextBadge">STATION NOTE</span>
+                </div>
+                <strong id="stationContextTitle">KINTEX · 대화</strong>
+                <p id="stationContextDescription">전시장과 넓은 하늘이 펼쳐지는 3호선의 시작점입니다.</p>
+                <div class="station-context-meta">
+                  <span id="stationContextArea">일산서구</span>
+                  <span id="stationContextKeyword">전시 · 업무 · 신도시</span>
+                </div>
+                <div class="station-transfer-block" id="stationTransferBlock" hidden>
+                  <div class="station-transfer-head">
+                    <strong>환승 가능</strong>
+                    <span id="stationTransferSummary">연결 노선 정보</span>
+                  </div>
+                  <div class="station-transfer-list" id="stationTransferList"></div>
+                </div>
+              </div>
+
+              <div class="target-copy">
+                <span id="targetIndexLabel">01 / 44</span>
+                <h2 id="targetName">대화</h2>
+                <p id="targetEnglish">DAEHWA</p>
+              </div>
+
+              <div class="journey-row">
+                <div>
+                  <span>FROM</span>
+                  <strong id="fromStation">START</strong>
+                </div>
+                <div class="journey-line"><i></i></div>
+                <div class="align-right">
+                  <span>TO</span>
+                  <strong id="toStation">대화</strong>
+                </div>
+              </div>
+
+              <label class="input-label" for="stationInput">역명을 정확하게 입력하세요.</label>
+              <div class="input-row">
+                <input id="stationInput" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="역명 입력" enterkeyhint="go" />
+                <button id="submitButton" type="button" aria-label="역명 확인">↵</button>
+              </div>
+
+              <div class="feedback neutral" id="feedback" aria-live="polite">
+                <strong>READY</strong>
+                <p>한글 철자가 일치하면 역이 추가됩니다.</p>
+              </div>
+            </article>
+
+            <article class="progress-panel panel">
+              <div class="progress-header">
+                <div>
+                  <span class="section-label">LIVE RUN</span>
+                  <h3>주행 현황</h3>
+                </div>
+                <strong id="progressPercent">0%</strong>
+              </div>
+              <div class="progress-track"><i id="progressBar"></i></div>
+              <div class="progress-metrics">
+                <span><small>TIME</small><b id="sideTimer">00:00.0</b></span>
+                <span><small>ACCURACY</small><b id="sideAccuracy">100%</b></span>
+                <span><small>ERRORS</small><b id="sideErrors">0</b></span>
+              </div>
+            </article>
+
+            <article class="station-window panel">
+              <div class="station-window-head">
+                <span class="section-label">ROUTE WINDOW</span>
+                <span>현재 위치 주변</span>
+              </div>
+              <ol id="nearbyStations" class="nearby-list"></ol>
+            </article>
+
+            <button class="exit-button" id="exitButton" type="button">플레이 종료</button>
+          </aside>
+        </div>
+      </section>
+
+      <section class="screen result-screen" id="resultScreen">
+        <div class="result-grid">
+          <article class="result-summary panel">
+            <span class="complete-check">✓</span>
+            <p class="eyebrow" id="resultLineEyebrow">LINE 03 COMPLETED</p>
+            <h1>서울의 한 줄을<br>완성했습니다.</h1>
+            <p class="result-description" id="resultDescription">대화역부터 오금역까지 실제 역 위치를 따라 완성한 노선이 자동으로 저장되었습니다.</p>
+
+            <div class="result-metrics">
+              <div><span>TOTAL TIME</span><strong id="resultTime">00:00.0</strong></div>
+              <div><span>ACCURACY</span><strong id="resultAccuracy">100%</strong></div>
+              <div><span>ERRORS</span><strong id="resultErrors">0</strong></div>
+            </div>
+
+            <div class="result-actions">
+              <button class="secondary-button" id="retryButton" type="button">다시 플레이</button>
+              <button class="primary-button" id="finishButton" type="button">홈에서 완성 노선 보기 <span>→</span></button>
+            </div>
+          </article>
+
+          <article class="map-panel panel result-map-panel">
+            <div class="map-heading">
+              <div>
+                <span class="section-label">COMPLETED INFOGRAPHIC</span>
+                <h2 id="resultMapTitle">서울 지하철 3호선</h2>
+              </div>
+              <span class="line-chip" id="resultLineChip"><i>3</i> COMPLETE</span>
+            </div>
+            <div class="map-stage result-map-stage">
+              <svg id="resultMapSvg" class="geo-map" viewBox="0 0 1200 760" role="img" aria-label="완성된 3호선 노선 인포그래픽"></svg>
+            </div>
+          </article>
+
+          <article class="analysis-panel panel">
+            <div class="analysis-heading">
+              <div>
+                <span class="section-label">TYPO ANALYSIS</span>
+                <h2>오답 유형</h2>
+              </div>
+              <span id="topTypoBadge">NO ERRORS</span>
+            </div>
+            <div id="typoChart" class="typo-chart"></div>
+          </article>
+
+          <article class="analysis-panel panel">
+            <div class="analysis-heading">
+              <div>
+                <span class="section-label">TROUBLE STATIONS</span>
+                <h2>많이 틀린 역</h2>
+              </div>
+            </div>
+            <ol id="troubleStations" class="trouble-list"></ol>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="statsModal" aria-hidden="true">
+    <section class="stats-modal panel" role="dialog" aria-modal="true" aria-labelledby="statsTitle">
+      <button class="modal-close" id="closeStatsButton" type="button" aria-label="기록 닫기">×</button>
+      <span class="section-label">PERSONAL DATA</span>
+      <h2 id="statsTitle">나의 주행 기록</h2>
+      <div class="stats-cards">
+        <div><span>CLEARED</span><strong id="statCleared">0 / 9</strong></div>
+        <div><span>SESSIONS</span><strong id="statSessions">0</strong></div>
+        <div><span>BEST TIME</span><strong id="statBest">—</strong></div>
+        <div><span>AVG. ACC.</span><strong id="statAccuracy">—</strong></div>
+      </div>
+      <div class="history-heading">
+        <h3>RECENT RUNS</h3>
+        <button id="resetButton" type="button">RESET DATA</button>
+      </div>
+      <div class="history-list" id="historyList"></div>
+    </section>
+  </div>
+
+
+  <div class="modal-backdrop route-setup-backdrop" id="routeSetupModal" aria-hidden="true">
+    <section class="route-setup-modal panel" role="dialog" aria-modal="true" aria-labelledby="routeSetupTitle">
+      <button class="modal-close" id="closeRouteSetupButton" type="button" aria-label="노선 설정 닫기">×</button>
+      <div class="route-setup-header">
+        <div class="route-setup-heading-copy">
+          <span class="section-label" id="routeSetupEyebrow">LINE 03 PREVIEW</span>
+          <h2 id="routeSetupTitle">3호선 주행을 설정하세요.</h2>
+          <p id="routeSetupDescription">코스와 종착역 방향을 선택한 뒤 모션 데모를 확인하고 Start를 누르세요.</p>
+        </div>
+        <figure class="route-train-card">
+          <div class="route-train-image-wrap">
+            <img id="routeTrainImage" src="./assets/trains/line3.jpg" alt="서울 지하철 3호선 전동차" />
+            <span class="route-setup-line-badge" id="routeSetupLineBadge">3</span>
+          </div>
+          <figcaption>
+            <strong id="routeTrainCaption">서울메트로 3000호대 전동차</strong>
+            <a id="routeTrainCredit" href="https://commons.wikimedia.org/" target="_blank" rel="noreferrer">사진 출처</a>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="route-setup-grid">
+        <div class="route-setup-options">
+          <section>
+            <span class="option-label">COURSE</span>
+            <div class="route-choice-list" id="courseChoiceList"></div>
+          </section>
+          <section>
+            <span class="option-label">DESTINATION</span>
+            <div class="direction-choice-list" id="directionChoiceList"></div>
+          </section>
+          <div class="selected-route-summary">
+            <span>SELECTED RUN</span>
+            <strong id="selectedRouteTitle">대화 → 오금</strong>
+            <p id="selectedRouteDescription">오금행 · 44개 역</p>
+          </div>
+        </div>
+
+        <div class="route-demo-panel">
+          <div class="route-demo-heading">
+            <div>
+              <span class="option-label">MOTION DEMO</span>
+              <strong id="routeDemoStation">대화</strong>
+            </div>
+            <button class="demo-toggle-button" id="routeDemoButton" type="button">다시 보기</button>
+          </div>
+          <div class="route-demo-stage">
+            <svg id="routeDemoMapSvg" class="geo-map" viewBox="0 0 1200 760" role="img" aria-label="선택한 노선의 모션 데모"></svg>
+            <div class="route-demo-caption">
+              <span id="routeDemoProgress">01 / 44</span>
+              <strong id="routeDemoDirection">오금행</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="line-history-panel" aria-labelledby="lineHistoryTitle">
+        <div class="line-history-heading">
+          <div>
+            <span class="option-label">LINE HISTORY</span>
+            <h3 id="lineHistoryTitle">3호선이 만들어진 과정</h3>
+          </div>
+          <span class="line-history-period" id="lineHistoryPeriod">1980 — 2010</span>
+        </div>
+        <p class="line-history-summary" id="lineHistorySummary"></p>
+        <ol class="line-history-timeline" id="lineHistoryTimeline"></ol>
+        <div class="line-history-sources">
+          <span>자료</span>
+          <div id="lineHistorySources"></div>
+        </div>
+      </section>
+
+      <div class="route-setup-actions">
+        <button class="secondary-button" id="cancelRouteSetupButton" type="button">취소</button>
+        <button class="primary-button route-start-button" id="routeStartButton" type="button">START <span>→</span></button>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="./js/line1-data.js?v=24.0.0"></script>
+  <script src="./js/line3-data.js?v=24.0.0"></script>
+  <script src="./js/line4-data.js?v=24.0.0"></script>
+  <script src="./js/line5-data.js?v=24.0.0"></script>
+  <script src="./js/line6-data.js?v=24.0.0"></script>
+  <script src="./js/line7-data.js?v=24.0.0"></script>
+  <script src="./js/line8-data.js?v=24.0.0"></script>
+  <script src="./js/line9-data.js?v=24.0.0"></script>
+  <script src="./js/metro-lines.js?v=24.0.0"></script>
+  <script src="./js/geo-boundaries.js?v=24.0.0"></script>
+  <script src="./js/han-river-geometry.js?v=24.0.0"></script>
+  <script src="./js/app.js?v=24.0.0"></script>
+</body>
+</html>

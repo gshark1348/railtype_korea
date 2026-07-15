@@ -1,0 +1,21 @@
+{
+  "uniqueStations": 56,
+  "officialRows": 56,
+  "directMatches": 54,
+  "preservedDistinctCoordinates": [
+    {
+      "station": "마곡",
+      "lat": 37.560199,
+      "lng": 126.825548,
+      "reason": "The official Seoul Metro file assigns one identical coordinate pair to both Magok and Balsan; the distinct existing project coordinate is retained."
+    },
+    {
+      "station": "발산",
+      "lat": 37.558989,
+      "lng": 126.837335,
+      "reason": "The official Seoul Metro file assigns one identical coordinate pair to both Magok and Balsan; the distinct existing project coordinate is retained."
+    }
+  ],
+  "coordinateChangesInV21": 0,
+  "visualWaterPlacementFix": "Han River polygon and island-hole correction"
+}

@@ -1,0 +1,17 @@
+{
+  "version": "24.0.0",
+  "coordinateSystem": "WGS84 / EPSG:4326",
+  "stationScope": "Unique station name and coordinate per playable Lines 1-9",
+  "combinationCount": 458,
+  "insideWaterCount": 0,
+  "nearestWaterBoundary": {
+    "line": 7,
+    "code": "731",
+    "name": "청담",
+    "lat": 37.519097,
+    "lng": 127.051851,
+    "distanceM": 36.1
+  },
+  "correction": "Rebuilt Gangseo and Gangdong channel geometry; official station coordinates were retained and revalidated.",
+  "insideWaterStations": []
+}

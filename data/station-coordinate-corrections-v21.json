@@ -1,0 +1,1067 @@
+{
+  "reference": "서울교통공사 1-8호선 역사 좌표(위경도) 정보, 작성기준일 2025-08-14",
+  "excluded_source_anomalies": [
+    {
+      "line": 2,
+      "station": "신답"
+    },
+    {
+      "line": 2,
+      "station": "용답"
+    },
+    {
+      "line": 2,
+      "station": "잠실새내"
+    },
+    {
+      "line": 5,
+      "station": "마곡"
+    },
+    {
+      "line": 5,
+      "station": "발산"
+    }
+  ],
+  "corrections": [
+    {
+      "line": 2,
+      "name": "왕십리",
+      "old_lat": 37.561533,
+      "old_lng": 127.037732,
+      "new_lat": 37.561159,
+      "new_lng": 127.035505,
+      "distance_m": 200.3,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "잠실",
+      "old_lat": 37.51395,
+      "old_lng": 127.102234,
+      "new_lat": 37.513305,
+      "new_lng": 127.100129,
+      "distance_m": 198.6,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "홍대입구",
+      "old_lat": 37.557192,
+      "old_lng": 126.925381,
+      "new_lat": 37.556748,
+      "new_lng": 126.923643,
+      "distance_m": 160.7,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "신당",
+      "old_lat": 37.565972,
+      "old_lng": 127.01782,
+      "new_lat": 37.565681,
+      "new_lng": 127.019488,
+      "distance_m": 150.3,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "한양대",
+      "old_lat": 37.555273,
+      "old_lng": 127.043655,
+      "new_lat": 37.55658,
+      "new_lng": 127.043504,
+      "distance_m": 145.7,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "당산",
+      "old_lat": 37.534946,
+      "old_lng": 126.902767,
+      "new_lat": 37.533877,
+      "new_lng": 126.902011,
+      "distance_m": 136.0,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "동대문역사문화공원",
+      "old_lat": 37.565138,
+      "old_lng": 127.007896,
+      "new_lat": 37.565597,
+      "new_lng": 127.009113,
+      "distance_m": 118.6,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "구로디지털단지",
+      "old_lat": 37.485266,
+      "old_lng": 126.901401,
+      "new_lat": 37.485005,
+      "new_lng": 126.902626,
+      "distance_m": 111.6,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "대림",
+      "old_lat": 37.493243,
+      "old_lng": 126.894932,
+      "new_lat": 37.492426,
+      "new_lng": 126.895293,
+      "distance_m": 96.1,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "강남",
+      "old_lat": 37.497175,
+      "old_lng": 127.027926,
+      "new_lat": 37.497958,
+      "new_lng": 127.027539,
+      "distance_m": 93.3,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "합정",
+      "old_lat": 37.549457,
+      "old_lng": 126.913808,
+      "new_lat": 37.550025,
+      "new_lng": 126.914557,
+      "distance_m": 91.2,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "구의",
+      "old_lat": 37.537077,
+      "old_lng": 127.085916,
+      "new_lat": 37.536857,
+      "new_lng": 127.085024,
+      "distance_m": 82.2,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "선릉",
+      "old_lat": 37.504503,
+      "old_lng": 127.049008,
+      "new_lat": 37.504257,
+      "new_lng": 127.048174,
+      "distance_m": 78.3,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "교대",
+      "old_lat": 37.493415,
+      "old_lng": 127.01408,
+      "new_lat": 37.493957,
+      "new_lng": 127.014631,
+      "distance_m": 77.3,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "신설동",
+      "old_lat": 37.575297,
+      "old_lng": 127.025087,
+      "new_lat": 37.574653,
+      "new_lng": 127.025158,
+      "distance_m": 71.8,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "양천구청",
+      "old_lat": 37.512398,
+      "old_lng": 126.865819,
+      "new_lat": 37.512194,
+      "new_lng": 126.865193,
+      "distance_m": 59.6,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "도림천",
+      "old_lat": 37.514287,
+      "old_lng": 126.882768,
+      "new_lat": 37.514759,
+      "new_lng": 126.882586,
+      "distance_m": 54.8,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "상왕십리",
+      "old_lat": 37.564354,
+      "old_lng": 127.029354,
+      "new_lat": 37.564504,
+      "new_lng": 127.028872,
+      "distance_m": 45.6,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "을지로4가",
+      "old_lat": 37.566941,
+      "old_lng": 126.998079,
+      "new_lat": 37.566611,
+      "new_lng": 126.998122,
+      "distance_m": 36.8,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "신대방",
+      "old_lat": 37.487462,
+      "old_lng": 126.913149,
+      "new_lat": 37.487534,
+      "new_lng": 126.913279,
+      "distance_m": 14.0,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "신림",
+      "old_lat": 37.484201,
+      "old_lng": 126.929715,
+      "new_lat": 37.484216,
+      "new_lng": 126.929573,
+      "distance_m": 12.6,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "을지로3가",
+      "old_lat": 37.566295,
+      "old_lng": 126.99191,
+      "new_lat": 37.566292,
+      "new_lng": 126.991773,
+      "distance_m": 12.1,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "신도림",
+      "old_lat": 37.508725,
+      "old_lng": 126.891295,
+      "new_lat": 37.508815,
+      "new_lng": 126.891222,
+      "distance_m": 11.9,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "이대",
+      "old_lat": 37.556733,
+      "old_lng": 126.946013,
+      "new_lat": 37.556734,
+      "new_lng": 126.945897,
+      "distance_m": 10.2,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "아현",
+      "old_lat": 37.557345,
+      "old_lng": 126.956141,
+      "new_lat": 37.557407,
+      "new_lng": 126.956079,
+      "distance_m": 8.8,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "충정로",
+      "old_lat": 37.559704,
+      "old_lng": 126.964378,
+      "new_lat": 37.559742,
+      "new_lng": 126.964455,
+      "distance_m": 8.0,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "낙성대",
+      "old_lat": 37.47693,
+      "old_lng": 126.963693,
+      "new_lat": 37.47693,
+      "new_lng": 126.963783,
+      "distance_m": 7.9,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "강변",
+      "old_lat": 37.535095,
+      "old_lng": 127.094681,
+      "new_lat": 37.535161,
+      "new_lng": 127.094684,
+      "distance_m": 7.3,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "영등포구청",
+      "old_lat": 37.525706,
+      "old_lng": 126.89661,
+      "new_lat": 37.525766,
+      "new_lng": 126.896627,
+      "distance_m": 6.8,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "문래",
+      "old_lat": 37.517933,
+      "old_lng": 126.89476,
+      "new_lat": 37.517993,
+      "new_lng": 126.894766,
+      "distance_m": 6.7,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "잠실나루",
+      "old_lat": 37.520733,
+      "old_lng": 127.10379,
+      "new_lat": 37.520688,
+      "new_lng": 127.103836,
+      "distance_m": 6.4,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "봉천",
+      "old_lat": 37.482362,
+      "old_lng": 126.941892,
+      "new_lat": 37.482416,
+      "new_lng": 126.941896,
+      "distance_m": 6.0,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "성수",
+      "old_lat": 37.544581,
+      "old_lng": 127.055961,
+      "new_lat": 37.544628,
+      "new_lng": 127.055983,
+      "distance_m": 5.6,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "방배",
+      "old_lat": 37.481426,
+      "old_lng": 126.997596,
+      "new_lat": 37.481469,
+      "new_lng": 126.997627,
+      "distance_m": 5.5,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "건대입구",
+      "old_lat": 37.540373,
+      "old_lng": 127.069191,
+      "new_lat": 37.540408,
+      "new_lng": 127.069231,
+      "distance_m": 5.2,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "까치산",
+      "old_lat": 37.531768,
+      "old_lng": 126.846683,
+      "new_lat": 37.53181,
+      "new_lng": 126.846706,
+      "distance_m": 5.1,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "사당",
+      "old_lat": 37.47653,
+      "old_lng": 126.981685,
+      "new_lat": 37.476536,
+      "new_lng": 126.981631,
+      "distance_m": 4.8,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "을지로입구",
+      "old_lat": 37.566014,
+      "old_lng": 126.982618,
+      "new_lat": 37.565998,
+      "new_lng": 126.982569,
+      "distance_m": 4.7,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "역삼",
+      "old_lat": 37.500622,
+      "old_lng": 127.036456,
+      "new_lat": 37.500658,
+      "new_lng": 127.03643,
+      "distance_m": 4.6,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "삼성",
+      "old_lat": 37.508844,
+      "old_lng": 127.06316,
+      "new_lat": 37.508827,
+      "new_lng": 127.063203,
+      "distance_m": 4.2,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "뚝섬",
+      "old_lat": 37.547184,
+      "old_lng": 127.047367,
+      "new_lat": 37.54718,
+      "new_lng": 127.047413,
+      "distance_m": 4.1,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "서초",
+      "old_lat": 37.491897,
+      "old_lng": 127.007917,
+      "new_lat": 37.49191,
+      "new_lng": 127.007945,
+      "distance_m": 2.9,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "용두",
+      "old_lat": 37.574028,
+      "old_lng": 127.038091,
+      "new_lat": 37.574012,
+      "new_lng": 127.03811,
+      "distance_m": 2.4,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "신촌",
+      "old_lat": 37.555134,
+      "old_lng": 126.936893,
+      "new_lat": 37.555153,
+      "new_lng": 126.93689,
+      "distance_m": 2.1,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "서울대입구",
+      "old_lat": 37.481247,
+      "old_lng": 126.952739,
+      "new_lat": 37.481233,
+      "new_lng": 126.952745,
+      "distance_m": 1.6,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 2,
+      "name": "종합운동장",
+      "old_lat": 37.510997,
+      "old_lng": 127.073642,
+      "new_lat": 37.511008,
+      "new_lng": 127.073641,
+      "distance_m": 1.2,
+      "file": "metro-lines.js"
+    },
+    {
+      "line": 3,
+      "name": "지축",
+      "old_lat": 37.648017,
+      "old_lng": 126.91397,
+      "new_lat": 37.648281,
+      "new_lng": 126.912551,
+      "distance_m": 128.3,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "충무로",
+      "old_lat": 37.56143,
+      "old_lng": 126.994072,
+      "new_lat": 37.561302,
+      "new_lng": 126.995473,
+      "distance_m": 124.1,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "양재",
+      "old_lat": 37.484477,
+      "old_lng": 127.033902,
+      "new_lat": 37.48466,
+      "new_lng": 127.03513,
+      "distance_m": 110.0,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "동대입구",
+      "old_lat": 37.559052,
+      "old_lng": 127.005602,
+      "new_lat": 37.55816,
+      "new_lng": 127.005273,
+      "distance_m": 103.2,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "압구정",
+      "old_lat": 37.527072,
+      "old_lng": 127.028461,
+      "new_lat": 37.526169,
+      "new_lng": 127.028502,
+      "distance_m": 100.3,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "수서",
+      "old_lat": 37.487378,
+      "old_lng": 127.101907,
+      "new_lat": 37.487507,
+      "new_lng": 127.101324,
+      "distance_m": 53.3,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "종로3가",
+      "old_lat": 37.571605,
+      "old_lng": 126.991791,
+      "new_lat": 37.571537,
+      "new_lng": 126.991237,
+      "distance_m": 49.3,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "연신내",
+      "old_lat": 37.619229,
+      "old_lng": 126.921038,
+      "new_lat": 37.618855,
+      "new_lng": 126.920859,
+      "distance_m": 44.4,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "잠원",
+      "old_lat": 37.512759,
+      "old_lng": 127.01122,
+      "new_lat": 37.512989,
+      "new_lng": 127.011613,
+      "distance_m": 43.0,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "무악재",
+      "old_lat": 37.582299,
+      "old_lng": 126.950291,
+      "new_lat": 37.582658,
+      "new_lng": 126.950131,
+      "distance_m": 42.3,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "을지로3가",
+      "old_lat": 37.566672,
+      "old_lng": 126.992548,
+      "new_lat": 37.566299,
+      "new_lng": 126.992616,
+      "distance_m": 41.8,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "홍제",
+      "old_lat": 37.589066,
+      "old_lng": 126.943736,
+      "new_lat": 37.588851,
+      "new_lng": 126.944092,
+      "distance_m": 39.4,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "경찰병원",
+      "old_lat": 37.495918,
+      "old_lng": 127.12454,
+      "new_lat": 37.495754,
+      "new_lng": 127.124198,
+      "distance_m": 35.2,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "가락시장",
+      "old_lat": 37.492245,
+      "old_lng": 127.117757,
+      "new_lat": 37.492368,
+      "new_lng": 127.118101,
+      "distance_m": 33.2,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "도곡",
+      "old_lat": 37.490922,
+      "old_lng": 127.055452,
+      "new_lat": 37.491129,
+      "new_lng": 127.055694,
+      "distance_m": 31.3,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "일원",
+      "old_lat": 37.483681,
+      "old_lng": 127.08439,
+      "new_lat": 37.48389,
+      "new_lng": 127.08416,
+      "distance_m": 30.8,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "금호",
+      "old_lat": 37.548034,
+      "old_lng": 127.015872,
+      "new_lat": 37.548269,
+      "new_lng": 127.015785,
+      "distance_m": 27.2,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "약수",
+      "old_lat": 37.554867,
+      "old_lng": 127.010541,
+      "new_lat": 37.554674,
+      "new_lng": 127.010628,
+      "distance_m": 22.7,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "매봉",
+      "old_lat": 37.486947,
+      "old_lng": 127.046769,
+      "new_lat": 37.487114,
+      "new_lng": 127.046907,
+      "distance_m": 22.2,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "오금",
+      "old_lat": 37.502129,
+      "old_lng": 127.128319,
+      "new_lat": 37.502288,
+      "new_lng": 127.128344,
+      "distance_m": 17.8,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "대치",
+      "old_lat": 37.494612,
+      "old_lng": 127.063642,
+      "new_lat": 37.494601,
+      "new_lng": 127.063449,
+      "distance_m": 17.0,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "구파발",
+      "old_lat": 37.636763,
+      "old_lng": 126.918821,
+      "new_lat": 37.636612,
+      "new_lng": 126.918827,
+      "distance_m": 16.8,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "신사",
+      "old_lat": 37.516334,
+      "old_lng": 127.020114,
+      "new_lat": 37.516438,
+      "new_lng": 127.020247,
+      "distance_m": 16.4,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "독립문",
+      "old_lat": 37.574571,
+      "old_lng": 126.957748,
+      "new_lat": 37.574534,
+      "new_lng": 126.957902,
+      "distance_m": 14.2,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "남부터미널",
+      "old_lat": 37.485013,
+      "old_lng": 127.016189,
+      "new_lat": 37.48494,
+      "new_lng": 127.016289,
+      "distance_m": 12.0,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "학여울",
+      "old_lat": 37.496663,
+      "old_lng": 127.070594,
+      "new_lat": 37.496757,
+      "new_lng": 127.070541,
+      "distance_m": 11.4,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "대청",
+      "old_lat": 37.493514,
+      "old_lng": 127.079532,
+      "new_lat": 37.493607,
+      "new_lng": 127.079526,
+      "distance_m": 10.3,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "경복궁",
+      "old_lat": 37.575762,
+      "old_lng": 126.97353,
+      "new_lat": 37.575844,
+      "new_lng": 126.973576,
+      "distance_m": 10.0,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "안국",
+      "old_lat": 37.576477,
+      "old_lng": 126.985443,
+      "new_lat": 37.576562,
+      "new_lng": 126.98547,
+      "distance_m": 9.7,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "고속터미널",
+      "old_lat": 37.504891,
+      "old_lng": 127.004916,
+      "new_lat": 37.504953,
+      "new_lng": 127.004916,
+      "distance_m": 6.9,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "녹번",
+      "old_lat": 37.600927,
+      "old_lng": 126.935756,
+      "new_lat": 37.600882,
+      "new_lng": 126.935758,
+      "distance_m": 5.0,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "옥수",
+      "old_lat": 37.541684,
+      "old_lng": 127.017269,
+      "new_lat": 37.541653,
+      "new_lng": 127.017303,
+      "distance_m": 4.6,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "교대",
+      "old_lat": 37.493025,
+      "old_lng": 127.013786,
+      "new_lat": 37.49306,
+      "new_lng": 127.013796,
+      "distance_m": 4.0,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 3,
+      "name": "불광",
+      "old_lat": 37.610553,
+      "old_lng": 126.92982,
+      "new_lat": 37.610554,
+      "new_lng": 126.929843,
+      "distance_m": 2.0,
+      "file": "line3-data.js"
+    },
+    {
+      "line": 4,
+      "name": "노원",
+      "old_lat": 37.655128,
+      "old_lng": 127.061368,
+      "new_lat": 37.656274,
+      "new_lng": 127.063183,
+      "distance_m": 204.2,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "회현",
+      "old_lat": 37.558514,
+      "old_lng": 126.978246,
+      "new_lat": 37.559698,
+      "new_lng": 126.979565,
+      "distance_m": 175.3,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "명동",
+      "old_lat": 37.560989,
+      "old_lng": 126.986325,
+      "new_lat": 37.561055,
+      "new_lng": 126.988271,
+      "distance_m": 171.4,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "총신대입구(이수)",
+      "old_lat": 37.486263,
+      "old_lng": 126.981989,
+      "new_lat": 37.487521,
+      "new_lng": 126.982309,
+      "distance_m": 142.4,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "수유",
+      "old_lat": 37.638052,
+      "old_lng": 127.025732,
+      "new_lat": 37.637127,
+      "new_lng": 127.024731,
+      "distance_m": 135.3,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "이촌",
+      "old_lat": 37.522295,
+      "old_lng": 126.974733,
+      "new_lat": 37.522525,
+      "new_lng": 126.97335,
+      "distance_m": 124.4,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "충무로",
+      "old_lat": 37.561207,
+      "old_lng": 126.99408,
+      "new_lat": 37.561302,
+      "new_lng": 126.995473,
+      "distance_m": 123.0,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "동작",
+      "old_lat": 37.502971,
+      "old_lng": 126.979306,
+      "new_lat": 37.503567,
+      "new_lng": 126.980171,
+      "distance_m": 100.9,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "성신여대입구",
+      "old_lat": 37.592612,
+      "old_lng": 127.016441,
+      "new_lat": 37.592782,
+      "new_lng": 127.017338,
+      "distance_m": 81.2,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "길음",
+      "old_lat": 37.603407,
+      "old_lng": 127.025053,
+      "new_lat": 37.604087,
+      "new_lng": 127.025353,
+      "distance_m": 80.0,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "숙대입구",
+      "old_lat": 37.54456,
+      "old_lng": 126.972106,
+      "new_lat": 37.545124,
+      "new_lng": 126.971952,
+      "distance_m": 64.1,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "신용산",
+      "old_lat": 37.52917,
+      "old_lng": 126.967894,
+      "new_lat": 37.52919,
+      "new_lng": 126.96858,
+      "distance_m": 60.4,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "남태령",
+      "old_lat": 37.46407,
+      "old_lng": 126.989644,
+      "new_lat": 37.464339,
+      "new_lng": 126.989081,
+      "distance_m": 57.8,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "쌍문",
+      "old_lat": 37.648627,
+      "old_lng": 127.034709,
+      "new_lat": 37.648274,
+      "new_lng": 127.034381,
+      "distance_m": 48.7,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "창동",
+      "old_lat": 37.653088,
+      "old_lng": 127.047274,
+      "new_lat": 37.652993,
+      "new_lng": 127.046746,
+      "distance_m": 47.6,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "한성대입구",
+      "old_lat": 37.588458,
+      "old_lng": 127.006221,
+      "new_lat": 37.58838,
+      "new_lng": 127.006751,
+      "distance_m": 47.4,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "상계",
+      "old_lat": 37.660878,
+      "old_lng": 127.073572,
+      "new_lat": 37.660576,
+      "new_lng": 127.073199,
+      "distance_m": 46.9,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "사당",
+      "old_lat": 37.476955,
+      "old_lng": 126.981651,
+      "new_lat": 37.476563,
+      "new_lng": 126.981746,
+      "distance_m": 44.3,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "삼각지",
+      "old_lat": 37.534777,
+      "old_lng": 126.97311,
+      "new_lat": 37.535057,
+      "new_lng": 126.973354,
+      "distance_m": 37.8,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "미아",
+      "old_lat": 37.62667,
+      "old_lng": 127.025983,
+      "new_lat": 37.626435,
+      "new_lng": 127.026151,
+      "distance_m": 30.0,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "혜화",
+      "old_lat": 37.582336,
+      "old_lng": 127.001844,
+      "new_lat": 37.582116,
+      "new_lng": 127.001759,
+      "distance_m": 25.5,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "동대문역사문화공원",
+      "old_lat": 37.565133,
+      "old_lng": 127.007885,
+      "new_lat": 37.565083,
+      "new_lng": 127.007645,
+      "distance_m": 21.8,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "동대문",
+      "old_lat": 37.570926,
+      "old_lng": 127.009287,
+      "new_lat": 37.5708397,
+      "new_lng": 127.009403,
+      "distance_m": 14.0,
+      "file": "line4-data.js"
+    },
+    {
+      "line": 4,
+      "name": "서울역",
+      "old_lat": 37.553172,
+      "old_lng": 126.97281,
+      "new_lat": 37.553172,
+      "new_lng": 126.972836,
+      "distance_m": 2.3,
+      "file": "line4-data.js"
+    }
+  ]
+}

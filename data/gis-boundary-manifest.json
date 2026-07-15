@@ -1,0 +1,341 @@
+{
+  "version": "24.0.0",
+  "coordinateSystem": "WGS84 / EPSG:4326",
+  "referenceBoundary": "KOSTAT 2018 municipality topology",
+  "embeddedBoundaryUpdate": "2024-02-13 sigungu topology",
+  "simplifyToleranceDegrees": 0.00028,
+  "seoulPolicy": "Dissolved from 25 Seoul district boundaries; retained after v24 topology audit. Han River is a separately loaded multi-ring water polygon.",
+  "regions": {
+    "seoul": {
+      "sourceFeatureCount": 25,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 144,
+      "modified": true,
+      "bounds": [
+        126.767385,
+        37.428998,
+        127.182846,
+        37.701474
+      ]
+    },
+    "yeoncheon": {
+      "sourceFeatureCount": 1,
+      "parts": 3,
+      "boundsParts": 1,
+      "points": 265,
+      "modified": true,
+      "bounds": [
+        126.800796,
+        37.928244,
+        127.192096,
+        38.281265
+      ]
+    },
+    "dongducheon": {
+      "sourceFeatureCount": 1,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 90,
+      "modified": true,
+      "bounds": [
+        127.009533,
+        37.86038,
+        127.155366,
+        37.980918
+      ]
+    },
+    "yangju": {
+      "sourceFeatureCount": 1,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 128,
+      "modified": true,
+      "bounds": [
+        126.902825,
+        37.668681,
+        127.122173,
+        37.942086
+      ]
+    },
+    "uijeongbu": {
+      "sourceFeatureCount": 1,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 52,
+      "modified": true,
+      "bounds": [
+        127.001697,
+        37.687957,
+        127.146551,
+        37.7803
+      ]
+    },
+    "goyang": {
+      "sourceFeatureCount": 3,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 154,
+      "modified": true,
+      "bounds": [
+        126.670362,
+        37.571786,
+        126.992229,
+        37.748482
+      ]
+    },
+    "bucheon": {
+      "sourceFeatureCount": 3,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 20,
+      "modified": true,
+      "bounds": [
+        126.742517,
+        37.458354,
+        126.833499,
+        37.546749
+      ]
+    },
+    "incheon": {
+      "sourceFeatureCount": 10,
+      "parts": 25,
+      "boundsParts": 1,
+      "points": 375,
+      "modified": true,
+      "bounds": [
+        124.609709,
+        37.084942,
+        126.793667,
+        37.983659
+      ]
+    },
+    "gwangmyeong": {
+      "sourceFeatureCount": 1,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 84,
+      "modified": true,
+      "bounds": [
+        126.826262,
+        37.401546,
+        126.899832,
+        37.494075
+      ]
+    },
+    "anyang": {
+      "sourceFeatureCount": 2,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 55,
+      "modified": true,
+      "bounds": [
+        126.870339,
+        37.361274,
+        126.982597,
+        37.445488
+      ]
+    },
+    "gunpo": {
+      "sourceFeatureCount": 1,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 22,
+      "modified": true,
+      "bounds": [
+        126.872787,
+        37.305069,
+        126.962083,
+        37.378646
+      ]
+    },
+    "uiwang": {
+      "sourceFeatureCount": 1,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 23,
+      "modified": true,
+      "bounds": [
+        126.92976,
+        37.300331,
+        127.046916,
+        37.415527
+      ]
+    },
+    "suwon": {
+      "sourceFeatureCount": 4,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 40,
+      "modified": true,
+      "bounds": [
+        126.927039,
+        37.224896,
+        127.089306,
+        37.351055
+      ]
+    },
+    "hwaseong": {
+      "sourceFeatureCount": 1,
+      "parts": 2,
+      "boundsParts": 1,
+      "points": 297,
+      "modified": true,
+      "bounds": [
+        126.617852,
+        37.013362,
+        127.161297,
+        37.29132
+      ]
+    },
+    "osan": {
+      "sourceFeatureCount": 1,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 19,
+      "modified": true,
+      "bounds": [
+        126.994895,
+        37.125539,
+        127.100352,
+        37.200417
+      ]
+    },
+    "pyeongtaek": {
+      "sourceFeatureCount": 1,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 196,
+      "modified": true,
+      "bounds": [
+        126.77903,
+        36.901603,
+        127.154006,
+        37.14463
+      ]
+    },
+    "cheonan": {
+      "sourceFeatureCount": 2,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 107,
+      "modified": true,
+      "bounds": [
+        127.008445,
+        36.62843,
+        127.420151,
+        36.971929
+      ]
+    },
+    "asan": {
+      "sourceFeatureCount": 1,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 64,
+      "modified": true,
+      "bounds": [
+        126.830996,
+        36.648682,
+        127.119398,
+        36.941922
+      ]
+    },
+    "namyangju": {
+      "sourceFeatureCount": 1,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 64,
+      "modified": true,
+      "bounds": [
+        127.084028,
+        37.506709,
+        127.379612,
+        37.780532
+      ]
+    },
+    "gwacheon": {
+      "sourceFeatureCount": 1,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 28,
+      "modified": true,
+      "bounds": [
+        126.960886,
+        37.40215,
+        127.047352,
+        37.467133
+      ]
+    },
+    "ansan": {
+      "sourceFeatureCount": 2,
+      "parts": 3,
+      "boundsParts": 1,
+      "points": 81,
+      "modified": true,
+      "bounds": [
+        126.380165,
+        37.099109,
+        126.939555,
+        37.37716
+      ]
+    },
+    "hanam": {
+      "sourceFeatureCount": 1,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 34,
+      "modified": true,
+      "bounds": [
+        127.140075,
+        37.469317,
+        127.285691,
+        37.591713
+      ]
+    },
+    "siheung": {
+      "sourceFeatureCount": 1,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 116,
+      "modified": true,
+      "bounds": [
+        126.671396,
+        37.308042,
+        126.881657,
+        37.471779
+      ]
+    },
+    "guri": {
+      "sourceFeatureCount": 1,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 25,
+      "modified": true,
+      "bounds": [
+        127.101223,
+        37.556457,
+        127.170602,
+        37.646013
+      ]
+    },
+    "seongnam": {
+      "sourceFeatureCount": 3,
+      "parts": 1,
+      "boundsParts": 1,
+      "points": 86,
+      "modified": true,
+      "bounds": [
+        127.027708,
+        37.333357,
+        127.195742,
+        37.474798
+      ]
+    }
+  },
+  "municipalGeometryVersion": "20.0.0",
+  "v21Policy": "Municipal polygons retained from v20; station coordinates and Han River water/island overlays revalidated in v21.",
+  "v22Policy": "Add Guri and dissolve Seongnam districts for the Line 8 corridor; preserve all v21 geometry otherwise.",
+  "v24Policy": "Retain all 25 valid municipal geometries; replace the low-density Han River ribbon with a GIS-calibrated multi-ring polygon and revalidate all playable station coordinates against water.",
+  "v24AuditFile": "boundary-topology-audit-v24.json",
+  "v24RiverGeometry": "han-river-geometry-v24.geojson"
+}
