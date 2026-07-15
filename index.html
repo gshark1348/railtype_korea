@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#f7f4ef" />
   <meta name="description" content="대한민국 철도 노선과 종착역 방향을 선택하고 역명을 입력해 지도 위에 선로를 완성하는 타자 연습 프로토타입" />
   <title>RAILTYPE KOREA — Type the Stations, Trace the Rails</title>
-  <link rel="stylesheet" href="./styles.css?v=24.0.0" />
+  <link rel="stylesheet" href="./styles.css?v=24.1.0" />
 </head>
 <body>
   <div class="app-shell">
@@ -66,6 +66,52 @@
           </article>
         </div>
 
+
+
+        <section class="community-panel panel" id="communityPanel" aria-labelledby="communityTitle">
+          <div class="community-heading">
+            <div>
+              <div class="community-label-row">
+                <span class="section-label">COMMUNITY TRAFFIC</span>
+                <span class="community-source-badge is-demo" id="communitySourceBadge">PREVIEW</span>
+              </div>
+              <h2 id="communityTitle">지금, 다른 사람들은 어디까지 달렸을까요?</h2>
+              <p id="communitySourceText">공유 기록 서버를 연결하면 다른 사용자의 완주 기록이 이곳에 실시간으로 표시됩니다.</p>
+            </div>
+            <div class="community-profile">
+              <label for="communityNickname">PUBLIC NICKNAME</label>
+              <div>
+                <input id="communityNickname" maxlength="16" autocomplete="nickname" aria-label="커뮤니티에 표시할 닉네임" />
+                <button id="saveCommunityNickname" type="button">저장</button>
+              </div>
+              <small>이메일·계정 정보 없이 닉네임과 플레이 결과만 공개됩니다.</small>
+            </div>
+          </div>
+
+          <div class="community-grid">
+            <div class="community-overview">
+              <div class="community-metrics" aria-label="커뮤니티 기록 요약">
+                <div><span>LOADED RUNS</span><strong id="communityRunCount">0</strong></div>
+                <div><span>RIDERS</span><strong id="communityUserCount">0</strong></div>
+                <div><span>FASTEST</span><strong id="communityFastest">—</strong></div>
+                <div><span>AVG. ACC.</span><strong id="communityAverageAccuracy">—</strong></div>
+              </div>
+              <p class="community-status" id="communityStatus" role="status" aria-live="polite"></p>
+            </div>
+
+            <div class="community-feed">
+              <div class="community-feed-head">
+                <div class="community-tabs" role="tablist" aria-label="커뮤니티 기록 정렬">
+                  <button class="is-active" data-community-mode="recent" type="button">최근 완주</button>
+                  <button data-community-mode="best" type="button">최고 기록</button>
+                </div>
+                <button class="community-refresh" id="refreshCommunityButton" type="button">새로고침</button>
+              </div>
+              <div class="community-record-list" id="communityRecordList"></div>
+            </div>
+          </div>
+        </section>
+
         <section class="line-select-panel panel" aria-labelledby="selectLineTitle">
           <div class="line-select-copy">
             <div>
@@ -107,7 +153,7 @@
               </div>
               <div class="coordinate-badge" id="coordinateBadge">37.676087° N · 126.747569° E</div>
               <div class="city-segment-indicator" id="citySegmentIndicator">CURRENT AREA · GOYANG / 고양시 · 일산서구</div>
-              <div class="map-scale-note">공식 역사 위·경도 · 실폭수계 검증 폴리곤 · 저긴장도 보간</div>
+              <div class="map-scale-note">실제 위·경도 기반 상대 위치 · 선로 곡선은 인포그래픽 보간</div>
             </div>
           </article>
 
@@ -366,7 +412,8 @@
   <script src="./js/line9-data.js?v=24.0.0"></script>
   <script src="./js/metro-lines.js?v=24.0.0"></script>
   <script src="./js/geo-boundaries.js?v=24.0.0"></script>
-  <script src="./js/han-river-geometry.js?v=24.0.0"></script>
-  <script src="./js/app.js?v=24.0.0"></script>
+  <script src="./js/community-config.js?v=24.1.0"></script>
+  <script src="./js/community.js?v=24.1.0"></script>
+  <script src="./js/app.js?v=24.1.0"></script>
 </body>
 </html>

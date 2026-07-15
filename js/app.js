@@ -673,13 +673,58 @@
     [[127.102,37.647],[127.092,37.586],[127.107,37.524],[127.126,37.472]]
   ];
 
-  // v24: 한강 본류는 별도 GIS 검증 파일에서 로드합니다.
-  // 다중 링(본류 외곽 + 섬 홀) 구조를 사용해 강서·강동 굴곡과 섬을 일관되게 렌더링합니다.
-  const HAN_RIVER_GEOMETRY = window.HAN_RIVER_GEOMETRY || { polygons: [] };
-  const HAN_RIVER_POLYGONS = Array.isArray(HAN_RIVER_GEOMETRY.polygons) ? HAN_RIVER_GEOMETRY.polygons : [];
-  const HAN_RIVER_ISLANDS = HAN_RIVER_POLYGONS.flatMap((polygon) =>
-    (polygon.holes || []).map((hole) => hole.ring || hole).filter(Array.isArray)
-  );
+  // 한강 수면은 국가기본도 실폭하천·하천경계 레이어의 형상을 참고해 WGS84 좌표로 재구성했습니다.
+  // 서울교통공사 공식 역사 좌표와 함께 교차 검증하며, 강변 역사가 수면 폴리곤 안에 들어가지 않도록
+  // 서강·이촌·뚝섬·광나루·강동·하남 구간의 굴곡과 동쪽으로 올라가는 본류 방향을 반영합니다.
+  const HAN_RIVER_NORTH_BANK = [
+    [126.715, 37.607], [126.735, 37.604], [126.755, 37.600], [126.775, 37.596],
+    [126.795, 37.591], [126.815, 37.585], [126.835, 37.577], [126.855, 37.569],
+    [126.875, 37.560], [126.892, 37.553], [126.905, 37.549], [126.918, 37.546],
+    [126.930, 37.542], [126.941, 37.538], [126.951, 37.533], [126.960, 37.527],
+    [126.968, 37.521], [126.975, 37.518], [126.983, 37.519], [126.991, 37.522],
+    [127.000, 37.527], [127.010, 37.532], [127.020, 37.536], [127.033, 37.537],
+    [127.047, 37.534], [127.060, 37.531], [127.072, 37.529], [127.084, 37.530],
+    [127.095, 37.533], [127.104, 37.540], [127.113, 37.547], [127.123, 37.553],
+    [127.134, 37.560], [127.146, 37.566], [127.160, 37.573], [127.178, 37.581],
+    [127.198, 37.588], [127.220, 37.595], [127.240, 37.600]
+  ];
+
+  const HAN_RIVER_SOUTH_BANK = [
+    [127.240, 37.578], [127.220, 37.576], [127.198, 37.572], [127.178, 37.566],
+    [127.160, 37.563], [127.146, 37.562], [127.134, 37.5585], [127.123, 37.5508],
+    [127.113, 37.539], [127.104, 37.530], [127.095, 37.524], [127.084, 37.521],
+    [127.072, 37.519], [127.060, 37.5195], [127.050, 37.5215], [127.040, 37.5255],
+    [127.030, 37.529], [127.020, 37.531], [127.010, 37.529], [127.000, 37.525],
+    [126.991, 37.519], [126.982, 37.514], [126.973, 37.511], [126.963, 37.512],
+    [126.953, 37.515], [126.943, 37.518], [126.934, 37.518], [126.926, 37.516],
+    [126.918, 37.5185], [126.912, 37.523], [126.907, 37.534], [126.901, 37.542],
+    [126.890, 37.548], [126.875, 37.554], [126.855, 37.565], [126.835, 37.572],
+    [126.815, 37.579], [126.795, 37.585], [126.775, 37.590], [126.755, 37.594],
+    [126.735, 37.598], [126.715, 37.600]
+  ];
+
+  const YEOUIDO_ISLAND = [
+    [126.9105, 37.5210], [126.9130, 37.5295], [126.9195, 37.5348], [126.9285, 37.5350],
+    [126.9360, 37.5300], [126.9400, 37.5210], [126.9360, 37.5135], [126.9270, 37.5108],
+    [126.9180, 37.5130], [126.9120, 37.5170]
+  ];
+
+  const BAMSEOM_ISLAND = [
+    [126.9225, 37.5365], [126.9270, 37.5397], [126.9325, 37.5390],
+    [126.9360, 37.5360], [126.9320, 37.5335], [126.9265, 37.5340]
+  ];
+
+  const SEONYUDO_ISLAND = [
+    [126.8940, 37.5415], [126.8980, 37.5445], [126.9030, 37.5435],
+    [126.9050, 37.5395], [126.9010, 37.5365], [126.8960, 37.5375]
+  ];
+
+  const NODEUL_ISLAND = [
+    [126.9480, 37.5168], [126.9560, 37.5190], [126.9650, 37.5182],
+    [126.9710, 37.5150], [126.9650, 37.5120], [126.9560, 37.5110], [126.9490, 37.5130]
+  ];
+
+  const HAN_RIVER_ISLANDS = [YEOUIDO_ISLAND, BAMSEOM_ISLAND, SEONYUDO_ISLAND, NODEUL_ISLAND];
 
   function getCourseRegionIds() {
     return COURSE_REGION_IDS[`${ACTIVE_LINE_NUMBER}:${ACTIVE_COURSE_ID}`] || (ACTIVE_LINE_NUMBER === 3 ? ["goyang", "seoul"] : ["seoul"]);
@@ -1347,6 +1392,7 @@
     renderHomeMap();
     renderGame();
     updateStatsHeader();
+    window.RAILTYPE_COMMUNITY?.init?.();
   }
 
   function bindEvents() {
@@ -1639,25 +1685,14 @@
   }
 
   function hanRiverWaterPath() {
-    return HAN_RIVER_POLYGONS.flatMap((polygon) => {
-      const outerPath = Array.isArray(polygon.outer) ? [pathFromGeo(polygon.outer, true)] : [];
-      const holePaths = (polygon.holes || [])
-        .map((hole) => hole.ring || hole)
-        .filter(Array.isArray)
-        .map((ring) => pathFromGeo(ring, true));
-      return [...outerPath, ...holePaths];
-    }).join(" ");
+    const outer = [...HAN_RIVER_NORTH_BANK, ...HAN_RIVER_SOUTH_BANK];
+    return [pathFromGeo(outer, true), ...HAN_RIVER_ISLANDS.map((ring) => pathFromGeo(ring, true))].join(" ");
   }
 
   function pointInHanRiverWater(lng, lat) {
-    return HAN_RIVER_POLYGONS.some((polygon) => {
-      if (!Array.isArray(polygon.outer) || !pointInGeoRing(lng, lat, polygon.outer)) return false;
-      const onIsland = (polygon.holes || []).some((hole) => {
-        const ring = hole.ring || hole;
-        return Array.isArray(ring) && pointInGeoRing(lng, lat, ring);
-      });
-      return !onIsland;
-    });
+    const inOuter = pointInGeoRing(lng, lat, [...HAN_RIVER_NORTH_BANK, ...HAN_RIVER_SOUTH_BANK]);
+    const onIsland = HAN_RIVER_ISLANDS.some((ring) => pointInGeoRing(lng, lat, ring));
+    return inOuter && !onIsland;
   }
 
   function cubicPoint(p0, p1, p2, p3, t) {
@@ -1670,7 +1705,7 @@
     };
   }
 
-  function buildSmoothPath(points, tension = 0.38) {
+  function buildSmoothPath(points, tension = 0.72) {
     if (!points.length) return { d: "", segmentDs: [] };
     if (points.length === 1) {
       return {
@@ -1771,23 +1806,18 @@
       });
       svg.appendChild(riverWater);
 
-      HAN_RIVER_POLYGONS.forEach((polygon) => {
-        if (Array.isArray(polygon.outer)) {
-          const bankOutline = svgElement("path", {
-            d: pathFromGeo(polygon.outer, true),
-            class: "han-river-bank"
-          });
-          svg.appendChild(bankOutline);
-        }
-        (polygon.holes || []).forEach((hole) => {
-          const ring = hole.ring || hole;
-          if (!Array.isArray(ring)) return;
-          const islandOutline = svgElement("path", {
-            d: pathFromGeo(ring, true),
-            class: "river-island-outline"
-          });
-          svg.appendChild(islandOutline);
+      const bankOutline = svgElement("path", {
+        d: pathFromGeo([...HAN_RIVER_NORTH_BANK, ...HAN_RIVER_SOUTH_BANK], true),
+        class: "han-river-bank"
+      });
+      svg.appendChild(bankOutline);
+
+      HAN_RIVER_ISLANDS.forEach((ring) => {
+        const islandOutline = svgElement("path", {
+          d: pathFromGeo(ring, true),
+          class: "river-island-outline"
         });
+        svg.appendChild(islandOutline);
       });
 
     }
@@ -2255,6 +2285,7 @@
     switchScreen("home");
     buildLineButtons();
     renderHomeMap();
+    window.RAILTYPE_COMMUNITY?.refresh?.();
   }
 
   function renderGame() {
@@ -2597,6 +2628,7 @@
     };
     state.currentResult = result;
     saveSession(result);
+    window.RAILTYPE_COMMUNITY?.publish?.(result)?.catch?.((error) => console.warn("Community publish failed", error));
     markCleared();
     renderResult(result);
     switchScreen("result");
