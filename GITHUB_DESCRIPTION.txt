@@ -1,4 +1,0 @@
-서울·수도권의 실제 역사 좌표를 따라 역명을 입력하며 노선을 완성하는 GIS 기반 인터랙티브 타자 연습 웹앱. 1–9호선 주행, 방향 선택, 모션 데모, 역 주변 이야기, 노선 역사, 기록 분석을 제공합니다.
-
-Suggested topics:
-seoul-subway, metro, typing-game, gis, svg-map, geojson, javascript, github-pages, public-data, data-visualization
