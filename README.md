@@ -13,7 +13,7 @@
 </div>
 
 > **GitHub Pages URL**  
-> 배포 후 `https://<USERNAME>.github.io/<REPOSITORY>/` 형식의 주소를 이곳에 추가하세요.
+> https://gshark1348.github.io/railtype_korea/
 
 ---
 
