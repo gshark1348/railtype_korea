@@ -120,7 +120,7 @@ main { padding-top: 14px; }
 .line-select-copy { display: flex; justify-content: space-between; gap: 20px; align-items: end; }
 .line-select-copy h2 { margin: 6px 0 0; font-size: 1.5rem; }
 .line-select-copy p { margin: 0; color: var(--muted); }
-.line-buttons { margin-top: 20px; display: grid; grid-template-columns: repeat(9, minmax(78px, 1fr)); gap: 10px; }
+.line-buttons { margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(78px, 1fr)); gap: 10px; }
 .line-button { min-height: 88px; border-radius: 20px; border: 1px solid var(--hairline); background: #fffdfa; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; }
 .line-button i { width: 39px; height: 39px; border-radius: 50%; display: grid; place-items: center; background: var(--line-color); color: white; font-style: normal; font-weight: 900; }
 .line-button span { font-size: .68rem; color: var(--muted); font-weight: 800; letter-spacing: .08em; }
@@ -1182,5 +1182,33 @@ main { padding-top: 14px; }
 
 @media (max-width: 620px) {
   .community-line-filter button { padding-right: 8px; }
+  .community-line-filter button span { display: none; }
+}
+
+
+/* v25.0 — national high-speed rail */
+.network-line-card[aria-label^="KTX"] .network-line-symbol,
+.community-line-filter button i,
+.community-line-badge,
+.route-setup-line-badge,
+.round-line-number,
+.home-line-chip i,
+.result-line-chip i,
+.history-item i {
+  font-variant-numeric: tabular-nums;
+}
+
+.city-silhouette[data-region-id="southKorea"] {
+  fill: #f1eee7;
+  stroke: rgba(79, 72, 63, .24);
+  stroke-width: 1.35;
+}
+
+.city-silhouette[data-region-id="southKorea"][data-region-part="1"] {
+  fill: #f4f0e9;
+  stroke-width: 1.05;
+}
+
+@media (max-width: 660px) {
   .community-line-filter button span { display: none; }
 }

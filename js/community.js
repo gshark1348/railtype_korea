@@ -36,7 +36,8 @@
     { id: "demo-7", nickname: "서울지리왕", line: 6, course_name: "본선", direction_name: "신내행", route_name: "응암 → 신내", duration_ms: 189710, accuracy: 98.2, errors: 2, completed_at: minutesAgo(93) },
     { id: "demo-8", nickname: "오답제로", line: 7, course_name: "본선", direction_name: "석남행", route_name: "장암 → 석남", duration_ms: 301080, accuracy: 100, errors: 0, completed_at: minutesAgo(128) },
     { id: "demo-9", nickname: "급행연구원", line: 9, course_name: "급행", direction_name: "중앙보훈병원행", route_name: "김포공항 → 중앙보훈병원", duration_ms: 112850, accuracy: 99.1, errors: 1, completed_at: minutesAgo(155) },
-    { id: "demo-10", nickname: "삼호선마스터", line: 3, course_name: "본선", direction_name: "대화행", route_name: "오금 → 대화", duration_ms: 215740, accuracy: 99.7, errors: 1, completed_at: minutesAgo(188) }
+    { id: "demo-10", nickname: "삼호선마스터", line: 3, course_name: "본선", direction_name: "대화행", route_name: "오금 → 대화", duration_ms: 215740, accuracy: 99.7, errors: 1, completed_at: minutesAgo(188) },
+    { id: "demo-11", nickname: "경부선여행자", line: 10, course_name: "대표 정차축", direction_name: "부산행", route_name: "서울 → 부산", duration_ms: 84210, accuracy: 98.8, errors: 1, completed_at: minutesAgo(214) }
   ];
 
   function minutesAgo(minutes) {
@@ -46,9 +47,19 @@
   function getLineNumbers() {
     const configured = Object.keys(window.METRO_LINES || {})
       .map(Number)
-      .filter((line) => Number.isInteger(line) && line >= 1 && line <= 9)
+      .filter((line) => Number.isInteger(line) && line >= 1)
       .sort((a, b) => a - b);
     return configured.length ? configured : [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  }
+
+  function getLineMeta(line) {
+    const config = window.METRO_LINES?.[line] || {};
+    return {
+      symbol: String(config.number ?? line),
+      name: String(config.name || `${line}호선`),
+      code: String(config.code || `LINE ${String(line).padStart(2, "0")}`),
+      color: config.color || "#5d5a54"
+    };
   }
 
   function isLiveConfigured() {
@@ -263,7 +274,7 @@
         });
         if (!response.ok) throw new Error(`Community publish failed: ${response.status}`);
         state.selectedLine = record.line;
-        showStatus(`${record.line}호선 완주 기록이 커뮤니티 기록판에 등록되었습니다.`);
+        showStatus(`${getLineMeta(record.line).name} 완주 기록이 커뮤니티 기록판에 등록되었습니다.`);
         await refresh();
         return;
       } catch (error) {
@@ -297,11 +308,12 @@
     if (!container) return;
     const lineNumbers = getLineNumbers();
     container.innerHTML = lineNumbers.map((line) => {
-      const color = window.METRO_LINES?.[line]?.color || "#5d5a54";
+      const meta = getLineMeta(line);
+      const color = meta.color;
       const selected = line === state.selectedLine;
       return `
         <button type="button" data-community-line="${line}" class="${selected ? "is-active" : ""}" aria-pressed="${selected}" style="--filter-line:${escapeHtml(color)}">
-          <i>${line}</i><span>${line}호선</span>
+          <i>${escapeHtml(meta.symbol)}</i><span>${escapeHtml(meta.name)}</span>
         </button>`;
     }).join("");
     container.querySelectorAll("[data-community-line]").forEach((button) => {
@@ -322,10 +334,10 @@
     sourceBadge.className = `community-source-badge is-${state.source}`;
     sourceBadge.textContent = live ? "LIVE" : state.source === "offline" ? "OFFLINE" : "PREVIEW";
     sourceText.textContent = live
-      ? "다른 사용자가 완주하면 이 기록판에 반영됩니다. 최고 기록은 같은 호선 안에서만 비교합니다."
+      ? "다른 사용자가 완주하면 이 기록판에 반영됩니다. 최고 기록은 같은 노선 안에서만 비교합니다."
       : state.source === "offline"
-        ? "공유 서버에 연결하지 못해 브라우저 저장 기록과 미리보기를 표시합니다. 최고 기록은 호선별로 분리됩니다."
-        : "Supabase 연결 전 화면 구성을 확인할 수 있는 미리보기입니다. 최고 기록은 호선별로 분리됩니다.";
+        ? "공유 서버에 연결하지 못해 브라우저 저장 기록과 미리보기를 표시합니다. 최고 기록은 노선별로 분리됩니다."
+        : "Supabase 연결 전 화면 구성을 확인할 수 있는 미리보기입니다. 최고 기록은 노선별로 분리됩니다.";
 
     const lineFilter = document.getElementById("communityLineFilter");
     const rankingNote = document.getElementById("communityRankingNote");
@@ -342,22 +354,22 @@
     updateSummary(records, isBest);
 
     if (!visible.length) {
-      const emptyTitle = isBest ? `${state.selectedLine}호선의 첫 기록을 기다리는 중` : "첫 기록을 기다리는 중";
+      const emptyTitle = isBest ? `${getLineMeta(state.selectedLine).name}의 첫 기록을 기다리는 중` : "첫 기록을 기다리는 중";
       list.innerHTML = `<div class="community-empty"><strong>${emptyTitle}</strong><span>해당 노선을 완주하면 이곳에 기록이 나타납니다.</span></div>`;
       return;
     }
 
     list.innerHTML = visible.map((record, index) => {
-      const lineConfig = window.METRO_LINES?.[record.line];
-      const color = lineConfig?.color || "#5d5a54";
+      const lineMeta = getLineMeta(record.line);
+      const color = lineMeta.color;
       const rank = isBest ? `<span class="community-rank">${String(index + 1).padStart(2, "0")}</span>` : "";
       return `
         <article class="community-record">
           ${rank}
-          <i class="community-line-badge" style="--record-line:${escapeHtml(color)}">${record.line}</i>
+          <i class="community-line-badge" style="--record-line:${escapeHtml(color)}">${escapeHtml(lineMeta.symbol)}</i>
           <div class="community-record-copy">
             <div><strong>${escapeHtml(record.nickname)}</strong><span>${escapeHtml(relativeTime(record.completed_at))}</span></div>
-            <p>${escapeHtml(`${record.line}호선 · ${record.course_name} · ${record.direction_name}`)}</p>
+            <p>${escapeHtml(`${lineMeta.name} · ${record.course_name} · ${record.direction_name}`)}</p>
             <small>${escapeHtml(record.route_name)}</small>
           </div>
           <div class="community-record-score">
@@ -378,7 +390,7 @@
     document.getElementById("communityRunCount").textContent = String(records.length);
     document.getElementById("communityUserCount").textContent = String(uniqueUsers);
     if (isBest) {
-      if (thirdLabel) thirdLabel.textContent = `LINE ${String(state.selectedLine).padStart(2, "0")} BEST`;
+      if (thirdLabel) thirdLabel.textContent = `${getLineMeta(state.selectedLine).code} BEST`;
       document.getElementById("communityFastest").textContent = fastest ? formatTime(fastest) : "—";
     } else {
       if (thirdLabel) thirdLabel.textContent = "ACTIVE LINES";

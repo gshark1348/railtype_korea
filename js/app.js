@@ -109,7 +109,18 @@
     "2:용두": { title: "동대문구청", subtitle: "행정시설과 전통시장, 청계천 동부 생활권이 만나는 곳", icon: "🏛️" },
     "2:도림천": { title: "도림천 산책로", subtitle: "수변 산책길과 신도림 주거단지가 가까운 조용한 역세권", icon: "🚴" },
     "2:양천구청": { title: "목동 행정타운", subtitle: "양천구청과 목동 주거단지, 학교가 밀집한 생활 중심", icon: "🏢" },
-    "2:신정네거리": { title: "신정동 생활상권", subtitle: "전통시장과 주거 골목이 모이는 양천구 남부 중심지", icon: "🛍️" }
+    "2:신정네거리": { title: "신정동 생활상권", subtitle: "전통시장과 주거 골목이 모이는 양천구 남부 중심지", icon: "🛍️" },
+    "10:서울": { title: "서울역", subtitle: "수도 서울에서 전국 고속철도망이 출발하는 대표 관문", icon: "🏙️" },
+    "10:광명": { title: "광명동굴과 KTX 광명역", subtitle: "수도권 서남부의 고속철도 관문과 광명 생활권", icon: "🚄" },
+    "10:천안아산": { title: "천안·아산 광역생활권", subtitle: "두 도시와 수도권 전철이 만나는 충남 북부 철도 거점", icon: "🏘️" },
+    "10:오송": { title: "오송 바이오밸리", subtitle: "경부·호남고속철도가 갈라지는 국가 철도 분기점", icon: "🧬" },
+    "10:대전": { title: "대전 원도심", subtitle: "과학도시 대전의 중앙시장과 철도 역사가 만나는 중심역", icon: "🔬" },
+    "10:김천구미": { title: "김천혁신도시", subtitle: "김천과 구미 산업권을 함께 연결하는 경북 서부 고속철도역", icon: "🏭" },
+    "10:서대구": { title: "대구 서부산업권", subtitle: "서대구 산업단지와 대구 서부 생활권을 잇는 신설 고속철도역", icon: "🏗️" },
+    "10:동대구": { title: "동대구 복합환승센터", subtitle: "대구 도시철도와 버스·일반철도가 집결하는 영남권 교통 중심", icon: "🚉" },
+    "10:경주": { title: "천년고도 경주", subtitle: "불국사와 대릉원으로 이어지는 신라 역사문화도시의 관문", icon: "🏛️" },
+    "10:울산": { title: "울산 산업도시", subtitle: "자동차·조선·석유화학 산업과 영남알프스를 연결하는 관문", icon: "⚙️" },
+    "10:부산": { title: "부산항과 원도심", subtitle: "바다와 항만, 산복도로가 펼쳐지는 경부고속선의 남쪽 종착점", icon: "🌊" }
   };
   const CITY_REGION_META = {
     yeoncheon: { id: "yeoncheon", label: "연천군", en: "YEONCHEON", short: "연천" },
@@ -136,7 +147,14 @@
     osan: { id: "osan", label: "오산시", en: "OSAN", short: "오산" },
     pyeongtaek: { id: "pyeongtaek", label: "평택시", en: "PYEONGTAEK", short: "평택" },
     cheonan: { id: "cheonan", label: "천안시", en: "CHEONAN", short: "천안" },
-    asan: { id: "asan", label: "아산시", en: "ASAN", short: "아산" }
+    asan: { id: "asan", label: "아산시", en: "ASAN", short: "아산" },
+    cheongju: { id: "cheongju", label: "청주시", en: "CHEONGJU", short: "청주" },
+    daejeon: { id: "daejeon", label: "대전광역시", en: "DAEJEON", short: "대전" },
+    gimcheon: { id: "gimcheon", label: "김천시", en: "GIMCHEON", short: "김천" },
+    daegu: { id: "daegu", label: "대구광역시", en: "DAEGU", short: "대구" },
+    gyeongju: { id: "gyeongju", label: "경주시", en: "GYEONGJU", short: "경주" },
+    ulsan: { id: "ulsan", label: "울산광역시", en: "ULSAN", short: "울산" },
+    busan: { id: "busan", label: "부산광역시", en: "BUSAN", short: "부산" }
   };
 
   const COURSE_CITY_SEGMENTS = {
@@ -238,7 +256,19 @@
       { id: "seongnam", stations: ["남위례", "산성", "남한산성입구", "단대오거리", "신흥", "수진", "모란"] }
     ],
     "9:local": [{ id: "seoul", stations: ["개화", "김포공항", "공항시장", "신방화", "마곡나루", "양천향교", "가양", "증미", "등촌", "염창", "신목동", "선유도", "당산", "국회의사당", "여의도", "샛강", "노량진", "노들", "흑석", "동작", "구반포", "신반포", "고속터미널", "사평", "신논현", "언주", "선정릉", "삼성중앙", "봉은사", "종합운동장", "삼전", "석촌고분", "석촌", "송파나루", "한성백제", "올림픽공원", "둔촌오륜", "중앙보훈병원"] }],
-    "9:express": [{ id: "seoul", stations: ["김포공항", "마곡나루", "가양", "염창", "당산", "여의도", "노량진", "동작", "고속터미널", "신논현", "선정릉", "봉은사", "종합운동장", "석촌", "올림픽공원", "중앙보훈병원"] }]
+    "9:express": [{ id: "seoul", stations: ["김포공항", "마곡나루", "가양", "염창", "당산", "여의도", "노량진", "동작", "고속터미널", "신논현", "선정릉", "봉은사", "종합운동장", "석촌", "올림픽공원", "중앙보훈병원"] }],
+    "10:main": [
+      { id: "seoul", stations: ["서울"] },
+      { id: "gwangmyeong", stations: ["광명"] },
+      { id: "asan", stations: ["천안아산"] },
+      { id: "cheongju", stations: ["오송"] },
+      { id: "daejeon", stations: ["대전"] },
+      { id: "gimcheon", stations: ["김천구미"] },
+      { id: "daegu", stations: ["서대구", "동대구"] },
+      { id: "gyeongju", stations: ["경주"] },
+      { id: "ulsan", stations: ["울산"] },
+      { id: "busan", stations: ["부산"] }
+    ]
   };
 
   const STATION_ADMIN_DISTRICTS = (() => {
@@ -662,7 +692,8 @@
     "7:dobongsanSeongnam": ["seoul", "gwangmyeong", "bucheon", "incheon"],
     "8:byeollaeMoran": ["namyangju", "guri", "seoul", "seongnam"],
     "9:local": ["seoul"],
-    "9:express": ["seoul"]
+    "9:express": ["seoul"],
+    "10:main": ["southKorea"]
   };
 
   const DISTRICT_GUIDES = [
@@ -945,7 +976,18 @@
     "9:선정릉": [{ kind: "rail", tag: "JR", name: "수인분당선" }],
     "9:종합운동장": [{ kind: "subway", tag: "2", name: "2호선" }],
     "9:석촌": [{ kind: "subway", tag: "8", name: "8호선" }],
-    "9:올림픽공원": [{ kind: "subway", tag: "5", name: "5호선" }]
+    "9:올림픽공원": [{ kind: "subway", tag: "5", name: "5호선" }],
+    "10:서울": [{ kind: "subway", tag: "1·4", name: "수도권 전철 1·4호선" }, { kind: "airport", tag: "AREX", name: "공항철도" }, { kind: "rail", tag: "JR", name: "경의·중앙선 · 일반철도" }],
+    "10:광명": [{ kind: "subway", tag: "1", name: "수도권 전철 1호선 셔틀" }],
+    "10:천안아산": [{ kind: "subway", tag: "1", name: "수도권 전철 1호선 아산역" }, { kind: "rail", tag: "JR", name: "장항선" }],
+    "10:오송": [{ kind: "rail", tag: "HSR", name: "호남고속선 · 충북선" }],
+    "10:대전": [{ kind: "subway", tag: "D1", name: "대전 도시철도 1호선" }, { kind: "rail", tag: "JR", name: "경부선 · 호남선" }],
+    "10:김천구미": [{ kind: "rail", tag: "KTX", name: "경부고속선" }],
+    "10:서대구": [{ kind: "rail", tag: "DG", name: "대경선 · 일반철도" }],
+    "10:동대구": [{ kind: "subway", tag: "D1", name: "대구 도시철도 1호선" }, { kind: "rail", tag: "DG", name: "대경선 · 경부선" }],
+    "10:경주": [{ kind: "rail", tag: "JR", name: "동해선" }],
+    "10:울산": [{ kind: "rail", tag: "KTX", name: "경부고속선" }],
+    "10:부산": [{ kind: "subway", tag: "B1", name: "부산 도시철도 1호선" }, { kind: "rail", tag: "JR", name: "경부선 · 동해선" }]
   };
 
   function getCourseCityLookup() {
@@ -1149,9 +1191,21 @@
     if (setupSvg) state.maps.setup = buildMap(setupSvg, { mode: "setup" });
   }
 
+  function lineSymbol(config = LINE_CONFIG) {
+    return String(config?.number ?? "");
+  }
+
+  function lineCode(config = LINE_CONFIG) {
+    return String(config?.code || `LINE ${String(config?.number ?? "").padStart(2, "0")}`);
+  }
+
+  function lineDisplayName(lineNumber) {
+    return window.METRO_LINES?.[lineNumber]?.name || `${lineNumber}호선`;
+  }
+
   function updateDynamicCopy() {
-    const lineNo = LINE_CONFIG.number;
-    const lineLabel = String(lineNo).padStart(2, "0");
+    const lineNo = lineSymbol();
+    const lineLabel = lineCode();
     const stationCount = STATIONS.length;
     const routeStart = journeyStart();
     const routeEnd = journeyEnd();
@@ -1160,7 +1214,7 @@
     $("heroStationCount").textContent = String(stationCount);
     $("homeAreaLabel").textContent = LINE_CONFIG.areaLabel || "SEOUL";
     $("homeMapTitle").textContent = `${LINE_CONFIG.name} ${COURSE.name} · ${currentDirectionLabel()}`;
-    $("homeLineChip").innerHTML = `<i>${lineNo}</i> LINE ${lineLabel}`;
+    $("homeLineChip").innerHTML = `<i>${lineNo}</i> ${lineLabel}`;
     const cornerLabels = COURSE.cornerLabels || LINE_CONFIG.cornerLabels || {};
     const routeRegions = getRenderedRegions();
     const firstCity = routeRegions[0]?.name || "SEOUL";
@@ -1169,9 +1223,9 @@
     $("southEastLabel").textContent = formatCityName(cornerLabels.southEast || lastCity);
     $("gameLineNumber").textContent = String(lineNo);
     $("gameRouteTitle").textContent = `${routeStart} → ${routeEnd} · ${currentDirectionLabel()}`;
-    $("resultLineEyebrow").textContent = `LINE ${lineLabel} · ${currentDirectionLabel().toUpperCase()} COMPLETED`;
+    $("resultLineEyebrow").textContent = `${lineLabel} · ${currentDirectionLabel().toUpperCase()} COMPLETED`;
     $("resultDescription").textContent = `${routeStart}역부터 ${routeEnd}역까지 ${currentDirectionLabel()} 경로를 따라 완성한 노선이 자동으로 저장되었습니다.`;
-    $("resultMapTitle").textContent = `서울 지하철 ${LINE_CONFIG.name} · ${currentDirectionLabel()}`;
+    $("resultMapTitle").textContent = `${LINE_CONFIG.name} · ${currentDirectionLabel()}`;
     $("resultLineChip").innerHTML = `<i>${lineNo}</i> COMPLETE`;
     $("homeMapSvg").setAttribute("aria-label", `${LINE_CONFIG.name} ${currentDirectionLabel()} 실제 역 위치 지도`);
     $("gameMapSvg").setAttribute("aria-label", `현재까지 완성된 ${LINE_CONFIG.name} ${currentDirectionLabel()}`);
@@ -1250,8 +1304,8 @@
 
   function renderRouteSetup() {
     if (!$("routeSetupModal")) return;
-    const lineNo = LINE_CONFIG.number;
-    $("routeSetupEyebrow").textContent = `LINE ${String(lineNo).padStart(2, "0")} PREVIEW`;
+    const lineNo = lineSymbol();
+    $("routeSetupEyebrow").textContent = `${lineCode()} PREVIEW`;
     $("routeSetupTitle").textContent = `${LINE_CONFIG.name} 주행을 설정하세요.`;
     $("routeSetupDescription").textContent = "코스와 종착역 방향을 고른 뒤 모션 데모를 확인하고 START를 누르세요.";
     $("routeSetupLineBadge").textContent = String(lineNo);
@@ -1509,7 +1563,7 @@
       title: "고속철도",
       description: "KTX·SRT로 연결되는 대한민국 고속철도 간선",
       lines: [
-        { id: "ktx-gyeongbu", symbol: "K", name: "KTX 경부고속선", detail: "서울·대전·동대구·부산", color: "#1B5EAA" },
+        { id: "ktx-gyeongbu", symbol: "K", name: "KTX 경부고속선", detail: "서울·대전·동대구·경주·울산·부산", color: "#1B5EAA", lineNumber: 10 },
         { id: "ktx-honam", symbol: "K", name: "KTX 호남고속선", detail: "용산·익산·광주송정·목포", color: "#1B5EAA" },
         { id: "ktx-gangneung", symbol: "K", name: "KTX 강릉선", detail: "서울·청량리·강릉", color: "#2D74DA" },
         { id: "ktx-eum", symbol: "이", name: "KTX-이음 중앙선", detail: "청량리·원주·안동·부전", color: "#2C7A7B" },
@@ -2749,7 +2803,7 @@
       const journeyKeys = getLineJourneyKeys(lineNumber);
       return journeyKeys.length > 0 && journeyKeys.every((key) => cleared.has(key));
     }).length;
-    $("statCleared").textContent = `${clearedLineCount} / 9`;
+    $("statCleared").textContent = `${clearedLineCount} / ${availableLineNumbers.length}`;
     $("statSessions").textContent = String(sessions.length);
     $("statBest").textContent = sessions.length ? formatTime(Math.min(...sessions.map((item) => item.durationMs))) : "—";
     $("statAccuracy").textContent = sessions.length
@@ -2767,8 +2821,8 @@
       const courseName = session.courseName || lineConfig.courses[session.course]?.name || "본선";
       return `
         <article class="history-item">
-          <i style="background:${lineConfig.color}">${session.line}</i>
-          <div><strong>${session.line}호선 ${escapeHtml(session.directionName || courseName)} 완주</strong><span>${escapeHtml(session.routeName || courseName)} · ${date.toLocaleString("ko-KR", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}</span></div>
+          <i style="background:${lineConfig.color}">${escapeHtml(lineSymbol(lineConfig))}</i>
+          <div><strong>${escapeHtml(lineConfig.name)} ${escapeHtml(session.directionName || courseName)} 완주</strong><span>${escapeHtml(session.routeName || courseName)} · ${date.toLocaleString("ko-KR", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}</span></div>
           <b>${formatTime(session.durationMs)}</b>
           <em>${session.accuracy.toFixed(1)}%</em>
         </article>

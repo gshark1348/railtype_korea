@@ -14,3 +14,11 @@
 The previous river was a sparse hand-drawn ribbon embedded in `app.js`. v24 moves the geometry to a standalone multi-ring dataset and increases control-point density at the western and eastern approaches. Islands are represented as holes. The result is designed for a minimalist SVG infographic and is not a cadastral, hydrographic, or legal survey product.
 
 Municipal geometry was not arbitrarily redrawn. All 25 stored features passed topology validity checks and were retained; the separate river layer was the primary source of the visible mismatch.
+
+## KTX 경부고속선 · 대한민국 전국 지도 (v25.0)
+
+- Station locations: 국가철도공단 역사정보, KORAIL 철도 노선도 교차 확인
+- National outline: Natural Earth Admin 0 Countries (public domain)
+- Jeju coastline supplement: GSHHS coastline dataset
+- Runtime CRS: EPSG:4326 (WGS84)
+- Validation: `ktx-gyeongbu-validation-v25.json`
