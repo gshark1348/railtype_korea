@@ -1,0 +1,157 @@
+{
+  "version": "v26.1",
+  "route": "KTX 호남고속축 대표 코스",
+  "crs": "EPSG:4326",
+  "station_count": 10,
+  "stations_inside_boundary": 10,
+  "boundary_geometry_type": "MultiPolygon",
+  "boundary_valid": true,
+  "boundary_parts": 6,
+  "boundary_vertex_count": 1206,
+  "max_boundary_segment_jump_degrees": {
+    "v26.0": 0.715868,
+    "v26.1": 0.239974
+  },
+  "max_station_coordinate_adjustment_m": 85.5,
+  "station_adjustments": [
+    {
+      "code": "KHN01",
+      "name": "용산",
+      "lat": 37.52991,
+      "lng": 126.9648,
+      "shift_from_v26_m": 23.3,
+      "inside_country_boundary": true
+    },
+    {
+      "code": "KHN02",
+      "name": "광명",
+      "lat": 37.416196,
+      "lng": 126.884818,
+      "shift_from_v26_m": 28.4,
+      "inside_country_boundary": true
+    },
+    {
+      "code": "KHN03",
+      "name": "천안아산",
+      "lat": 36.79391,
+      "lng": 127.10445,
+      "shift_from_v26_m": 53.0,
+      "inside_country_boundary": true
+    },
+    {
+      "code": "KHN04",
+      "name": "오송",
+      "lat": 36.620557,
+      "lng": 127.327377,
+      "shift_from_v26_m": 45.9,
+      "inside_country_boundary": true
+    },
+    {
+      "code": "KHN05",
+      "name": "공주",
+      "lat": 36.332361,
+      "lng": 127.096778,
+      "shift_from_v26_m": 12.2,
+      "inside_country_boundary": true
+    },
+    {
+      "code": "KHN06",
+      "name": "익산",
+      "lat": 35.941636,
+      "lng": 126.945797,
+      "shift_from_v26_m": 0.0,
+      "inside_country_boundary": true
+    },
+    {
+      "code": "KHN07",
+      "name": "정읍",
+      "lat": 35.575556,
+      "lng": 126.8425,
+      "shift_from_v26_m": 0.4,
+      "inside_country_boundary": true
+    },
+    {
+      "code": "KHN08",
+      "name": "광주송정",
+      "lat": 35.1374,
+      "lng": 126.791,
+      "shift_from_v26_m": 85.5,
+      "inside_country_boundary": true
+    },
+    {
+      "code": "KHN09",
+      "name": "나주",
+      "lat": 35.014261,
+      "lng": 126.716994,
+      "shift_from_v26_m": 0.0,
+      "inside_country_boundary": true
+    },
+    {
+      "code": "KHN10",
+      "name": "목포",
+      "lat": 34.79194,
+      "lng": 126.38722,
+      "shift_from_v26_m": 0.0,
+      "inside_country_boundary": true
+    }
+  ],
+  "finding": "The main visual displacement came from disconnected/interleaved vertices in the national boundary ring, not from kilometre-scale station-coordinate errors.",
+  "gyeongbu_stations_inside_boundary": 11,
+  "gyeongbu_station_count": 11,
+  "svg_projection_check": {
+    "viewport": "1200x760",
+    "all_honam_station_nodes_inside_viewport": true,
+    "station_positions": [
+      {
+        "name": "용산",
+        "x": 525.1,
+        "y": 209.9
+      },
+      {
+        "name": "광명",
+        "x": 518.3,
+        "y": 221.9
+      },
+      {
+        "name": "천안아산",
+        "x": 537.0,
+        "y": 287.1
+      },
+      {
+        "name": "오송",
+        "x": 555.9,
+        "y": 305.3
+      },
+      {
+        "name": "공주",
+        "x": 536.3,
+        "y": 335.5
+      },
+      {
+        "name": "익산",
+        "x": 523.5,
+        "y": 376.5
+      },
+      {
+        "name": "정읍",
+        "x": 514.7,
+        "y": 414.8
+      },
+      {
+        "name": "광주송정",
+        "x": 510.4,
+        "y": 460.8
+      },
+      {
+        "name": "나주",
+        "x": 504.1,
+        "y": 473.7
+      },
+      {
+        "name": "목포",
+        "x": 476.1,
+        "y": 497.0
+      }
+    ]
+  }
+}

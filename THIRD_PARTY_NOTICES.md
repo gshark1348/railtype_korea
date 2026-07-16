@@ -91,7 +91,35 @@ The boundary geometry is transformed, dissolved by municipality, topology-preser
 ## 대한민국 전국 경계
 
 - Files: `data/south-korea-boundary.geojson`, `js/national-boundary.js`
-- Mainland source: Natural Earth Admin 0 Countries
-- Island coastline supplement: GSHHS coastline data
+- Administrative outline: Natural Earth Admin 0 Countries
+- Coastline refinement: GSHHS intermediate-resolution coastline data
+- Processing: Republic of Korea border envelope intersection, topology-preserving simplification, and major-island extraction
 - Coordinate reference system: WGS84 / EPSG:4326
 - Natural Earth data is public domain.
+
+
+## KTX 호남고속선 전동차 이미지
+
+- File: `assets/trains/ktx-honam.jpg`
+- Source: Wikimedia Commons, `File:KTX (Korea Train eXpress).jpg`
+- Author: Subway06
+- License: CC BY 3.0
+- Note: 경부고속선 화면에 사용한 동일 원본 이미지를 호남고속선 노선 카드용 별도 파일로 복사했습니다.
+
+
+## 한국철도공사 역 위치 정보
+
+- Provider: 한국철도공사·공공데이터포털
+- Dataset: `한국철도공사_역 위치 정보`
+- Coordinates: decimal WGS84 latitude/longitude
+- Purpose: KTX 호남고속축 용산–목포 대표 역사 좌표 재검수
+- Project files: `data/ktx-honam-stations.csv`, `js/ktx-honam-data.js`
+
+## GSHHG / Basemap coastline data
+
+- Dataset: GSHHG 2.3.6 coastline geometry distributed with Basemap Data 2.0.0
+- Resolution used: intermediate
+- Purpose: topology-correct coastline reconstruction for the South Korea infographic boundary
+- License of the extracted GSHHG boundary data in Basemap Data: LGPL-3.0-or-later
+- Project files: `data/south-korea-boundary.geojson`, `js/national-boundary.js`
+- Processing: line-order correction, invalid-spike removal, polygon repair, major-island union, and topology-preserving simplification
