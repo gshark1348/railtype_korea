@@ -1,0 +1,64 @@
+﻿order,code,name_ko,name_en,latitude,longitude,source_crs,verification
+1,K209,청량리,CHEONGNYANGNI,37.580895,127.047848,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+2,K210,왕십리,WANGSIMNI,37.560641,127.038785,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+3,K211,서울숲,SEOUL FOREST,37.543646,127.044746,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+4,K212,압구정로데오,APGUJEONG RODEO,37.527519,127.040601,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+5,K213,강남구청,GANGNAM-GU OFFICE,37.517215,127.041310,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+6,K214,선정릉,SEONJEONGNEUNG,37.510933,127.043627,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+7,K215,선릉,SEOLLEUNG,37.505168,127.048709,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+8,K216,한티,HANTI,37.496286,127.052910,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+9,K217,도곡,DOGOK,37.490976,127.055498,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+10,K218,구룡,GURYONG,37.487027,127.059493,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+11,K219,개포동,GAEPODONG,37.489139,127.066121,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+12,K220,대모산입구,DAEMOSAN,37.491550,127.073070,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+13,K221,수서,SUSEO,37.487373,127.101646,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+14,K222,복정,BOKJEONG,37.469041,127.126576,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+15,K223,가천대,GACHON UNIVERSITY,37.448563,127.126696,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+16,K224,태평,TAEPYEONG,37.439789,127.127748,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+17,K225,모란,MORAN,37.432057,127.129131,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+18,K226,야탑,YATAP,37.411374,127.128743,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+19,K227,이매,IMAE,37.396208,127.128288,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+20,K228,서현,SEOHYEON,37.385015,127.123431,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+21,K229,수내,SUNAE,37.378469,127.114289,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+22,K230,정자,JEONGJA,37.366174,127.108097,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+23,K231,미금,MIGEUM,37.350073,127.109009,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+24,K232,오리,ORI,37.339831,127.108949,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+25,K233,죽전,JUKJEON,37.324377,127.107505,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+26,K234,보정,BOJEONG,37.312775,127.108337,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+27,K235,구성,GUSEONG,37.298977,127.105696,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+28,K236,신갈,SINGAL,37.286148,127.111285,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+29,K237,기흥,GIHEUNG,37.275497,127.115955,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+30,K238,상갈,SANGGAL,37.261812,127.108737,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+31,K239,청명,CHEONGMYEONG,37.259540,127.078969,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+32,K240,영통,YEONGTONG,37.251504,127.071332,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+33,K241,망포,MANGPO,37.245838,127.056855,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+34,K242,매탄권선,MAETAN-GWONSEON,37.252506,127.040809,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+35,K243,수원시청,SUWON CITY HALL,37.261923,127.030857,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+36,K244,매교,MAEGYO,37.265515,127.015901,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+37,K245,수원,SUWON,37.265790,127.000095,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+38,K246,고색,GOSEK,37.249772,126.980573,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+39,K247,오목천,OMOKCHEON,37.243360,126.963903,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+40,K248,어천,EOCHEON,37.250088,126.908800,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+41,K249,야목,YAMOK,37.261423,126.883773,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+42,K250,사리,SARI,37.290641,126.857104,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+43,K251,한대앞,HANYANG UNIV. AT ANSAN,37.310207,126.853246,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+44,K252,중앙,JUNGANG,37.316040,126.837959,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+45,K253,고잔,GOJAN,37.316825,126.822470,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+46,K254,초지,CHOJI,37.320896,126.805461,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+47,K255,안산,ANSAN,37.327401,126.788019,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+48,K256,신길온천,SINGILONCHEON,37.337892,126.766558,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+49,K257,정왕,JEONGWANG,37.352013,126.742261,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+50,K258,오이도,OIDO,37.362929,126.738923,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+51,K259,달월,DARWOL,37.380027,126.745403,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+52,K260,월곶,WOLGOT,37.391821,126.742708,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+53,K261,소래포구,SORAEPOGU,37.400940,126.733492,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+54,K262,인천논현,INCHEON NONHYEON,37.400659,126.722452,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+55,K263,호구포,HOGUPO,37.401642,126.708683,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+56,K264,남동인더스파크,NAMDONG INDUSPARK,37.407742,126.695227,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+57,K265,원인재,WONINJAE,37.413212,126.686458,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+58,K266,연수,YEONSU,37.417927,126.678747,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+59,K267,송도,SONGDO,37.429962,126.654676,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+60,K269,인하대,INHA UNIVERSITY,37.448339,126.649763,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+61,K270,숭의,SUNGUI,37.460800,126.638411,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+62,K271,신포,SINPO,37.468455,126.624534,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset
+63,K272,인천,INCHEON,37.476469,126.617398,WGS84 / EPSG:4326,National Railroad Authority 63-row station reference; municipal polygon cross-check v27.1; no display offset

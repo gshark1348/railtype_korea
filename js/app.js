@@ -143,6 +143,7 @@
     namyangju: { id: "namyangju", label: "남양주시", en: "NAMYANGJU", short: "남양주" },
     guri: { id: "guri", label: "구리시", en: "GURI", short: "구리" },
     seongnam: { id: "seongnam", label: "성남시", en: "SEONGNAM", short: "성남" },
+    yongin: { id: "yongin", label: "용인특례시", en: "YONGIN", short: "용인" },
     gwacheon: { id: "gwacheon", label: "과천시", en: "GWACHEON", short: "과천" },
     ansan: { id: "ansan", label: "안산시", en: "ANSAN", short: "안산" },
     siheung: { id: "siheung", label: "시흥시", en: "SIHEUNG", short: "시흥" },
@@ -273,6 +274,26 @@
     ],
     "9:local": [{ id: "seoul", stations: ["개화", "김포공항", "공항시장", "신방화", "마곡나루", "양천향교", "가양", "증미", "등촌", "염창", "신목동", "선유도", "당산", "국회의사당", "여의도", "샛강", "노량진", "노들", "흑석", "동작", "구반포", "신반포", "고속터미널", "사평", "신논현", "언주", "선정릉", "삼성중앙", "봉은사", "종합운동장", "삼전", "석촌고분", "석촌", "송파나루", "한성백제", "올림픽공원", "둔촌오륜", "중앙보훈병원"] }],
     "9:express": [{ id: "seoul", stations: ["김포공항", "마곡나루", "가양", "염창", "당산", "여의도", "노량진", "동작", "고속터미널", "신논현", "선정릉", "봉은사", "종합운동장", "석촌", "올림픽공원", "중앙보훈병원"] }],
+    "12:full": [
+      { id: "seoul", stations: ["청량리", "왕십리", "서울숲", "압구정로데오", "강남구청", "선정릉", "선릉", "한티", "도곡", "구룡", "개포동", "대모산입구", "수서", "복정"] },
+      { id: "seongnam", stations: ["가천대", "태평", "모란", "야탑", "이매", "서현", "수내", "정자", "미금", "오리"] },
+      { id: "yongin", stations: ["죽전", "보정", "구성", "신갈", "기흥", "상갈"] },
+      { id: "suwon", stations: ["청명", "영통", "망포", "매탄권선", "수원시청", "매교", "수원", "고색", "오목천"] },
+      { id: "hwaseong", stations: ["어천", "야목"] },
+      { id: "ansan", stations: ["사리", "한대앞", "중앙", "고잔", "초지", "안산", "신길온천"] },
+      { id: "siheung", stations: ["정왕", "오이도", "달월", "월곶"] },
+      { id: "incheon", stations: ["소래포구", "인천논현", "호구포", "남동인더스파크", "원인재", "연수", "송도", "인하대", "숭의", "신포", "인천"] }
+    ],
+    "12:regular": [
+      { id: "seoul", stations: ["왕십리", "서울숲", "압구정로데오", "강남구청", "선정릉", "선릉", "한티", "도곡", "구룡", "개포동", "대모산입구", "수서", "복정"] },
+      { id: "seongnam", stations: ["가천대", "태평", "모란", "야탑", "이매", "서현", "수내", "정자", "미금", "오리"] },
+      { id: "yongin", stations: ["죽전", "보정", "구성", "신갈", "기흥", "상갈"] },
+      { id: "suwon", stations: ["청명", "영통", "망포", "매탄권선", "수원시청", "매교", "수원", "고색", "오목천"] },
+      { id: "hwaseong", stations: ["어천", "야목"] },
+      { id: "ansan", stations: ["사리", "한대앞", "중앙", "고잔", "초지", "안산", "신길온천"] },
+      { id: "siheung", stations: ["정왕", "오이도", "달월", "월곶"] },
+      { id: "incheon", stations: ["소래포구", "인천논현", "호구포", "남동인더스파크", "원인재", "연수", "송도", "인하대", "숭의", "신포", "인천"] }
+    ],
     "10:main": [
       { id: "seoul", stations: ["서울"] },
       { id: "gwangmyeong", stations: ["광명"] },
@@ -721,8 +742,8 @@
     "8:byeollaeMoran": ["namyangju", "guri", "seoul", "seongnam"],
     "9:local": ["seoul"],
     "9:express": ["seoul"],
-    "10:main": ["southKorea"],
-    "11:main": ["southKorea"]
+    "12:full": ["seoul", "seongnam", "yongin", "suwon", "hwaseong", "ansan", "siheung", "incheon"],
+    "12:regular": ["seoul", "seongnam", "yongin", "suwon", "hwaseong", "ansan", "siheung", "incheon"],
   };
 
   const DISTRICT_GUIDES = [
@@ -1026,7 +1047,31 @@
     "11:정읍": [{ kind: "rail", tag: "JR", name: "호남선" }, { kind: "rail", tag: "SRT", name: "SRT" }],
     "11:광주송정": [{ kind: "subway", tag: "G1", name: "광주 도시철도 1호선" }, { kind: "rail", tag: "JR", name: "호남선 · 경전선" }, { kind: "rail", tag: "SRT", name: "SRT" }],
     "11:나주": [{ kind: "rail", tag: "JR", name: "호남선" }],
-    "11:목포": [{ kind: "rail", tag: "JR", name: "호남선" }]
+    "11:목포": [{ kind: "rail", tag: "JR", name: "호남선" }],
+    "12:청량리": [{ kind: "subway", tag: "1", name: "수도권 전철 1호선" }, { kind: "rail", tag: "JR", name: "경의·중앙선 · 경춘선" }, { kind: "rail", tag: "KTX", name: "KTX · 일반철도" }],
+    "12:왕십리": [{ kind: "subway", tag: "2", name: "2호선" }, { kind: "subway", tag: "5", name: "5호선" }, { kind: "rail", tag: "JR", name: "경의·중앙선" }],
+    "12:강남구청": [{ kind: "subway", tag: "7", name: "7호선" }],
+    "12:선정릉": [{ kind: "subway", tag: "9", name: "9호선" }],
+    "12:선릉": [{ kind: "subway", tag: "2", name: "2호선" }],
+    "12:도곡": [{ kind: "subway", tag: "3", name: "3호선" }],
+    "12:수서": [{ kind: "subway", tag: "3", name: "3호선" }, { kind: "rail", tag: "SRT", name: "SRT" }, { kind: "gtx", tag: "GTX", name: "GTX-A" }],
+    "12:복정": [{ kind: "subway", tag: "8", name: "8호선" }],
+    "12:모란": [{ kind: "subway", tag: "8", name: "8호선" }],
+    "12:이매": [{ kind: "rail", tag: "JR", name: "경강선" }],
+    "12:정자": [{ kind: "rail", tag: "NDB", name: "신분당선" }],
+    "12:미금": [{ kind: "rail", tag: "NDB", name: "신분당선" }],
+    "12:기흥": [{ kind: "light", tag: "LRT", name: "용인경전철" }],
+    "12:수원": [{ kind: "subway", tag: "1", name: "수도권 전철 1호선" }, { kind: "rail", tag: "JR", name: "일반철도 · ITX" }],
+    "12:한대앞": [{ kind: "subway", tag: "4", name: "4호선" }],
+    "12:중앙": [{ kind: "subway", tag: "4", name: "4호선" }],
+    "12:고잔": [{ kind: "subway", tag: "4", name: "4호선" }],
+    "12:초지": [{ kind: "subway", tag: "4", name: "4호선" }, { kind: "rail", tag: "WS", name: "서해선" }],
+    "12:안산": [{ kind: "subway", tag: "4", name: "4호선" }],
+    "12:신길온천": [{ kind: "subway", tag: "4", name: "4호선" }],
+    "12:정왕": [{ kind: "subway", tag: "4", name: "4호선" }],
+    "12:오이도": [{ kind: "subway", tag: "4", name: "4호선" }],
+    "12:원인재": [{ kind: "subway", tag: "I1", name: "인천 1호선" }],
+    "12:인천": [{ kind: "subway", tag: "1", name: "수도권 전철 1호선" }]
   };
 
   function getCourseCityLookup() {
@@ -1578,7 +1623,7 @@
       title: "광역전철 · 기타 노선",
       description: "수도권 도시 간 광역 연결망",
       lines: [
-        { id: "suin-bundang", symbol: "수", name: "수인분당선", detail: "수원·분당·인천 광역축", color: "#FABE00", darkText: true },
+        { id: "suin-bundang", symbol: "수", name: "수인분당선", detail: "청량리·분당·수원·안산·인천 63개 역", color: "#F5A200", darkText: true, lineNumber: 12 },
         { id: "gyeongui-jungang", symbol: "경", name: "경의중앙선", detail: "문산·용문 광역축", color: "#77C4A3" },
         { id: "gyeongchun", symbol: "춘", name: "경춘선", detail: "서울·춘천 광역축", color: "#0C8E72" },
         { id: "gyeonggang", symbol: "강", name: "경강선", detail: "판교·여주 광역축", color: "#003DA5" },
@@ -1602,8 +1647,8 @@
       title: "고속철도",
       description: "KTX·SRT로 연결되는 대한민국 고속철도 간선",
       lines: [
-        { id: "ktx-gyeongbu", symbol: "K", name: "KTX 경부고속선", detail: "서울·대전·동대구·경주·울산·부산", color: "#1B5EAA", lineNumber: 10 },
-        { id: "ktx-honam", symbol: "K", name: "KTX 호남고속선", detail: "용산·공주·익산·광주송정·목포", color: "#2D68B2", lineNumber: 11 },
+        { id: "ktx-gyeongbu", symbol: "K", name: "KTX 경부고속선", detail: "서울·대전·동대구·경주·울산·부산", color: "#1B5EAA" },
+        { id: "ktx-honam", symbol: "K", name: "KTX 호남고속선", detail: "용산·공주·익산·광주송정·목포", color: "#2D68B2" },
         { id: "ktx-gangneung", symbol: "K", name: "KTX 강릉선", detail: "서울·청량리·강릉", color: "#2D74DA" },
         { id: "ktx-eum", symbol: "이", name: "KTX-이음 중앙선", detail: "청량리·원주·안동·부전", color: "#2C7A7B" },
         { id: "srt-gyeongbu", symbol: "S", name: "SRT 경부선", detail: "수서·대전·동대구·부산", color: "#7A0019" },
@@ -2443,7 +2488,9 @@
                 ? window.LINE_8_CONTEXTS?.[station.name]
                 : ACTIVE_LINE_NUMBER === 9
                   ? window.LINE_9_CONTEXTS?.[station.name]
-                  : null;
+                  : ACTIVE_LINE_NUMBER === 12
+                    ? window.SUIN_BUNDANG_CONTEXTS?.[station.name]
+                    : null;
     const context = externalContext || LINE_SPECIFIC_CONTEXTS[contextKey] || STATION_CONTEXTS[station.name] || {
       title: station.en,
       subtitle: `${station.name}역 주변의 생활권과 지역 분위기를 살펴볼 수 있는 구간`,

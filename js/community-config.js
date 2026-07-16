@@ -13,6 +13,5 @@ window.RAILTYPE_COMMUNITY_CONFIG = {
   supabaseUrl: "https://yskkbhusdxulyilueoep.supabase.co",
   anonKey: "sb_publishable_2NTLx6H1AYgXc2TAM45eZA_wc-Yf3o6",
   table: "public_runs",
-  maxRecords: 36,
-  leaderboardPerLine: 8
+  maxRecords: 36
 };

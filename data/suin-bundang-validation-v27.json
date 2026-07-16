@@ -1,0 +1,68 @@
+{
+  "version": "27.0.0",
+  "line": "수인분당선",
+  "coordinateSystem": "WGS84 / EPSG:4326",
+  "stationCount": 63,
+  "courseCounts": {
+    "full": 63,
+    "regular": 62
+  },
+  "directions": [
+    "인천행",
+    "청량리행",
+    "왕십리행"
+  ],
+  "uniqueStationNames": 63,
+  "uniqueOperatingCodes": 63,
+  "reservedCodeGap": {
+    "code": "K268",
+    "status": "not included in operating stations",
+    "reason": "planned Hagik station code gap"
+  },
+  "coordinateExtent": {
+    "minLongitude": 126.617398,
+    "maxLongitude": 127.129131,
+    "minLatitude": 37.24336,
+    "maxLatitude": 37.580895
+  },
+  "routePolylineDistanceKmApprox": 101.8,
+  "runtimeMunicipalityCoverage": {
+    "coveredStations": 57,
+    "totalStations": 63,
+    "missingMunicipalityGeometry": "yongin",
+    "stationsUsingCoordinateAndLabelFallback": [
+      "죽전",
+      "보정",
+      "구성",
+      "신갈",
+      "기흥",
+      "상갈"
+    ]
+  },
+  "checks": {
+    "stationOrder": "PASS",
+    "routeLength": "PASS",
+    "contextCount": "PASS",
+    "codeGapK268": "PASS",
+    "javascriptSyntax": "PASS",
+    "htmlLocalReferences": "PASS",
+    "browserIntegration": "PASS"
+  },
+  "notes": [
+    "Station nodes use exact WGS84 coordinates in the runtime route data.",
+    "The route curve is an educational infographic connecting station coordinates, not a surveyed track centerline.",
+    "The current municipal background dataset does not yet include a Yongin polygon; six Yongin stations remain geospatially positioned and labelled."
+  ],
+  "browserIntegration": {
+    "catalogCard": "PASS",
+    "leaderboardFilter": "PASS",
+    "fullCourseNodes": 63,
+    "regularCourseNodes": 62,
+    "directionSwitch": "PASS",
+    "wrongInputRemainsAtStation": "PASS",
+    "correctInputAdvances": "PASS",
+    "pageErrors": 0,
+    "consoleErrors": 0,
+    "screenshot": "docs/suin-bundang-browser-v27.png"
+  }
+}

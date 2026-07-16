@@ -1,0 +1,592 @@
+{
+  "version": "27.1.0",
+  "line": "Suin-Bundang Line",
+  "coordinateSystem": "WGS84 / EPSG:4326",
+  "distanceCheckCrs": "UTM-K / EPSG:5179",
+  "stationCount": 63,
+  "municipalityCount": 8,
+  "renderedMunicipalities": [
+    "seoul",
+    "seongnam",
+    "yongin",
+    "suwon",
+    "hwaseong",
+    "ansan",
+    "siheung",
+    "incheon"
+  ],
+  "allStationsInsideAssignedMunicipality": true,
+  "minimumBoundaryClearanceM": 27.9,
+  "closestStationToMunicipalBoundary": "복정",
+  "courseRegionRendererFixed": true,
+  "arbitraryStationDisplayOffset": false,
+  "stations": [
+    {
+      "code": "K209",
+      "station": "청량리",
+      "city_id": "seoul",
+      "lat": 37.580895,
+      "lng": 127.047848,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2507.6
+    },
+    {
+      "code": "K210",
+      "station": "왕십리",
+      "city_id": "seoul",
+      "lat": 37.560641,
+      "lng": 127.038785,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2778.0
+    },
+    {
+      "code": "K211",
+      "station": "서울숲",
+      "city_id": "seoul",
+      "lat": 37.543646,
+      "lng": 127.044746,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1580.1
+    },
+    {
+      "code": "K212",
+      "station": "압구정로데오",
+      "city_id": "seoul",
+      "lat": 37.527519,
+      "lng": 127.040601,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1383.0
+    },
+    {
+      "code": "K213",
+      "station": "강남구청",
+      "city_id": "seoul",
+      "lat": 37.517215,
+      "lng": 127.04131,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1803.0
+    },
+    {
+      "code": "K214",
+      "station": "선정릉",
+      "city_id": "seoul",
+      "lat": 37.510933,
+      "lng": 127.043627,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2225.9
+    },
+    {
+      "code": "K215",
+      "station": "선릉",
+      "city_id": "seoul",
+      "lat": 37.505168,
+      "lng": 127.048709,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2436.4
+    },
+    {
+      "code": "K216",
+      "station": "한티",
+      "city_id": "seoul",
+      "lat": 37.496286,
+      "lng": 127.05291,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 3039.5
+    },
+    {
+      "code": "K217",
+      "station": "도곡",
+      "city_id": "seoul",
+      "lat": 37.490976,
+      "lng": 127.055498,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 3494.6
+    },
+    {
+      "code": "K218",
+      "station": "구룡",
+      "city_id": "seoul",
+      "lat": 37.487027,
+      "lng": 127.059493,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 3376.3
+    },
+    {
+      "code": "K219",
+      "station": "개포동",
+      "city_id": "seoul",
+      "lat": 37.489139,
+      "lng": 127.066121,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 3533.0
+    },
+    {
+      "code": "K220",
+      "station": "대모산입구",
+      "city_id": "seoul",
+      "lat": 37.49155,
+      "lng": 127.07307,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 3294.2
+    },
+    {
+      "code": "K221",
+      "station": "수서",
+      "city_id": "seoul",
+      "lat": 37.487373,
+      "lng": 127.101646,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2806.9
+    },
+    {
+      "code": "K222",
+      "station": "복정",
+      "city_id": "seoul",
+      "lat": 37.469041,
+      "lng": 127.126576,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 27.9
+    },
+    {
+      "code": "K223",
+      "station": "가천대",
+      "city_id": "seongnam",
+      "lat": 37.448563,
+      "lng": 127.126696,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1718.9
+    },
+    {
+      "code": "K224",
+      "station": "태평",
+      "city_id": "seongnam",
+      "lat": 37.439789,
+      "lng": 127.127748,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1164.4
+    },
+    {
+      "code": "K225",
+      "station": "모란",
+      "city_id": "seongnam",
+      "lat": 37.432057,
+      "lng": 127.129131,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 941.4
+    },
+    {
+      "code": "K226",
+      "station": "야탑",
+      "city_id": "seongnam",
+      "lat": 37.411374,
+      "lng": 127.128743,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 971.1
+    },
+    {
+      "code": "K227",
+      "station": "이매",
+      "city_id": "seongnam",
+      "lat": 37.396208,
+      "lng": 127.128288,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1929.2
+    },
+    {
+      "code": "K228",
+      "station": "서현",
+      "city_id": "seongnam",
+      "lat": 37.385015,
+      "lng": 127.123431,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2688.8
+    },
+    {
+      "code": "K229",
+      "station": "수내",
+      "city_id": "seongnam",
+      "lat": 37.378469,
+      "lng": 127.114289,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2900.0
+    },
+    {
+      "code": "K230",
+      "station": "정자",
+      "city_id": "seongnam",
+      "lat": 37.366174,
+      "lng": 127.108097,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2513.2
+    },
+    {
+      "code": "K231",
+      "station": "미금",
+      "city_id": "seongnam",
+      "lat": 37.350073,
+      "lng": 127.109009,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1250.4
+    },
+    {
+      "code": "K232",
+      "station": "오리",
+      "city_id": "seongnam",
+      "lat": 37.339831,
+      "lng": 127.108949,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 324.3
+    },
+    {
+      "code": "K233",
+      "station": "죽전",
+      "city_id": "yongin",
+      "lat": 37.324377,
+      "lng": 127.107505,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1136.2
+    },
+    {
+      "code": "K234",
+      "station": "보정",
+      "city_id": "yongin",
+      "lat": 37.312775,
+      "lng": 127.108337,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2190.3
+    },
+    {
+      "code": "K235",
+      "station": "구성",
+      "city_id": "yongin",
+      "lat": 37.298977,
+      "lng": 127.105696,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1271.6
+    },
+    {
+      "code": "K236",
+      "station": "신갈",
+      "city_id": "yongin",
+      "lat": 37.286148,
+      "lng": 127.111285,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1776.2
+    },
+    {
+      "code": "K237",
+      "station": "기흥",
+      "city_id": "yongin",
+      "lat": 37.275497,
+      "lng": 127.115955,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2414.7
+    },
+    {
+      "code": "K238",
+      "station": "상갈",
+      "city_id": "yongin",
+      "lat": 37.261812,
+      "lng": 127.108737,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2139.4
+    },
+    {
+      "code": "K239",
+      "station": "청명",
+      "city_id": "suwon",
+      "lat": 37.25954,
+      "lng": 127.078969,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 188.4
+    },
+    {
+      "code": "K240",
+      "station": "영통",
+      "city_id": "suwon",
+      "lat": 37.251504,
+      "lng": 127.071332,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 574.0
+    },
+    {
+      "code": "K241",
+      "station": "망포",
+      "city_id": "suwon",
+      "lat": 37.245838,
+      "lng": 127.056855,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 848.2
+    },
+    {
+      "code": "K242",
+      "station": "매탄권선",
+      "city_id": "suwon",
+      "lat": 37.252506,
+      "lng": 127.040809,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 576.9
+    },
+    {
+      "code": "K243",
+      "station": "수원시청",
+      "city_id": "suwon",
+      "lat": 37.261923,
+      "lng": 127.030857,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 88.5
+    },
+    {
+      "code": "K244",
+      "station": "매교",
+      "city_id": "suwon",
+      "lat": 37.265515,
+      "lng": 127.015901,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1473.0
+    },
+    {
+      "code": "K245",
+      "station": "수원",
+      "city_id": "suwon",
+      "lat": 37.26579,
+      "lng": 127.000095,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2847.8
+    },
+    {
+      "code": "K246",
+      "station": "고색",
+      "city_id": "suwon",
+      "lat": 37.249772,
+      "lng": 126.980573,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2077.2
+    },
+    {
+      "code": "K247",
+      "station": "오목천",
+      "city_id": "suwon",
+      "lat": 37.24336,
+      "lng": 126.963903,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 606.0
+    },
+    {
+      "code": "K248",
+      "station": "어천",
+      "city_id": "hwaseong",
+      "lat": 37.250088,
+      "lng": 126.9088,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2292.2
+    },
+    {
+      "code": "K249",
+      "station": "야목",
+      "city_id": "hwaseong",
+      "lat": 37.261423,
+      "lng": 126.883773,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2165.3
+    },
+    {
+      "code": "K250",
+      "station": "사리",
+      "city_id": "ansan",
+      "lat": 37.290641,
+      "lng": 126.857104,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1185.7
+    },
+    {
+      "code": "K251",
+      "station": "한대앞",
+      "city_id": "ansan",
+      "lat": 37.310207,
+      "lng": 126.853246,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2223.3
+    },
+    {
+      "code": "K252",
+      "station": "중앙",
+      "city_id": "ansan",
+      "lat": 37.31604,
+      "lng": 126.837959,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2738.5
+    },
+    {
+      "code": "K253",
+      "station": "고잔",
+      "city_id": "ansan",
+      "lat": 37.316825,
+      "lng": 126.82247,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2142.3
+    },
+    {
+      "code": "K254",
+      "station": "초지",
+      "city_id": "ansan",
+      "lat": 37.320896,
+      "lng": 126.805461,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2369.4
+    },
+    {
+      "code": "K255",
+      "station": "안산",
+      "city_id": "ansan",
+      "lat": 37.327401,
+      "lng": 126.788019,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1380.1
+    },
+    {
+      "code": "K256",
+      "station": "신길온천",
+      "city_id": "ansan",
+      "lat": 37.337892,
+      "lng": 126.766558,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 463.0
+    },
+    {
+      "code": "K257",
+      "station": "정왕",
+      "city_id": "siheung",
+      "lat": 37.352013,
+      "lng": 126.742261,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2026.8
+    },
+    {
+      "code": "K258",
+      "station": "오이도",
+      "city_id": "siheung",
+      "lat": 37.362929,
+      "lng": 126.738923,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2125.5
+    },
+    {
+      "code": "K259",
+      "station": "달월",
+      "city_id": "siheung",
+      "lat": 37.380027,
+      "lng": 126.745403,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1436.8
+    },
+    {
+      "code": "K260",
+      "station": "월곶",
+      "city_id": "siheung",
+      "lat": 37.391821,
+      "lng": 126.742708,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 456.1
+    },
+    {
+      "code": "K261",
+      "station": "소래포구",
+      "city_id": "incheon",
+      "lat": 37.40094,
+      "lng": 126.733492,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 626.5
+    },
+    {
+      "code": "K262",
+      "station": "인천논현",
+      "city_id": "incheon",
+      "lat": 37.400659,
+      "lng": 126.722452,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1310.1
+    },
+    {
+      "code": "K263",
+      "station": "호구포",
+      "city_id": "incheon",
+      "lat": 37.401642,
+      "lng": 126.708683,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1916.4
+    },
+    {
+      "code": "K264",
+      "station": "남동인더스파크",
+      "city_id": "incheon",
+      "lat": 37.407742,
+      "lng": 126.695227,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2391.0
+    },
+    {
+      "code": "K265",
+      "station": "원인재",
+      "city_id": "incheon",
+      "lat": 37.413212,
+      "lng": 126.686458,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2409.3
+    },
+    {
+      "code": "K266",
+      "station": "연수",
+      "city_id": "incheon",
+      "lat": 37.417927,
+      "lng": 126.678747,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 2315.0
+    },
+    {
+      "code": "K267",
+      "station": "송도",
+      "city_id": "incheon",
+      "lat": 37.429962,
+      "lng": 126.654676,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 847.6
+    },
+    {
+      "code": "K269",
+      "station": "인하대",
+      "city_id": "incheon",
+      "lat": 37.448339,
+      "lng": 126.649763,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1535.0
+    },
+    {
+      "code": "K270",
+      "station": "숭의",
+      "city_id": "incheon",
+      "lat": 37.4608,
+      "lng": 126.638411,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 888.1
+    },
+    {
+      "code": "K271",
+      "station": "신포",
+      "city_id": "incheon",
+      "lat": 37.468455,
+      "lng": 126.624534,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 1076.2
+    },
+    {
+      "code": "K272",
+      "station": "인천",
+      "city_id": "incheon",
+      "lat": 37.476469,
+      "lng": 126.617398,
+      "inside_city_polygon": true,
+      "distance_to_city_boundary_m": 715.0
+    }
+  ]
+}

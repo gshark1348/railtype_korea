@@ -78,48 +78,17 @@ The boundary geometry is transformed, dissolved by municipality, topology-preser
 - License: 이용허락범위 제한 없음
 - Purpose: Line 9 extension station coordinate cross-check
 
+## 수인분당선 v27.0
 
-## KTX-I 고속열차 사진
+- 역명·역번호·역 위치: 국가철도공단 분당선·수인선 역정보 및 역위치 공개자료, WGS84 정규화
+- 운행 구간·역수: 한국철도공사 광역철도 운영정보
+- 전동차 사진: `Korail Class 351000 EMU 3rd batch.jpg`, Minseong Kim, Wikimedia Commons
+- 라이선스: CC BY-SA 4.0
+- 사진 원본: https://commons.wikimedia.org/wiki/File:Korail_Class_351000_EMU_3rd_batch.jpg
 
-- File: `assets/trains/ktx-gyeongbu.jpg`
-- Original title: `KTX (Korea Train eXpress).jpg`
-- Author: Subway06
-- Source: Wikimedia Commons
-- License: Creative Commons Attribution 3.0
-- Source URL: https://commons.wikimedia.org/wiki/File:KTX_(Korea_Train_eXpress).jpg
+## v27.1 수인분당선 도시 경계·역 위치
 
-## 대한민국 전국 경계
-
-- Files: `data/south-korea-boundary.geojson`, `js/national-boundary.js`
-- Administrative outline: Natural Earth Admin 0 Countries
-- Coastline refinement: GSHHS intermediate-resolution coastline data
-- Processing: Republic of Korea border envelope intersection, topology-preserving simplification, and major-island extraction
-- Coordinate reference system: WGS84 / EPSG:4326
-- Natural Earth data is public domain.
-
-
-## KTX 호남고속선 전동차 이미지
-
-- File: `assets/trains/ktx-honam.jpg`
-- Source: Wikimedia Commons, `File:KTX (Korea Train eXpress).jpg`
-- Author: Subway06
-- License: CC BY 3.0
-- Note: 경부고속선 화면에 사용한 동일 원본 이미지를 호남고속선 노선 카드용 별도 파일로 복사했습니다.
-
-
-## 한국철도공사 역 위치 정보
-
-- Provider: 한국철도공사·공공데이터포털
-- Dataset: `한국철도공사_역 위치 정보`
-- Coordinates: decimal WGS84 latitude/longitude
-- Purpose: KTX 호남고속축 용산–목포 대표 역사 좌표 재검수
-- Project files: `data/ktx-honam-stations.csv`, `js/ktx-honam-data.js`
-
-## GSHHG / Basemap coastline data
-
-- Dataset: GSHHG 2.3.6 coastline geometry distributed with Basemap Data 2.0.0
-- Resolution used: intermediate
-- Purpose: topology-correct coastline reconstruction for the South Korea infographic boundary
-- License of the extracted GSHHG boundary data in Basemap Data: LGPL-3.0-or-later
-- Project files: `data/south-korea-boundary.geojson`, `js/national-boundary.js`
-- Processing: line-order correction, invalid-spike removal, polygon repair, major-island union, and topology-preserving simplification
+- 수인분당선 63개 역 기준점: 국가철도공단 `분당선 역위치` 공개 데이터, WGS84 십진수 좌표
+- 서울·성남·수원·화성·안산·시흥·인천: 프로젝트의 KOSTAT 기반 시·군 경계 피처
+- 용인: KOSTAT 센서스용 행정구역경계의 수지구·기흥구·처인구를 dissolve한 시 외곽선
+- 웹 렌더링을 위해 위상을 보존하는 범위에서 정점을 단순화하며, 법적 경계 판정·측량 용도로 사용하지 않습니다.

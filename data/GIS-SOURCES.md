@@ -15,43 +15,17 @@ The previous river was a sparse hand-drawn ribbon embedded in `app.js`. v24 move
 
 Municipal geometry was not arbitrarily redrawn. All 25 stored features passed topology validity checks and were retained; the separate river layer was the primary source of the visible mismatch.
 
-## KTX 경부고속선 · 대한민국 전국 지도 (v25.0)
+## 수인분당선 v27.0
 
-- Station locations: 국가철도공단 역사정보, KORAIL 철도 노선도 교차 확인
-- National administrative outline: Natural Earth Admin 0 Countries (public domain)
-- Coastline refinement: GSHHS intermediate-resolution coastline dataset
-- Runtime CRS: EPSG:4326 (WGS84)
-- Validation: `ktx-gyeongbu-validation-v25.json`
+- 국가철도공단 분당선 역위치 공개자료: https://www.data.go.kr/data/15041333/fileData.do
+- 한국철도공사 광역철도 운영노선: https://info.korail.com/info/contents.do?key=1446
+- 런타임 좌표계: WGS84 / EPSG:4326
+- 프로젝트 데이터: `suin-bundang-stations.csv`, `js/suin-bundang-data.js`
+- 자동 검증: `suin-bundang-validation-v27.json`
 
+## v27.1 수인분당선 도시 경계·역 위치
 
-## KTX 호남고속선 · v26.0
-
-- 대표 정차축: 용산–광명–천안아산–오송–공주–익산–정읍–광주송정–나주–목포
-- 역사 좌표: 국가철도공단 철도역 정보의 WGS84 위·경도 항목을 우선 기준으로 사용하고, 각 역사 공개 좌표와 교차 확인
-- 노선·사업 연혁: 국가철도공단 호남고속철도 주요사업현황
-- 현재 선로 설명: 오송–광주송정은 호남고속선, 광주송정–목포는 기존 호남선 연계 운행
-- Runtime: `js/ktx-honam-data.js`
-- CSV: `ktx-honam-stations.csv`
-- Validation: `ktx-honam-validation-v26.json`
-
-
-## KTX 호남고속선 위치 보정 · v26.1
-
-- 역사 좌표 기준: 한국철도공사 `역 위치 정보` 공개자료의 WGS84 위도·경도
-- 정밀 좌표 교차 검수: 개별 역사 공개 위치 자료
-- 전국 경계 기준: Natural Earth 계열 국가 경계의 남북 경계선과 GSHHG/GSHHS 2.3.6 중해상도 해안선
-- 경계 처리:
-  1. 남북 경계선을 서쪽에서 동쪽으로 연속 병합
-  2. 동해안에서 서해안까지 대한민국 본토 해안선 연결
-  3. 한강 하구에 비정상 대각선을 만들던 단절 정점 제거
-  4. `buffer(0)`을 이용한 미세 자기교차 복구
-  5. 본토·제주·거제·진도·남해·강화를 유효한 `MultiPolygon`으로 통합
-  6. topology-preserving simplification 적용
-- 런타임 CRS: WGS84 / EPSG:4326
-- 결과:
-  - 대한민국 경계 위상 유효성: PASS
-  - 호남축 대표 역사 경계 내부 포함: 10 / 10
-  - v26.0 대비 최대 역사 좌표 조정: 85.5 m
-- Runtime: `js/national-boundary.js`, `js/ktx-honam-data.js`
-- Exchange: `south-korea-boundary.geojson`, `ktx-honam-stations.csv`
-- Validation: `ktx-honam-validation-v26.1.json`
+- 수인분당선 63개 역 기준점: 국가철도공단 `분당선 역위치` 공개 데이터, WGS84 십진수 좌표
+- 서울·성남·수원·화성·안산·시흥·인천: 프로젝트의 KOSTAT 기반 시·군 경계 피처
+- 용인: KOSTAT 센서스용 행정구역경계의 수지구·기흥구·처인구를 dissolve한 시 외곽선
+- 웹 렌더링을 위해 위상을 보존하는 범위에서 정점을 단순화하며, 법적 경계 판정·측량 용도로 사용하지 않습니다.

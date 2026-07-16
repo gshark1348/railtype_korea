@@ -1,7 +1,7 @@
 /*
  * METROTYPE SEOUL 노선 데이터
  * 좌표계: WGS84 위도·경도
- * 수도권 전철 1–9호선과 KTX 경부·호남고속선의 대표 주행축을 구성합니다.
+ * 1호선은 네 개의 대표 광역 운행축, 2호선은 순환·지선, 3호선은 종착역별 운행으로 구성합니다.
  */
 window.METRO_LINES = {
   1: {
@@ -816,127 +816,87 @@ window.METRO_LINES = {
       "봉은사", "종합운동장", "석촌", "올림픽공원", "중앙보훈병원"
     ]
   },
-  10: {
-    number: "K",
-    code: "KTX",
-    name: "KTX 경부고속선",
-    color: "#1B5EAA",
-    darkColor: "#0B3F78",
-    softColor: "rgba(27,94,170,.16)",
-    areaLabel: "NATIONAL HIGH-SPEED RAIL",
-    heroRegion: "대한민국 위에",
+  12: {
+    number: "수",
+    code: "SUIN-BUNDANG",
+    name: "수인분당선",
+    color: "#F5A200",
+    darkColor: "#A76500",
+    softColor: "rgba(245,162,0,.18)",
+    areaLabel: "SEOUL · BUNDANG · SUWON · INCHEON",
+    heroRegion: "서울·성남·용인·수원·안산·시흥·인천 위에",
     train: {
-      src: "./assets/trains/ktx-gyeongbu.jpg",
-      alt: "KTX-I 고속열차가 고속철도 선로를 주행하는 모습",
-      caption: "KTX-I 고속열차",
-      credit: "Subway06 · Wikimedia Commons",
-      license: "CC BY 3.0",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:KTX_(Korea_Train_eXpress).jpg"
+      src: "./assets/trains/suin-bundang.jpg",
+      alt: "코레일 351000호대 전동차가 죽전역을 출발하는 모습",
+      caption: "코레일 351000호대 전동차 · 죽전",
+      credit: "Minseong Kim · Wikimedia Commons",
+      license: "CC BY-SA 4.0",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Korail_Class_351000_EMU_3rd_batch.jpg"
     },
     history: {
-      period: "1989 — 2022",
-      summary: "경부고속철도는 서울과 부산을 고속철도로 연결하기 위해 추진된 대한민국의 핵심 철도 인프라입니다. 1992년 공사를 시작해 2004년 서울–동대구 1단계와 기존 경부선 연계 구간을 개통했고, 2010년 동대구–부산 2단계 개통으로 전 구간 고속선 운행 체계를 완성했습니다. 이후 대전·대구 도심 구간과 서대구역이 차례로 문을 열며 현재의 경부고속축이 형성되었습니다.",
+      period: "1994 — 2020",
+      summary: "수인분당선은 1994년 수서–오리 분당선 개통에서 출발해 서울 도심·용인·수원으로 단계적으로 연장되었습니다. 한편 옛 수인선 축은 복선전철로 재건되어 2012년 오이도–송도, 2016년 송도–인천이 열렸고, 2020년 수원–한대앞 구간이 연결되면서 분당선과 수인선이 하나의 광역 운행계통으로 통합되었습니다.",
       events: [
-        { year: "1989.05", label: "고속철도 추진 방침", detail: "정부가 서울–부산 간 고속철도 건설 추진 방침을 결정하며 국가 고속철도 사업이 본격화되었습니다." },
-        { year: "1990.06", label: "기본계획 확정", detail: "경부고속철도 노선과 단계별 건설 방향을 담은 기본계획이 확정되었습니다." },
-        { year: "1992.06", label: "경부고속철도 착공", detail: "천안아산 시험선 구간을 시작으로 경부고속철도 건설 공사가 시작되었습니다." },
-        { year: "2004.04.01", label: "KTX 상업 운행 시작", detail: "서울–동대구 고속선 1단계와 동대구–부산 기존선 연계 운행이 개통하며 KTX 상업 운행이 시작되었습니다." },
-        { year: "2010.11.01", label: "동대구–부산 2단계 개통", detail: "동대구에서 경주·울산을 거쳐 부산까지 이어지는 고속선이 개통해 경부고속철도 2단계가 완성되었습니다." },
-        { year: "2015.08.01", label: "대전·대구 도심 구간 개통", detail: "대전과 대구 도심 통과 구간이 고속선으로 연결되어 운행 동선과 선로 용량이 개선되었습니다." },
-        { year: "2022.03.31", label: "서대구역 개통", detail: "대구 서부권의 고속철도 접근성을 높이는 서대구역이 개통했습니다." }
+        { year: "1994.09.01", label: "분당선 첫 개통", detail: "수서–오리 구간이 개통해 분당신도시와 서울 동남권을 연결하는 광역전철 운행이 시작되었습니다." },
+        { year: "2003–2011", label: "서울·용인 방향 연장", detail: "선릉–수서 구간과 오리–죽전–기흥 구간이 단계적으로 개통해 서울 도심과 용인 생활권으로 노선이 확장되었습니다." },
+        { year: "2012", label: "왕십리·망포 및 수인선 재개통", detail: "선릉–왕십리와 기흥–망포 구간이 열렸고, 오이도–송도 수인선 복선전철도 운행을 시작했습니다." },
+        { year: "2013.11.30", label: "분당선 수원 연결", detail: "망포–수원 구간이 개통해 분당선이 경부선과 수도권 전철 1호선의 수원역까지 이어졌습니다." },
+        { year: "2016.02.27", label: "수인선 인천 연장", detail: "송도–인천 구간이 개통해 소래포구·연수·인천 개항장을 잇는 서해안 전철축이 완성되었습니다." },
+        { year: "2018.12.31", label: "청량리 연장 운행", detail: "일부 열차가 왕십리에서 경원선을 따라 청량리까지 연장 운행하기 시작했습니다." },
+        { year: "2020.09.12", label: "수인분당선 직결", detail: "수원–한대앞 구간이 개통하며 분당선과 수인선이 연결되어 청량리·왕십리–인천을 잇는 현재의 수인분당선이 출범했습니다." }
       ],
       sources: [
-        { name: "국가철도공단 · 경부고속철도 건설 연혁", url: "https://www.kr.or.kr/sub/info.do?m=05010201" },
-        { name: "한국철도공사 · 철도 노선도", url: "https://info.korail.com/info/contents.do?key=1005" },
-        { name: "공공데이터포털 · 국가철도공단 역사정보", url: "https://www.data.go.kr/data/15093755/fileData.do" },
-        { name: "Wikimedia Commons · KTX-I 사진", url: "https://commons.wikimedia.org/wiki/File:KTX_(Korea_Train_eXpress).jpg" }
+        { name: "한국철도공사 · 수도권전철 개통 연혁", url: "https://info.korail.com/info/selectBbsNttView.do?bbsNo=199&integrDeptCode=&key=911&nttNo=22491&pageIndex=9&searchCnd=all&searchCtgry=&searchKrwd=" },
+        { name: "한국철도공사 · 광역철도 운영노선", url: "https://info.korail.com/info/contents.do?key=1446" },
+        { name: "국가철도공단 · 분당선 역위치", url: "https://www.data.go.kr/data/15041333/fileData.do" },
+        { name: "Wikimedia Commons · 351000호대 전동차", url: "https://commons.wikimedia.org/wiki/File:Korail_Class_351000_EMU_3rd_batch.jpg" }
       ]
     },
     courses: {
-      main: {
-        id: "main",
-        name: "경부고속선 대표 정차축",
-        subtitle: "서울에서 대전·대구·경주·울산을 지나 부산까지",
-        start: "서울",
-        end: "부산",
-        mapBounds: { minLng: 125.9, maxLng: 129.6, minLat: 33.0, maxLat: 38.7 },
-        cornerLabels: { northWest: "SEOUL", southEast: "BUSAN" },
+      full: {
+        id: "full",
+        name: "청량리 · 인천 전 구간",
+        subtitle: "청량리에서 분당·수원·안산·소래포구를 지나 인천까지 63개 역",
+        start: "청량리",
+        end: "인천",
+        mapBounds: { minLng: 126.56, maxLng: 127.18, minLat: 37.20, maxLat: 37.64 },
+        cornerLabels: { northWest: "INCHEON", southEast: "CHEONGNYANGNI" },
         mapLabels: [
-          { text: "SEOUL", lng: 126.78, lat: 37.70 },
-          { text: "DAEJEON", lng: 127.18, lat: 36.25, muted: true },
-          { text: "DAEGU", lng: 128.36, lat: 35.95, muted: true },
-          { text: "GYEONGJU · ULSAN", lng: 129.34, lat: 35.70, muted: true },
-          { text: "BUSAN", lng: 129.22, lat: 35.02 }
+          { text: "INCHEON", lng: 126.61, lat: 37.49 },
+          { text: "SIHEUNG · ANSAN", lng: 126.78, lat: 37.33, muted: true },
+          { text: "SUWON", lng: 127.00, lat: 37.23, muted: true },
+          { text: "YONGIN · BUNDANG", lng: 127.12, lat: 37.34, muted: true },
+          { text: "SEOUL", lng: 127.04, lat: 37.59 }
         ],
         directions: [
-          { id: "busan", name: "부산행", destination: "부산", subtitle: "서울 출발 · 부산 종착", mode: "forward" },
-          { id: "seoul", name: "서울행", destination: "서울", subtitle: "부산 출발 · 서울 종착", mode: "reverse" }
+          { id: "incheon", name: "인천행", destination: "인천", subtitle: "청량리 출발 · 인천 종착", mode: "forward" },
+          { id: "cheongnyangni", name: "청량리행", destination: "청량리", subtitle: "인천 출발 · 청량리 종착", mode: "reverse" }
         ],
-        stations: window.KTX_GYEONGBU_ROUTES.main
-      }
-    },
-    majorStations: ["서울", "광명", "천안아산", "오송", "대전", "김천구미", "서대구", "동대구", "경주", "울산", "부산"]
-  },
-  11: {
-    number: "K",
-    code: "KTX-HN",
-    name: "KTX 호남고속선",
-    color: "#2D68B2",
-    darkColor: "#163E70",
-    softColor: "rgba(45,104,178,.16)",
-    areaLabel: "HONAM HIGH-SPEED RAIL",
-    heroRegion: "대한민국 서남축 위에",
-    train: {
-      src: "./assets/trains/ktx-honam.jpg",
-      alt: "KTX-I 고속열차가 고속철도 선로를 주행하는 모습",
-      caption: "KTX-I 고속열차",
-      credit: "Subway06 · Wikimedia Commons",
-      license: "CC BY 3.0",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:KTX_(Korea_Train_eXpress).jpg"
-    },
-    history: {
-      period: "2006 — 현재",
-      summary: "호남고속철도는 수도권과 충청·호남권을 빠르게 연결하는 대한민국의 두 번째 고속철도 축입니다. 2006년 기본계획이 확정되고 2009년 오송–광주송정 구간 공사가 시작되어 2015년 1단계가 개통했습니다. 현재 KTX는 광주송정 이후 기존 호남선을 따라 나주와 목포까지 운행하며, 고막원–목포 구간을 포함한 2단계 사업이 진행 중입니다.",
-      events: [
-        { year: "2006.08.28", label: "건설기본계획 확정", detail: "오송에서 광주송정과 목포 방향으로 이어지는 호남고속철도 건설기본계획이 확정·고시되었습니다." },
-        { year: "2009.05.22", label: "오송–광주송정 착공", detail: "오송–광주송정 구간의 노반 공사가 시작되며 호남고속철도 1단계 건설이 본격화되었습니다." },
-        { year: "2015.04.02", label: "1단계 개통", detail: "오송–공주–익산–정읍–광주송정을 잇는 호남고속철도 1단계가 개통해 수도권과 광주 사이 이동 시간이 크게 단축되었습니다." },
-        { year: "2019.06", label: "광주송정–고막원 고속화", detail: "광주송정–고막원 기존선 고속화 구간이 사용을 시작해 나주·목포 방향 운행 기반이 개선되었습니다." },
-        { year: "2020.12", label: "고막원–목포 공사 착수", detail: "호남고속철도 2단계의 고막원–목포 구간 공사가 시작되었습니다." },
-        { year: "2026.03", label: "2단계 사업 진행", detail: "국가철도공단 공개 현황 기준 호남고속철도 사업이 계속 진행 중이며, 향후 무안국제공항을 경유해 목포까지 고속철도 축을 확장할 예정입니다." }
-      ],
-      sources: [
-        { name: "국가철도공단 · 호남고속철도 사업현황", url: "https://www.kr.or.kr/sub/info.do?m=05010202" },
-        { name: "한국철도공사 · 열차시간표·노선도", url: "https://info.korail.com/info/contents.do?key=857" },
-        { name: "공공데이터포털 · 국가철도공단 철도역 정보", url: "https://www.data.go.kr/data/15067652/fileData.do" },
-        { name: "Wikimedia Commons · KTX-I 사진", url: "https://commons.wikimedia.org/wiki/File:KTX_(Korea_Train_eXpress).jpg" }
-      ]
-    },
-    courses: {
-      main: {
-        id: "main",
-        name: "호남고속축 대표 정차 코스",
-        subtitle: "용산에서 공주·익산·광주송정을 지나 목포까지",
-        start: "용산",
-        end: "목포",
-        mapBounds: { minLng: 125.9, maxLng: 129.6, minLat: 33.0, maxLat: 38.7 },
-        cornerLabels: { northWest: "YONGSAN", southEast: "MOKPO" },
+        stations: window.SUIN_BUNDANG_ROUTES.full
+      },
+      regular: {
+        id: "regular",
+        name: "왕십리 · 인천 주 운행축",
+        subtitle: "대부분의 열차가 오가는 왕십리–인천 62개 역 학습 코스",
+        start: "왕십리",
+        end: "인천",
+        mapBounds: { minLng: 126.56, maxLng: 127.18, minLat: 37.20, maxLat: 37.61 },
+        cornerLabels: { northWest: "INCHEON", southEast: "WANGSIMNI" },
         mapLabels: [
-          { text: "YONGSAN", lng: 126.75, lat: 37.70 },
-          { text: "OSONG", lng: 127.48, lat: 36.72, muted: true },
-          { text: "GONGJU", lng: 126.85, lat: 36.28, muted: true },
-          { text: "IKSAN · JEONGEUP", lng: 126.55, lat: 35.72, muted: true },
-          { text: "GWANGJU · NAJU", lng: 126.55, lat: 35.12, muted: true },
-          { text: "MOKPO", lng: 126.18, lat: 34.68 }
+          { text: "INCHEON", lng: 126.61, lat: 37.49 },
+          { text: "ANSAN · SIHEUNG", lng: 126.78, lat: 37.33, muted: true },
+          { text: "SUWON", lng: 127.00, lat: 37.23, muted: true },
+          { text: "BUNDANG", lng: 127.13, lat: 37.39, muted: true },
+          { text: "WANGSIMNI", lng: 127.04, lat: 37.58 }
         ],
         directions: [
-          { id: "mokpo", name: "목포행", destination: "목포", subtitle: "용산 출발 · 목포 종착", mode: "forward" },
-          { id: "yongsan", name: "용산행", destination: "용산", subtitle: "목포 출발 · 용산 종착", mode: "reverse" }
+          { id: "incheon", name: "인천행", destination: "인천", subtitle: "왕십리 출발 · 인천 종착", mode: "forward" },
+          { id: "wangsimni", name: "왕십리행", destination: "왕십리", subtitle: "인천 출발 · 왕십리 종착", mode: "reverse" }
         ],
-        stations: window.KTX_HONAM_ROUTES.main
+        stations: window.SUIN_BUNDANG_ROUTES.regular
       }
     },
-    majorStations: ["용산", "광명", "천안아산", "오송", "공주", "익산", "정읍", "광주송정", "나주", "목포"]
+    majorStations: ["청량리", "왕십리", "서울숲", "강남구청", "선정릉", "선릉", "수서", "복정", "모란", "이매", "서현", "정자", "미금", "죽전", "기흥", "영통", "수원시청", "수원", "한대앞", "중앙", "초지", "안산", "오이도", "소래포구", "원인재", "인하대", "신포", "인천"]
   }
 
 };
