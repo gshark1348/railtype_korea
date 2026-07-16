@@ -1,7 +1,7 @@
 /*
  * METROTYPE SEOUL 노선 데이터
  * 좌표계: WGS84 위도·경도
- * 1호선은 네 개의 대표 광역 운행축, 2호선은 순환·지선, 3호선은 종착역별 운행으로 구성합니다.
+ * 수도권 전철 1–9호선과 KTX 경부고속선의 대표 주행축을 구성합니다.
  */
 window.METRO_LINES = {
   1: {
@@ -815,6 +815,67 @@ window.METRO_LINES = {
       "여의도", "노량진", "동작", "고속터미널", "신논현", "선정릉",
       "봉은사", "종합운동장", "석촌", "올림픽공원", "중앙보훈병원"
     ]
+  },
+  10: {
+    number: "K",
+    code: "KTX",
+    name: "KTX 경부고속선",
+    color: "#1B5EAA",
+    darkColor: "#0B3F78",
+    softColor: "rgba(27,94,170,.16)",
+    areaLabel: "NATIONAL HIGH-SPEED RAIL",
+    heroRegion: "대한민국 위에",
+    train: {
+      src: "./assets/trains/ktx-gyeongbu.jpg",
+      alt: "KTX-I 고속열차가 고속철도 선로를 주행하는 모습",
+      caption: "KTX-I 고속열차",
+      credit: "Subway06 · Wikimedia Commons",
+      license: "CC BY 3.0",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:KTX_(Korea_Train_eXpress).jpg"
+    },
+    history: {
+      period: "1989 — 2022",
+      summary: "경부고속철도는 서울과 부산을 고속철도로 연결하기 위해 추진된 대한민국의 핵심 철도 인프라입니다. 1992년 공사를 시작해 2004년 서울–동대구 1단계와 기존 경부선 연계 구간을 개통했고, 2010년 동대구–부산 2단계 개통으로 전 구간 고속선 운행 체계를 완성했습니다. 이후 대전·대구 도심 구간과 서대구역이 차례로 문을 열며 현재의 경부고속축이 형성되었습니다.",
+      events: [
+        { year: "1989.05", label: "고속철도 추진 방침", detail: "정부가 서울–부산 간 고속철도 건설 추진 방침을 결정하며 국가 고속철도 사업이 본격화되었습니다." },
+        { year: "1990.06", label: "기본계획 확정", detail: "경부고속철도 노선과 단계별 건설 방향을 담은 기본계획이 확정되었습니다." },
+        { year: "1992.06", label: "경부고속철도 착공", detail: "천안아산 시험선 구간을 시작으로 경부고속철도 건설 공사가 시작되었습니다." },
+        { year: "2004.04.01", label: "KTX 상업 운행 시작", detail: "서울–동대구 고속선 1단계와 동대구–부산 기존선 연계 운행이 개통하며 KTX 상업 운행이 시작되었습니다." },
+        { year: "2010.11.01", label: "동대구–부산 2단계 개통", detail: "동대구에서 경주·울산을 거쳐 부산까지 이어지는 고속선이 개통해 경부고속철도 2단계가 완성되었습니다." },
+        { year: "2015.08.01", label: "대전·대구 도심 구간 개통", detail: "대전과 대구 도심 통과 구간이 고속선으로 연결되어 운행 동선과 선로 용량이 개선되었습니다." },
+        { year: "2022.03.31", label: "서대구역 개통", detail: "대구 서부권의 고속철도 접근성을 높이는 서대구역이 개통했습니다." }
+      ],
+      sources: [
+        { name: "국가철도공단 · 경부고속철도 건설 연혁", url: "https://www.kr.or.kr/sub/info.do?m=05010201" },
+        { name: "한국철도공사 · 철도 노선도", url: "https://info.korail.com/info/contents.do?key=1005" },
+        { name: "공공데이터포털 · 국가철도공단 역사정보", url: "https://www.data.go.kr/data/15093755/fileData.do" },
+        { name: "Wikimedia Commons · KTX-I 사진", url: "https://commons.wikimedia.org/wiki/File:KTX_(Korea_Train_eXpress).jpg" }
+      ]
+    },
+    courses: {
+      main: {
+        id: "main",
+        name: "경부고속선 대표 정차축",
+        subtitle: "서울에서 대전·대구·경주·울산을 지나 부산까지",
+        start: "서울",
+        end: "부산",
+        mapBounds: { minLng: 125.9, maxLng: 129.6, minLat: 33.0, maxLat: 38.7 },
+        cornerLabels: { northWest: "SEOUL", southEast: "BUSAN" },
+        mapLabels: [
+          { text: "SEOUL", lng: 126.78, lat: 37.70 },
+          { text: "DAEJEON", lng: 127.18, lat: 36.25, muted: true },
+          { text: "DAEGU", lng: 128.36, lat: 35.95, muted: true },
+          { text: "GYEONGJU · ULSAN", lng: 129.34, lat: 35.70, muted: true },
+          { text: "BUSAN", lng: 129.22, lat: 35.02 }
+        ],
+        directions: [
+          { id: "busan", name: "부산행", destination: "부산", subtitle: "서울 출발 · 부산 종착", mode: "forward" },
+          { id: "seoul", name: "서울행", destination: "서울", subtitle: "부산 출발 · 서울 종착", mode: "reverse" }
+        ],
+        stations: window.KTX_GYEONGBU_ROUTES.main
+      }
+    },
+    majorStations: ["서울", "광명", "천안아산", "오송", "대전", "김천구미", "서대구", "동대구", "경주", "울산", "부산"]
   }
 
 };

@@ -1,0 +1,164 @@
+{
+  "version": "25.0",
+  "crs": "EPSG:4326",
+  "route": "KTX 경부고속선 대표 정차축",
+  "station_count": 11,
+  "all_stations_within_south_korea_boundary": true,
+  "route_polyline_within_south_korea_boundary": true,
+  "outside_route_length_degrees": 0.0,
+  "straight_segment_total_km": 394.38,
+  "stations": [
+    {
+      "code": "KTX01",
+      "name": "서울",
+      "en": "SEOUL",
+      "lat": 37.554648,
+      "lng": 126.972559,
+      "inside_boundary": true,
+      "boundary_distance_degrees": 0.382087
+    },
+    {
+      "code": "KTX02",
+      "name": "광명",
+      "en": "GWANGMYEONG",
+      "lat": 37.416451,
+      "lng": 126.884804,
+      "inside_boundary": true,
+      "boundary_distance_degrees": 0.345894
+    },
+    {
+      "code": "KTX03",
+      "name": "천안아산",
+      "en": "CHEONAN-ASAN",
+      "lat": 36.794383,
+      "lng": 127.104522,
+      "inside_boundary": true,
+      "boundary_distance_degrees": 0.263874
+    },
+    {
+      "code": "KTX04",
+      "name": "오송",
+      "en": "OSONG",
+      "lat": 36.620159,
+      "lng": 127.327532,
+      "inside_boundary": true,
+      "boundary_distance_degrees": 0.541664
+    },
+    {
+      "code": "KTX05",
+      "name": "대전",
+      "en": "DAEJEON",
+      "lat": 36.332116,
+      "lng": 127.434136,
+      "inside_boundary": true,
+      "boundary_distance_degrees": 0.803179
+    },
+    {
+      "code": "KTX06",
+      "name": "김천구미",
+      "en": "GIMCHEON-GUMI",
+      "lat": 36.113742,
+      "lng": 128.180983,
+      "inside_boundary": true,
+      "boundary_distance_degrees": 1.197741
+    },
+    {
+      "code": "KTX07",
+      "name": "서대구",
+      "en": "SEODAEGU",
+      "lat": 35.881667,
+      "lng": 128.539167,
+      "inside_boundary": true,
+      "boundary_distance_degrees": 0.896384
+    },
+    {
+      "code": "KTX08",
+      "name": "동대구",
+      "en": "DONGDAEGU",
+      "lat": 35.879436,
+      "lng": 128.628889,
+      "inside_boundary": true,
+      "boundary_distance_degrees": 0.832136
+    },
+    {
+      "code": "KTX09",
+      "name": "경주",
+      "en": "GYEONGJU",
+      "lat": 35.798386,
+      "lng": 129.138325,
+      "inside_boundary": true,
+      "boundary_distance_degrees": 0.328838
+    },
+    {
+      "code": "KTX10",
+      "name": "울산",
+      "en": "ULSAN",
+      "lat": 35.551329,
+      "lng": 129.138742,
+      "inside_boundary": true,
+      "boundary_distance_degrees": 0.226092
+    },
+    {
+      "code": "KTX11",
+      "name": "부산",
+      "en": "BUSAN",
+      "lat": 35.115109,
+      "lng": 129.041419,
+      "inside_boundary": true,
+      "boundary_distance_degrees": 0.042283
+    }
+  ],
+  "segments": [
+    {
+      "from": "서울",
+      "to": "광명",
+      "geodesic_km": 17.19
+    },
+    {
+      "from": "광명",
+      "to": "천안아산",
+      "geodesic_km": 71.75
+    },
+    {
+      "from": "천안아산",
+      "to": "오송",
+      "geodesic_km": 27.76
+    },
+    {
+      "from": "오송",
+      "to": "대전",
+      "geodesic_km": 33.36
+    },
+    {
+      "from": "대전",
+      "to": "김천구미",
+      "geodesic_km": 71.39
+    },
+    {
+      "from": "김천구미",
+      "to": "서대구",
+      "geodesic_km": 41.31
+    },
+    {
+      "from": "서대구",
+      "to": "동대구",
+      "geodesic_km": 8.11
+    },
+    {
+      "from": "동대구",
+      "to": "경주",
+      "geodesic_km": 46.9
+    },
+    {
+      "from": "경주",
+      "to": "울산",
+      "geodesic_km": 27.41
+    },
+    {
+      "from": "울산",
+      "to": "부산",
+      "geodesic_km": 49.2
+    }
+  ],
+  "note": "직선 구간 합계는 역사 좌표 간 측지 거리이며 실제 선로 영업거리와 다릅니다."
+}

@@ -77,3 +77,21 @@ The boundary geometry is transformed, dissolved by municipality, topology-preser
 - Scope: 언주–중앙보훈병원
 - License: 이용허락범위 제한 없음
 - Purpose: Line 9 extension station coordinate cross-check
+
+
+## KTX-I 고속열차 사진
+
+- File: `assets/trains/ktx-gyeongbu.jpg`
+- Original title: `KTX (Korea Train eXpress).jpg`
+- Author: Subway06
+- Source: Wikimedia Commons
+- License: Creative Commons Attribution 3.0
+- Source URL: https://commons.wikimedia.org/wiki/File:KTX_(Korea_Train_eXpress).jpg
+
+## 대한민국 전국 경계
+
+- Files: `data/south-korea-boundary.geojson`, `js/national-boundary.js`
+- Mainland source: Natural Earth Admin 0 Countries
+- Island coastline supplement: GSHHS coastline data
+- Coordinate reference system: WGS84 / EPSG:4326
+- Natural Earth data is public domain.
