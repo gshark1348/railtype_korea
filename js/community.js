@@ -7,6 +7,7 @@
     anonKey: "",
     table: "public_runs",
     maxRecords: 36,
+    leaderboardPerLine: 8,
     ...(window.RAILTYPE_COMMUNITY_CONFIG || {})
   };
 
@@ -16,13 +17,16 @@
   };
 
   const state = {
-    records: [],
+    recentRecords: [],
+    bestByLine: {},
     mode: "recent",
+    selectedLine: 1,
     loading: false,
     source: "demo"
   };
 
   const DEMO_RECORDS = [
+    { id: "demo-0", nickname: "경인선기록자", line: 1, course_name: "경인선", direction_name: "인천행", route_name: "소요산 → 인천", duration_ms: 346530, accuracy: 98.9, errors: 1, completed_at: minutesAgo(2) },
     { id: "demo-1", nickname: "한강러너", line: 9, course_name: "일반", direction_name: "중앙보훈병원행", route_name: "개화 → 중앙보훈병원", duration_ms: 178420, accuracy: 98.6, errors: 1, completed_at: minutesAgo(4) },
     { id: "demo-2", nickname: "환승요정", line: 2, course_name: "순환 본선", direction_name: "내선순환", route_name: "시청 → 시청", duration_ms: 256810, accuracy: 97.9, errors: 2, completed_at: minutesAgo(11) },
     { id: "demo-3", nickname: "일산탐험가", line: 3, course_name: "본선", direction_name: "오금행", route_name: "대화 → 오금", duration_ms: 221370, accuracy: 99.3, errors: 1, completed_at: minutesAgo(19) },
@@ -30,11 +34,21 @@
     { id: "demo-5", nickname: "노선수집가", line: 8, course_name: "별내선", direction_name: "모란행", route_name: "별내 → 모란", duration_ms: 139240, accuracy: 100, errors: 0, completed_at: minutesAgo(47) },
     { id: "demo-6", nickname: "막차직전", line: 4, course_name: "안산선", direction_name: "오이도행", route_name: "불암산 → 오이도", duration_ms: 318560, accuracy: 95.5, errors: 4, completed_at: minutesAgo(68) },
     { id: "demo-7", nickname: "서울지리왕", line: 6, course_name: "본선", direction_name: "신내행", route_name: "응암 → 신내", duration_ms: 189710, accuracy: 98.2, errors: 2, completed_at: minutesAgo(93) },
-    { id: "demo-8", nickname: "오답제로", line: 7, course_name: "본선", direction_name: "석남행", route_name: "장암 → 석남", duration_ms: 301080, accuracy: 100, errors: 0, completed_at: minutesAgo(128) }
+    { id: "demo-8", nickname: "오답제로", line: 7, course_name: "본선", direction_name: "석남행", route_name: "장암 → 석남", duration_ms: 301080, accuracy: 100, errors: 0, completed_at: minutesAgo(128) },
+    { id: "demo-9", nickname: "급행연구원", line: 9, course_name: "급행", direction_name: "중앙보훈병원행", route_name: "김포공항 → 중앙보훈병원", duration_ms: 112850, accuracy: 99.1, errors: 1, completed_at: minutesAgo(155) },
+    { id: "demo-10", nickname: "삼호선마스터", line: 3, course_name: "본선", direction_name: "대화행", route_name: "오금 → 대화", duration_ms: 215740, accuracy: 99.7, errors: 1, completed_at: minutesAgo(188) }
   ];
 
   function minutesAgo(minutes) {
     return new Date(Date.now() - minutes * 60 * 1000).toISOString();
+  }
+
+  function getLineNumbers() {
+    const configured = Object.keys(window.METRO_LINES || {})
+      .map(Number)
+      .filter((line) => Number.isInteger(line) && line >= 1 && line <= 9)
+      .sort((a, b) => a - b);
+    return configured.length ? configured : [1, 2, 3, 4, 5, 6, 7, 8, 9];
   }
 
   function isLiveConfigured() {
@@ -90,6 +104,9 @@
     const panel = document.getElementById("communityPanel");
     if (!panel) return;
 
+    const availableLines = getLineNumbers();
+    if (!availableLines.includes(state.selectedLine)) state.selectedLine = availableLines[0];
+
     document.getElementById("communityNickname").value = getNickname();
     document.getElementById("saveCommunityNickname").addEventListener("click", () => {
       saveNickname(document.getElementById("communityNickname").value);
@@ -106,6 +123,7 @@
       });
     });
 
+    renderLineFilters();
     await refresh();
   }
 
@@ -117,22 +135,40 @@
     if (isLiveConfigured()) {
       try {
         const max = Math.min(100, Math.max(8, Number(config.maxRecords) || 36));
-        const query = `?select=id,nickname,line,course_name,direction_name,route_name,duration_ms,accuracy,errors,completed_at&order=completed_at.desc&limit=${max}`;
-        const response = await fetch(endpoint(query), {
+        const perLine = Math.min(20, Math.max(3, Number(config.leaderboardPerLine) || 8));
+        const select = "id,nickname,line,course_name,direction_name,route_name,duration_ms,accuracy,errors,completed_at";
+        const recentResponse = await fetch(endpoint(`?select=${select}&order=completed_at.desc&limit=${max}`), {
           headers: headers({ Prefer: "count=exact" }),
           cache: "no-store"
         });
-        if (!response.ok) throw new Error(`Community fetch failed: ${response.status}`);
-        const records = await response.json();
-        state.records = Array.isArray(records) ? records.map(normalizeRecord).filter(Boolean) : [];
+        if (!recentResponse.ok) throw new Error(`Community fetch failed: ${recentResponse.status}`);
+        const recent = await recentResponse.json();
+        state.recentRecords = Array.isArray(recent) ? recent.map(normalizeRecord).filter(Boolean) : [];
+
+        const lineNumbers = getLineNumbers();
+        const leaderboardResults = await Promise.allSettled(lineNumbers.map(async (line) => {
+          const query = `?select=${select}&line=eq.${line}&order=duration_ms.asc,accuracy.desc,errors.asc,completed_at.asc&limit=${perLine}`;
+          const response = await fetch(endpoint(query), { headers: headers(), cache: "no-store" });
+          if (!response.ok) throw new Error(`Line ${line} leaderboard fetch failed: ${response.status}`);
+          const rows = await response.json();
+          return [line, Array.isArray(rows) ? rows.map(normalizeRecord).filter(Boolean) : []];
+        }));
+
+        state.bestByLine = {};
+        leaderboardResults.forEach((result, index) => {
+          const line = lineNumbers[index];
+          state.bestByLine[line] = result.status === "fulfilled"
+            ? sortBest(result.value[1]).slice(0, perLine)
+            : sortBest(state.recentRecords.filter((record) => record.line === line)).slice(0, perLine);
+        });
         state.source = "live";
       } catch (error) {
         console.warn(error);
-        state.records = getFallbackRecords();
+        applyFallbackRecords();
         state.source = "offline";
       }
     } else {
-      state.records = getFallbackRecords();
+      applyFallbackRecords();
       state.source = "demo";
     }
 
@@ -141,13 +177,33 @@
     render();
   }
 
-  function getFallbackRecords() {
+  function getFallbackPool() {
     let local = [];
     try { local = JSON.parse(localStorage.getItem(STORAGE.localFeed)) || []; }
     catch { local = []; }
-    return [...local.map(normalizeRecord).filter(Boolean), ...DEMO_RECORDS]
+    return [...local.map(normalizeRecord).filter(Boolean), ...DEMO_RECORDS.map(normalizeRecord).filter(Boolean)];
+  }
+
+  function applyFallbackRecords() {
+    const pool = getFallbackPool();
+    const max = Number(config.maxRecords) || 36;
+    const perLine = Number(config.leaderboardPerLine) || 8;
+    state.recentRecords = [...pool]
       .sort((a, b) => new Date(b.completed_at) - new Date(a.completed_at))
-      .slice(0, Number(config.maxRecords) || 36);
+      .slice(0, max);
+    state.bestByLine = {};
+    getLineNumbers().forEach((line) => {
+      state.bestByLine[line] = sortBest(pool.filter((record) => record.line === line)).slice(0, perLine);
+    });
+  }
+
+  function sortBest(records) {
+    return [...records].sort((a, b) => (
+      a.duration_ms - b.duration_ms
+      || b.accuracy - a.accuracy
+      || a.errors - b.errors
+      || new Date(a.completed_at) - new Date(b.completed_at)
+    ));
   }
 
   function normalizeRecord(record) {
@@ -206,14 +262,16 @@
           body: JSON.stringify(payload)
         });
         if (!response.ok) throw new Error(`Community publish failed: ${response.status}`);
-        showStatus("완주 기록이 커뮤니티 기록판에 등록되었습니다.");
+        state.selectedLine = record.line;
+        showStatus(`${record.line}호선 완주 기록이 커뮤니티 기록판에 등록되었습니다.`);
         await refresh();
         return;
       } catch (error) {
         console.warn(error);
         saveLocalRecord(record);
+        state.selectedLine = record.line;
+        applyFallbackRecords();
         state.source = "offline";
-        state.records = getFallbackRecords();
         render();
         showStatus("네트워크 문제로 기록을 이 브라우저에 임시 저장했습니다.");
         return;
@@ -221,7 +279,8 @@
     }
 
     saveLocalRecord(record);
-    state.records = getFallbackRecords();
+    state.selectedLine = record.line;
+    applyFallbackRecords();
     render();
   }
 
@@ -231,6 +290,26 @@
     catch { records = []; }
     records = [record, ...records.filter((item) => item.id !== record.id)].slice(0, 20);
     localStorage.setItem(STORAGE.localFeed, JSON.stringify(records));
+  }
+
+  function renderLineFilters() {
+    const container = document.getElementById("communityLineFilter");
+    if (!container) return;
+    const lineNumbers = getLineNumbers();
+    container.innerHTML = lineNumbers.map((line) => {
+      const color = window.METRO_LINES?.[line]?.color || "#5d5a54";
+      const selected = line === state.selectedLine;
+      return `
+        <button type="button" data-community-line="${line}" class="${selected ? "is-active" : ""}" aria-pressed="${selected}" style="--filter-line:${escapeHtml(color)}">
+          <i>${line}</i><span>${line}호선</span>
+        </button>`;
+    }).join("");
+    container.querySelectorAll("[data-community-line]").forEach((button) => {
+      button.addEventListener("click", () => {
+        state.selectedLine = Number(button.dataset.communityLine);
+        render();
+      });
+    });
   }
 
   function render() {
@@ -243,35 +322,42 @@
     sourceBadge.className = `community-source-badge is-${state.source}`;
     sourceBadge.textContent = live ? "LIVE" : state.source === "offline" ? "OFFLINE" : "PREVIEW";
     sourceText.textContent = live
-      ? "다른 사용자가 완주하면 이 기록판에 반영됩니다."
+      ? "다른 사용자가 완주하면 이 기록판에 반영됩니다. 최고 기록은 같은 호선 안에서만 비교합니다."
       : state.source === "offline"
-        ? "공유 서버에 연결하지 못해 브라우저 저장 기록과 미리보기를 표시합니다."
-        : "Supabase 연결 전 화면 구성을 확인할 수 있는 미리보기 기록입니다.";
+        ? "공유 서버에 연결하지 못해 브라우저 저장 기록과 미리보기를 표시합니다. 최고 기록은 호선별로 분리됩니다."
+        : "Supabase 연결 전 화면 구성을 확인할 수 있는 미리보기입니다. 최고 기록은 호선별로 분리됩니다.";
 
-    const records = [...state.records];
-    const sorted = state.mode === "best"
-      ? records.sort((a, b) => a.duration_ms - b.duration_ms || b.accuracy - a.accuracy)
-      : records.sort((a, b) => new Date(b.completed_at) - new Date(a.completed_at));
-    const visible = sorted.slice(0, 8);
+    const lineFilter = document.getElementById("communityLineFilter");
+    const rankingNote = document.getElementById("communityRankingNote");
+    const isBest = state.mode === "best";
+    if (lineFilter) lineFilter.hidden = !isBest;
+    if (rankingNote) rankingNote.hidden = !isBest;
+    renderLineFilters();
 
-    updateSummary(records);
+    const records = isBest
+      ? sortBest(state.bestByLine[state.selectedLine] || [])
+      : [...state.recentRecords].sort((a, b) => new Date(b.completed_at) - new Date(a.completed_at));
+    const visible = records.slice(0, 8);
+
+    updateSummary(records, isBest);
 
     if (!visible.length) {
-      list.innerHTML = `<div class="community-empty"><strong>첫 기록을 기다리는 중</strong><span>노선을 완주하면 이곳에 기록이 나타납니다.</span></div>`;
+      const emptyTitle = isBest ? `${state.selectedLine}호선의 첫 기록을 기다리는 중` : "첫 기록을 기다리는 중";
+      list.innerHTML = `<div class="community-empty"><strong>${emptyTitle}</strong><span>해당 노선을 완주하면 이곳에 기록이 나타납니다.</span></div>`;
       return;
     }
 
     list.innerHTML = visible.map((record, index) => {
       const lineConfig = window.METRO_LINES?.[record.line];
       const color = lineConfig?.color || "#5d5a54";
-      const rank = state.mode === "best" ? `<span class="community-rank">${String(index + 1).padStart(2, "0")}</span>` : "";
+      const rank = isBest ? `<span class="community-rank">${String(index + 1).padStart(2, "0")}</span>` : "";
       return `
         <article class="community-record">
           ${rank}
           <i class="community-line-badge" style="--record-line:${escapeHtml(color)}">${record.line}</i>
           <div class="community-record-copy">
             <div><strong>${escapeHtml(record.nickname)}</strong><span>${escapeHtml(relativeTime(record.completed_at))}</span></div>
-            <p>${escapeHtml(`${record.line}호선 · ${record.direction_name}`)}</p>
+            <p>${escapeHtml(`${record.line}호선 · ${record.course_name} · ${record.direction_name}`)}</p>
             <small>${escapeHtml(record.route_name)}</small>
           </div>
           <div class="community-record-score">
@@ -282,13 +368,22 @@
     }).join("");
   }
 
-  function updateSummary(records) {
+  function updateSummary(records, isBest) {
     const uniqueUsers = new Set(records.map((item) => item.nickname)).size;
     const fastest = records.length ? Math.min(...records.map((item) => item.duration_ms)) : null;
     const avgAccuracy = records.length ? records.reduce((sum, item) => sum + item.accuracy, 0) / records.length : null;
+    const activeLines = new Set(records.map((item) => item.line)).size;
+    const thirdLabel = document.getElementById("communityFastestLabel");
+
     document.getElementById("communityRunCount").textContent = String(records.length);
     document.getElementById("communityUserCount").textContent = String(uniqueUsers);
-    document.getElementById("communityFastest").textContent = fastest ? formatTime(fastest) : "—";
+    if (isBest) {
+      if (thirdLabel) thirdLabel.textContent = `LINE ${String(state.selectedLine).padStart(2, "0")} BEST`;
+      document.getElementById("communityFastest").textContent = fastest ? formatTime(fastest) : "—";
+    } else {
+      if (thirdLabel) thirdLabel.textContent = "ACTIVE LINES";
+      document.getElementById("communityFastest").textContent = String(activeLines);
+    }
     document.getElementById("communityAverageAccuracy").textContent = avgAccuracy == null ? "—" : `${avgAccuracy.toFixed(1)}%`;
   }
 
@@ -300,7 +395,7 @@
       button.classList.toggle("is-loading", isLoading);
       button.textContent = isLoading ? "불러오는 중" : "새로고침";
     }
-    if (list && isLoading && !state.records.length) {
+    if (list && isLoading && !state.recentRecords.length) {
       list.innerHTML = `<div class="community-empty"><strong>기록을 불러오는 중</strong><span>철도망의 최근 움직임을 확인하고 있습니다.</span></div>`;
     }
   }

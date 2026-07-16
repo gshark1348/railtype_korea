@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#f7f4ef" />
   <meta name="description" content="대한민국 철도 노선과 종착역 방향을 선택하고 역명을 입력해 지도 위에 선로를 완성하는 타자 연습 프로토타입" />
   <title>RAILTYPE KOREA — Type the Stations, Trace the Rails</title>
-  <link rel="stylesheet" href="./styles.css?v=24.1.0" />
+  <link rel="stylesheet" href="./styles.css?v=24.2.0" />
 </head>
 <body>
   <div class="app-shell">
@@ -93,7 +93,7 @@
               <div class="community-metrics" aria-label="커뮤니티 기록 요약">
                 <div><span>LOADED RUNS</span><strong id="communityRunCount">0</strong></div>
                 <div><span>RIDERS</span><strong id="communityUserCount">0</strong></div>
-                <div><span>FASTEST</span><strong id="communityFastest">—</strong></div>
+                <div><span id="communityFastestLabel">ACTIVE LINES</span><strong id="communityFastest">0</strong></div>
                 <div><span>AVG. ACC.</span><strong id="communityAverageAccuracy">—</strong></div>
               </div>
               <p class="community-status" id="communityStatus" role="status" aria-live="polite"></p>
@@ -107,6 +107,8 @@
                 </div>
                 <button class="community-refresh" id="refreshCommunityButton" type="button">새로고침</button>
               </div>
+              <div class="community-line-filter" id="communityLineFilter" aria-label="최고 기록 호선 선택" hidden></div>
+              <p class="community-ranking-note" id="communityRankingNote" hidden>최고 기록은 선택한 호선 내부에서만 비교되며, 소요 시간이 빠른 순으로 표시됩니다.</p>
               <div class="community-record-list" id="communityRecordList"></div>
             </div>
           </div>
@@ -412,8 +414,8 @@
   <script src="./js/line9-data.js?v=24.0.0"></script>
   <script src="./js/metro-lines.js?v=24.0.0"></script>
   <script src="./js/geo-boundaries.js?v=24.0.0"></script>
-  <script src="./js/community-config.js?v=24.1.0"></script>
-  <script src="./js/community.js?v=24.1.0"></script>
-  <script src="./js/app.js?v=24.1.0"></script>
+  <script src="./js/community-config.js?v=24.2.0"></script>
+  <script src="./js/community.js?v=24.2.0"></script>
+  <script src="./js/app.js?v=24.2.0"></script>
 </body>
 </html>
