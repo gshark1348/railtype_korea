@@ -120,7 +120,17 @@
     "10:동대구": { title: "동대구 복합환승센터", subtitle: "대구 도시철도와 버스·일반철도가 집결하는 영남권 교통 중심", icon: "🚉" },
     "10:경주": { title: "천년고도 경주", subtitle: "불국사와 대릉원으로 이어지는 신라 역사문화도시의 관문", icon: "🏛️" },
     "10:울산": { title: "울산 산업도시", subtitle: "자동차·조선·석유화학 산업과 영남알프스를 연결하는 관문", icon: "⚙️" },
-    "10:부산": { title: "부산항과 원도심", subtitle: "바다와 항만, 산복도로가 펼쳐지는 경부고속선의 남쪽 종착점", icon: "🌊" }
+    "10:부산": { title: "부산항과 원도심", subtitle: "바다와 항만, 산복도로가 펼쳐지는 경부고속선의 남쪽 종착점", icon: "🌊" },
+    "11:용산": { title: "용산역과 한강대로", subtitle: "호남·전라·장항선 열차가 출발하는 서울의 대표 철도 관문", icon: "🚉" },
+    "11:광명": { title: "광명 KTX 광역권", subtitle: "수도권 서남부에서 호남고속축으로 진입하는 대형 고속철도역", icon: "🚄" },
+    "11:천안아산": { title: "천안·아산 광역생활권", subtitle: "충남 북부 산업·대학도시와 수도권 전철을 연결하는 철도 거점", icon: "🏘️" },
+    "11:오송": { title: "오송 분기점", subtitle: "경부고속선에서 호남고속선이 갈라지는 대한민국 고속철도의 핵심 분기역", icon: "🔀" },
+    "11:공주": { title: "백제의 고도 공주", subtitle: "공산성과 무령왕릉으로 이어지는 백제 역사문화권의 고속철도 관문", icon: "🏛️" },
+    "11:익산": { title: "익산 철도 허브", subtitle: "호남선·전라선·장항선이 만나는 전북 서부의 대표 철도 중심지", icon: "🚆" },
+    "11:정읍": { title: "내장산과 정읍", subtitle: "단풍 명소 내장산과 샘고을시장으로 이어지는 전북 남부의 관문", icon: "🍁" },
+    "11:광주송정": { title: "1913송정역시장", subtitle: "광주 도시철도와 전남 서남권 철도가 만나는 호남고속선의 핵심역", icon: "🍜" },
+    "11:나주": { title: "나주곰탕과 빛가람", subtitle: "영산강 문화권과 빛가람 혁신도시를 함께 연결하는 전남 중부 거점", icon: "🌾" },
+    "11:목포": { title: "목포항과 유달산", subtitle: "근대항구·다도해·원도심 풍경이 펼쳐지는 호남고속축의 남쪽 종착점", icon: "⚓" }
   };
   const CITY_REGION_META = {
     yeoncheon: { id: "yeoncheon", label: "연천군", en: "YEONCHEON", short: "연천" },
@@ -154,7 +164,13 @@
     daegu: { id: "daegu", label: "대구광역시", en: "DAEGU", short: "대구" },
     gyeongju: { id: "gyeongju", label: "경주시", en: "GYEONGJU", short: "경주" },
     ulsan: { id: "ulsan", label: "울산광역시", en: "ULSAN", short: "울산" },
-    busan: { id: "busan", label: "부산광역시", en: "BUSAN", short: "부산" }
+    busan: { id: "busan", label: "부산광역시", en: "BUSAN", short: "부산" },
+    gongju: { id: "gongju", label: "공주시", en: "GONGJU", short: "공주" },
+    iksan: { id: "iksan", label: "익산시", en: "IKSAN", short: "익산" },
+    jeongeup: { id: "jeongeup", label: "정읍시", en: "JEONGEUP", short: "정읍" },
+    gwangju: { id: "gwangju", label: "광주광역시", en: "GWANGJU", short: "광주" },
+    naju: { id: "naju", label: "나주시", en: "NAJU", short: "나주" },
+    mokpo: { id: "mokpo", label: "목포시", en: "MOKPO", short: "목포" }
   };
 
   const COURSE_CITY_SEGMENTS = {
@@ -268,6 +284,18 @@
       { id: "gyeongju", stations: ["경주"] },
       { id: "ulsan", stations: ["울산"] },
       { id: "busan", stations: ["부산"] }
+    ],
+    "11:main": [
+      { id: "seoul", stations: ["용산"] },
+      { id: "gwangmyeong", stations: ["광명"] },
+      { id: "asan", stations: ["천안아산"] },
+      { id: "cheongju", stations: ["오송"] },
+      { id: "gongju", stations: ["공주"] },
+      { id: "iksan", stations: ["익산"] },
+      { id: "jeongeup", stations: ["정읍"] },
+      { id: "gwangju", stations: ["광주송정"] },
+      { id: "naju", stations: ["나주"] },
+      { id: "mokpo", stations: ["목포"] }
     ]
   };
 
@@ -693,7 +721,8 @@
     "8:byeollaeMoran": ["namyangju", "guri", "seoul", "seongnam"],
     "9:local": ["seoul"],
     "9:express": ["seoul"],
-    "10:main": ["southKorea"]
+    "10:main": ["southKorea"],
+    "11:main": ["southKorea"]
   };
 
   const DISTRICT_GUIDES = [
@@ -987,7 +1016,17 @@
     "10:동대구": [{ kind: "subway", tag: "D1", name: "대구 도시철도 1호선" }, { kind: "rail", tag: "DG", name: "대경선 · 경부선" }],
     "10:경주": [{ kind: "rail", tag: "JR", name: "동해선" }],
     "10:울산": [{ kind: "rail", tag: "KTX", name: "경부고속선" }],
-    "10:부산": [{ kind: "subway", tag: "B1", name: "부산 도시철도 1호선" }, { kind: "rail", tag: "JR", name: "경부선 · 동해선" }]
+    "10:부산": [{ kind: "subway", tag: "B1", name: "부산 도시철도 1호선" }, { kind: "rail", tag: "JR", name: "경부선 · 동해선" }],
+    "11:용산": [{ kind: "subway", tag: "1", name: "수도권 전철 1호선" }, { kind: "rail", tag: "JR", name: "경의·중앙선 · 일반철도" }],
+    "11:광명": [{ kind: "subway", tag: "1", name: "수도권 전철 1호선 셔틀" }],
+    "11:천안아산": [{ kind: "subway", tag: "1", name: "수도권 전철 1호선 아산역" }, { kind: "rail", tag: "JR", name: "장항선" }],
+    "11:오송": [{ kind: "rail", tag: "HSR", name: "경부고속선 · 충북선" }],
+    "11:공주": [{ kind: "rail", tag: "HSR", name: "KTX · SRT 호남고속선" }],
+    "11:익산": [{ kind: "rail", tag: "JR", name: "호남선 · 전라선 · 장항선" }, { kind: "rail", tag: "SRT", name: "SRT" }],
+    "11:정읍": [{ kind: "rail", tag: "JR", name: "호남선" }, { kind: "rail", tag: "SRT", name: "SRT" }],
+    "11:광주송정": [{ kind: "subway", tag: "G1", name: "광주 도시철도 1호선" }, { kind: "rail", tag: "JR", name: "호남선 · 경전선" }, { kind: "rail", tag: "SRT", name: "SRT" }],
+    "11:나주": [{ kind: "rail", tag: "JR", name: "호남선" }],
+    "11:목포": [{ kind: "rail", tag: "JR", name: "호남선" }]
   };
 
   function getCourseCityLookup() {
@@ -1564,7 +1603,7 @@
       description: "KTX·SRT로 연결되는 대한민국 고속철도 간선",
       lines: [
         { id: "ktx-gyeongbu", symbol: "K", name: "KTX 경부고속선", detail: "서울·대전·동대구·경주·울산·부산", color: "#1B5EAA", lineNumber: 10 },
-        { id: "ktx-honam", symbol: "K", name: "KTX 호남고속선", detail: "용산·익산·광주송정·목포", color: "#1B5EAA" },
+        { id: "ktx-honam", symbol: "K", name: "KTX 호남고속선", detail: "용산·공주·익산·광주송정·목포", color: "#2D68B2", lineNumber: 11 },
         { id: "ktx-gangneung", symbol: "K", name: "KTX 강릉선", detail: "서울·청량리·강릉", color: "#2D74DA" },
         { id: "ktx-eum", symbol: "이", name: "KTX-이음 중앙선", detail: "청량리·원주·안동·부전", color: "#2C7A7B" },
         { id: "srt-gyeongbu", symbol: "S", name: "SRT 경부선", detail: "수서·대전·동대구·부산", color: "#7A0019" },

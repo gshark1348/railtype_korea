@@ -1,7 +1,7 @@
 /*
  * METROTYPE SEOUL 노선 데이터
  * 좌표계: WGS84 위도·경도
- * 수도권 전철 1–9호선과 KTX 경부고속선의 대표 주행축을 구성합니다.
+ * 수도권 전철 1–9호선과 KTX 경부·호남고속선의 대표 주행축을 구성합니다.
  */
 window.METRO_LINES = {
   1: {
@@ -876,6 +876,67 @@ window.METRO_LINES = {
       }
     },
     majorStations: ["서울", "광명", "천안아산", "오송", "대전", "김천구미", "서대구", "동대구", "경주", "울산", "부산"]
+  },
+  11: {
+    number: "K",
+    code: "KTX-HN",
+    name: "KTX 호남고속선",
+    color: "#2D68B2",
+    darkColor: "#163E70",
+    softColor: "rgba(45,104,178,.16)",
+    areaLabel: "HONAM HIGH-SPEED RAIL",
+    heroRegion: "대한민국 서남축 위에",
+    train: {
+      src: "./assets/trains/ktx-honam.jpg",
+      alt: "KTX-I 고속열차가 고속철도 선로를 주행하는 모습",
+      caption: "KTX-I 고속열차",
+      credit: "Subway06 · Wikimedia Commons",
+      license: "CC BY 3.0",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:KTX_(Korea_Train_eXpress).jpg"
+    },
+    history: {
+      period: "2006 — 현재",
+      summary: "호남고속철도는 수도권과 충청·호남권을 빠르게 연결하는 대한민국의 두 번째 고속철도 축입니다. 2006년 기본계획이 확정되고 2009년 오송–광주송정 구간 공사가 시작되어 2015년 1단계가 개통했습니다. 현재 KTX는 광주송정 이후 기존 호남선을 따라 나주와 목포까지 운행하며, 고막원–목포 구간을 포함한 2단계 사업이 진행 중입니다.",
+      events: [
+        { year: "2006.08.28", label: "건설기본계획 확정", detail: "오송에서 광주송정과 목포 방향으로 이어지는 호남고속철도 건설기본계획이 확정·고시되었습니다." },
+        { year: "2009.05.22", label: "오송–광주송정 착공", detail: "오송–광주송정 구간의 노반 공사가 시작되며 호남고속철도 1단계 건설이 본격화되었습니다." },
+        { year: "2015.04.02", label: "1단계 개통", detail: "오송–공주–익산–정읍–광주송정을 잇는 호남고속철도 1단계가 개통해 수도권과 광주 사이 이동 시간이 크게 단축되었습니다." },
+        { year: "2019.06", label: "광주송정–고막원 고속화", detail: "광주송정–고막원 기존선 고속화 구간이 사용을 시작해 나주·목포 방향 운행 기반이 개선되었습니다." },
+        { year: "2020.12", label: "고막원–목포 공사 착수", detail: "호남고속철도 2단계의 고막원–목포 구간 공사가 시작되었습니다." },
+        { year: "2026.03", label: "2단계 사업 진행", detail: "국가철도공단 공개 현황 기준 호남고속철도 사업이 계속 진행 중이며, 향후 무안국제공항을 경유해 목포까지 고속철도 축을 확장할 예정입니다." }
+      ],
+      sources: [
+        { name: "국가철도공단 · 호남고속철도 사업현황", url: "https://www.kr.or.kr/sub/info.do?m=05010202" },
+        { name: "한국철도공사 · 열차시간표·노선도", url: "https://info.korail.com/info/contents.do?key=857" },
+        { name: "공공데이터포털 · 국가철도공단 철도역 정보", url: "https://www.data.go.kr/data/15067652/fileData.do" },
+        { name: "Wikimedia Commons · KTX-I 사진", url: "https://commons.wikimedia.org/wiki/File:KTX_(Korea_Train_eXpress).jpg" }
+      ]
+    },
+    courses: {
+      main: {
+        id: "main",
+        name: "호남고속축 대표 정차 코스",
+        subtitle: "용산에서 공주·익산·광주송정을 지나 목포까지",
+        start: "용산",
+        end: "목포",
+        mapBounds: { minLng: 125.9, maxLng: 129.6, minLat: 33.0, maxLat: 38.7 },
+        cornerLabels: { northWest: "YONGSAN", southEast: "MOKPO" },
+        mapLabels: [
+          { text: "YONGSAN", lng: 126.75, lat: 37.70 },
+          { text: "OSONG", lng: 127.48, lat: 36.72, muted: true },
+          { text: "GONGJU", lng: 126.85, lat: 36.28, muted: true },
+          { text: "IKSAN · JEONGEUP", lng: 126.55, lat: 35.72, muted: true },
+          { text: "GWANGJU · NAJU", lng: 126.55, lat: 35.12, muted: true },
+          { text: "MOKPO", lng: 126.18, lat: 34.68 }
+        ],
+        directions: [
+          { id: "mokpo", name: "목포행", destination: "목포", subtitle: "용산 출발 · 목포 종착", mode: "forward" },
+          { id: "yongsan", name: "용산행", destination: "용산", subtitle: "목포 출발 · 용산 종착", mode: "reverse" }
+        ],
+        stations: window.KTX_HONAM_ROUTES.main
+      }
+    },
+    majorStations: ["용산", "광명", "천안아산", "오송", "공주", "익산", "정읍", "광주송정", "나주", "목포"]
   }
 
 };

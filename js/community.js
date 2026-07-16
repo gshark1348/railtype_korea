@@ -37,7 +37,8 @@
     { id: "demo-8", nickname: "오답제로", line: 7, course_name: "본선", direction_name: "석남행", route_name: "장암 → 석남", duration_ms: 301080, accuracy: 100, errors: 0, completed_at: minutesAgo(128) },
     { id: "demo-9", nickname: "급행연구원", line: 9, course_name: "급행", direction_name: "중앙보훈병원행", route_name: "김포공항 → 중앙보훈병원", duration_ms: 112850, accuracy: 99.1, errors: 1, completed_at: minutesAgo(155) },
     { id: "demo-10", nickname: "삼호선마스터", line: 3, course_name: "본선", direction_name: "대화행", route_name: "오금 → 대화", duration_ms: 215740, accuracy: 99.7, errors: 1, completed_at: minutesAgo(188) },
-    { id: "demo-11", nickname: "경부선여행자", line: 10, course_name: "대표 정차축", direction_name: "부산행", route_name: "서울 → 부산", duration_ms: 84210, accuracy: 98.8, errors: 1, completed_at: minutesAgo(214) }
+    { id: "demo-11", nickname: "경부선여행자", line: 10, course_name: "대표 정차축", direction_name: "부산행", route_name: "서울 → 부산", duration_ms: 84210, accuracy: 98.8, errors: 1, completed_at: minutesAgo(214) },
+    { id: "demo-12", nickname: "호남선탐험가", line: 11, course_name: "대표 정차 코스", direction_name: "목포행", route_name: "용산 → 목포", duration_ms: 79640, accuracy: 99.2, errors: 1, completed_at: minutesAgo(236) }
   ];
 
   function minutesAgo(minutes) {

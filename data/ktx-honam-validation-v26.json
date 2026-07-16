@@ -1,0 +1,150 @@
+{
+  "version": "26.0",
+  "route": "KTX 호남고속축 대표 정차 코스",
+  "station_count": 10,
+  "stations_inside_boundary": 10,
+  "all_stations_inside_boundary": true,
+  "coordinate_crs": "EPSG:4326",
+  "boundary_source": "Natural Earth administrative outline + GSHHS intermediate-resolution coastline",
+  "station_checks": [
+    {
+      "code": "KHN01",
+      "name": "용산",
+      "lat": 37.5297056,
+      "lng": 126.9647444,
+      "inside_national_boundary": true,
+      "distance_to_boundary_degrees": 0.063478
+    },
+    {
+      "code": "KHN02",
+      "name": "광명",
+      "lat": 37.416451,
+      "lng": 126.884804,
+      "inside_national_boundary": true,
+      "distance_to_boundary_degrees": 0.1289104
+    },
+    {
+      "code": "KHN03",
+      "name": "천안아산",
+      "lat": 36.7943833,
+      "lng": 127.1045222,
+      "inside_national_boundary": true,
+      "distance_to_boundary_degrees": 0.1748492
+    },
+    {
+      "code": "KHN04",
+      "name": "오송",
+      "lat": 36.6207917,
+      "lng": 127.3278,
+      "inside_national_boundary": true,
+      "distance_to_boundary_degrees": 0.457071
+    },
+    {
+      "code": "KHN05",
+      "name": "공주",
+      "lat": 36.33245306,
+      "lng": 127.09685306,
+      "inside_national_boundary": true,
+      "distance_to_boundary_degrees": 0.2786576
+    },
+    {
+      "code": "KHN06",
+      "name": "익산",
+      "lat": 35.9416361,
+      "lng": 126.9457972,
+      "inside_national_boundary": true,
+      "distance_to_boundary_degrees": 0.1164288
+    },
+    {
+      "code": "KHN07",
+      "name": "정읍",
+      "lat": 35.57556,
+      "lng": 126.8425,
+      "inside_national_boundary": true,
+      "distance_to_boundary_degrees": 0.1659346
+    },
+    {
+      "code": "KHN08",
+      "name": "광주송정",
+      "lat": 35.1378444,
+      "lng": 126.7902333,
+      "inside_national_boundary": true,
+      "distance_to_boundary_degrees": 0.2822013
+    },
+    {
+      "code": "KHN09",
+      "name": "나주",
+      "lat": 35.0142611,
+      "lng": 126.7169944,
+      "inside_national_boundary": true,
+      "distance_to_boundary_degrees": 0.1674829
+    },
+    {
+      "code": "KHN10",
+      "name": "목포",
+      "lat": 34.79194,
+      "lng": 126.38722,
+      "inside_national_boundary": true,
+      "distance_to_boundary_degrees": 0.008405
+    }
+  ],
+  "segment_checks": [
+    {
+      "from": "용산",
+      "to": "광명",
+      "centerline_fully_on_land": true,
+      "outside_land_length_degrees": 0.0
+    },
+    {
+      "from": "광명",
+      "to": "천안아산",
+      "centerline_fully_on_land": true,
+      "outside_land_length_degrees": 0.0
+    },
+    {
+      "from": "천안아산",
+      "to": "오송",
+      "centerline_fully_on_land": true,
+      "outside_land_length_degrees": 0.0
+    },
+    {
+      "from": "오송",
+      "to": "공주",
+      "centerline_fully_on_land": true,
+      "outside_land_length_degrees": 0.0
+    },
+    {
+      "from": "공주",
+      "to": "익산",
+      "centerline_fully_on_land": true,
+      "outside_land_length_degrees": 0.0
+    },
+    {
+      "from": "익산",
+      "to": "정읍",
+      "centerline_fully_on_land": true,
+      "outside_land_length_degrees": 0.0
+    },
+    {
+      "from": "정읍",
+      "to": "광주송정",
+      "centerline_fully_on_land": true,
+      "outside_land_length_degrees": 0.0
+    },
+    {
+      "from": "광주송정",
+      "to": "나주",
+      "centerline_fully_on_land": true,
+      "outside_land_length_degrees": 0.0
+    },
+    {
+      "from": "나주",
+      "to": "목포",
+      "centerline_fully_on_land": false,
+      "outside_land_length_degrees": 0.0251506
+    }
+  ],
+  "route_centerline_fully_on_land": false,
+  "route_outside_land_length_degrees": 0.0251506,
+  "interpretation": "Station points are the primary water-placement validation target. A straight station-to-station infographic centerline can cross rivers, estuaries, or bridge approaches and is not a surveyed railway alignment."
+}
