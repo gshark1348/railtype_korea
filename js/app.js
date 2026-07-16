@@ -913,7 +913,23 @@
     currentResult: null,
     autoFollow: true,
     viewAnimation: null,
-    completedPulseTimer: null
+    completedPulseTimer: null,
+    playMode: "standard",
+    infinite: {
+      active: false,
+      startConfig: null,
+      returnConfig: null,
+      totalStations: 0,
+      distanceKm: 0,
+      transfers: 0,
+      reversals: 0,
+      visitedLines: [],
+      legs: [],
+      currentLegIndex: -1,
+      templateStations: [],
+      templateDirection: null,
+      availableTransfers: []
+    }
   };
 
   const $ = (id) => document.getElementById(id);
@@ -922,6 +938,727 @@
     game: $("gameScreen"),
     result: $("resultScreen")
   };
+
+  const INFINITE_STATION_ALIASES = new Map([
+    ["총신대입구(이수)", "이수"],
+    ["총신대입구이수", "이수"],
+    ["서울", "서울역"],
+    ["천안아산", "아산"],
+    ["신경주", "경주"],
+    ["울산(통도사)", "울산"]
+  ]);
+
+  function normalizeInfiniteStationName(value) {
+    const compact = String(value || "").normalize("NFC").replace(/\s+/g, "").replace(/역$/, "");
+    return INFINITE_STATION_ALIASES.get(compact) || compact.replace(/[·.\-]/g, "");
+  }
+
+  function getPlayableLineNumbers() {
+    return Object.keys(window.METRO_LINES || {})
+      .map(Number)
+      .filter((lineNumber) => window.METRO_LINES[lineNumber]?.courses)
+      .sort((a, b) => a - b);
+  }
+
+  function getCourseDirections(course) {
+    return course?.directions?.length
+      ? course.directions
+      : [{ id: "forward", name: `${course?.end || "종착역"}행`, destination: course?.end, mode: "forward" }];
+  }
+
+  function getDirectionTemplate(lineNumber, courseId, directionId) {
+    const line = window.METRO_LINES?.[lineNumber];
+    const course = line?.courses?.[courseId];
+    if (!line || !course) return null;
+    const directions = getCourseDirections(course);
+    const direction = directions.find((item) => item.id === directionId) || directions[0];
+    const stations = createJourneyStations(course, direction);
+    return { lineNumber, line, courseId, course, direction, stations };
+  }
+
+  function uniqueStationsForCourse(course) {
+    const seen = new Set();
+    return (course?.stations || []).filter((station) => {
+      const key = normalizeInfiniteStationName(station.name);
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+
+  function findStationIndex(stations, stationName, { requireOutgoing = false } = {}) {
+    const key = normalizeInfiniteStationName(stationName);
+    const matches = [];
+    stations.forEach((station, index) => {
+      if (normalizeInfiniteStationName(station.name) === key) matches.push(index);
+    });
+    if (!matches.length) return -1;
+    if (requireOutgoing) {
+      const outgoing = matches.find((index) => index < stations.length - 1);
+      if (outgoing !== undefined) return outgoing;
+    }
+    return matches[0];
+  }
+
+  function getInfiniteLeg(template, stationName) {
+    if (!template?.stations?.length) return null;
+    const startIndex = findStationIndex(template.stations, stationName, { requireOutgoing: true });
+    const fallbackIndex = startIndex >= 0 ? startIndex : findStationIndex(template.stations, stationName);
+    if (fallbackIndex < 0) return null;
+    return { ...template, startIndex: fallbackIndex, stations: template.stations.slice(fallbackIndex) };
+  }
+
+  function resetInfiniteState({ preserveStart = false } = {}) {
+    const startConfig = preserveStart ? state.infinite.startConfig : null;
+    const returnConfig = preserveStart ? state.infinite.returnConfig : null;
+    state.infinite = {
+      active: false,
+      startConfig,
+      returnConfig,
+      totalStations: 0,
+      distanceKm: 0,
+      transfers: 0,
+      reversals: 0,
+      visitedLines: [],
+      legs: [],
+      currentLegIndex: -1,
+      templateStations: [],
+      templateDirection: null,
+      availableTransfers: []
+    };
+  }
+
+  function applyRouteContext(lineNumber, courseId, direction, stations) {
+    const nextLine = window.METRO_LINES?.[lineNumber];
+    const nextCourse = nextLine?.courses?.[courseId];
+    if (!nextLine || !nextCourse || !stations?.length) return false;
+    ACTIVE_LINE_NUMBER = lineNumber;
+    ACTIVE_COURSE_ID = courseId;
+    ACTIVE_DIRECTION_ID = direction?.id || "infinite";
+    LINE_CONFIG = nextLine;
+    COURSE = nextCourse;
+    DIRECTION = direction || { id: "infinite", name: `${stations.at(-1)?.name || "종착역"}행`, mode: "custom" };
+    STATIONS = stations.map((station) => ({ ...station }));
+    LINE_COLOR = LINE_CONFIG.color;
+    MAJOR_STATION_NAMES = new Set(LINE_CONFIG.majorStations || []);
+    setActiveTheme();
+    updateDynamicCopy();
+    rebuildMaps();
+    return true;
+  }
+
+  function startInfiniteLeg({ template, stationName, skipStartStation = false, reason = "start" }) {
+    const leg = getInfiniteLeg(template, stationName);
+    if (!leg?.stations?.length) return false;
+    const canSkipStart = skipStartStation && leg.stations.length > 1;
+    if (!applyRouteContext(template.lineNumber, template.courseId, template.direction, leg.stations)) return false;
+    state.infinite.templateStations = template.stations.map((station) => ({ ...station }));
+    state.infinite.templateDirection = { ...template.direction };
+    state.targetIndex = canSkipStart ? 1 : 0;
+    state.completedIndex = canSkipStart ? 0 : -1;
+    // 무한모드의 입력 대상역과 열차 위치를 같은 역으로 유지합니다.
+    // 환승·회차 직후 시작역을 건너뛰는 경우에도 열차와 완성 선로를
+    // 다음 입력 대상역까지 즉시 맞춰 환승 UI가 직전 역을 가리키지 않게 합니다.
+    state.routePosition = state.targetIndex;
+    state.isAnimating = false;
+    state.currentResult = null;
+    const actualStart = leg.stations[0]?.name || stationName;
+    const initialPath = leg.stations
+      .slice(0, Math.min(state.routePosition + 1, leg.stations.length))
+      .map(snapshotJourneyStation);
+    const journeyLeg = {
+      line: template.lineNumber,
+      lineName: template.line.name,
+      lineSymbol: lineSymbol(template.line),
+      color: template.line.color,
+      course: template.courseId,
+      courseName: template.course.name,
+      directionName: template.direction.name || `${leg.stations.at(-1)?.name}행`,
+      startStation: actualStart,
+      endStation: initialPath.at(-1)?.name || actualStart,
+      stations: 0,
+      distanceKm: 0,
+      path: initialPath,
+      reason
+    };
+    state.infinite.legs.push(journeyLeg);
+    state.infinite.currentLegIndex = state.infinite.legs.length - 1;
+    if (!state.infinite.visitedLines.includes(template.lineNumber)) state.infinite.visitedLines.push(template.lineNumber);
+    renderGame();
+    updateStatsHeader();
+    updateInfiniteControls();
+    return true;
+  }
+
+  function snapshotJourneyStation(station) {
+    if (!station) return null;
+    return {
+      name: station.name,
+      code: station.code,
+      en: station.en,
+      lat: Number(station.lat),
+      lng: Number(station.lng)
+    };
+  }
+
+  function currentInfiniteLeg() {
+    return state.infinite.legs[state.infinite.currentLegIndex] || null;
+  }
+
+  function appendInfiniteJourneyPoint(station) {
+    if (!state.infinite.active || !station) return;
+    const leg = currentInfiniteLeg();
+    if (!leg) return;
+    if (!Array.isArray(leg.path)) leg.path = [];
+    const point = snapshotJourneyStation(station);
+    const previous = leg.path.at(-1);
+    if (!previous || previous.name !== point.name || previous.lat !== point.lat || previous.lng !== point.lng) {
+      leg.path.push(point);
+    }
+    leg.endStation = point.name;
+  }
+
+  function closeInfiniteLeg(stationName) {
+    const leg = currentInfiniteLeg();
+    if (leg && stationName) leg.endStation = stationName;
+  }
+
+  function haversineKm(left, right) {
+    if (!left || !right) return 0;
+    const radius = 6371.0088;
+    const toRad = (degree) => (degree * Math.PI) / 180;
+    const dLat = toRad(right.lat - left.lat);
+    const dLng = toRad(right.lng - left.lng);
+    const a = Math.sin(dLat / 2) ** 2
+      + Math.cos(toRad(left.lat)) * Math.cos(toRad(right.lat)) * Math.sin(dLng / 2) ** 2;
+    return radius * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  function recordInfiniteStation(index) {
+    if (!state.infinite.active) return;
+    const leg = currentInfiniteLeg();
+    const station = STATIONS[index];
+    const previous = index > 0 ? STATIONS[index - 1] : null;
+    const distance = previous ? haversineKm(previous, station) : 0;
+    state.infinite.totalStations += 1;
+    state.infinite.distanceKm += distance;
+    if (leg) {
+      leg.stations += 1;
+      leg.distanceKm += distance;
+      leg.endStation = station?.name || leg.endStation;
+    }
+  }
+
+  function getCurrentInfiniteStation() {
+    if (!STATIONS.length) return null;
+    // 화면에 제시되는 현재 입력 대상역이 지도 위 열차의 현재 위치입니다.
+    // 환승 가능 여부와 TAB 환승도 반드시 같은 역을 기준으로 계산합니다.
+    return STATIONS[Math.min(state.targetIndex, STATIONS.length - 1)];
+  }
+
+  function currentTravelVector() {
+    if (STATIONS.length < 2) return null;
+    let from;
+    let to;
+    if (state.targetIndex >= 1) {
+      from = STATIONS[state.targetIndex - 1];
+      to = STATIONS[state.targetIndex];
+    } else {
+      from = STATIONS[0];
+      to = STATIONS[1];
+    }
+    const scale = Math.cos((((from.lat + to.lat) / 2) * Math.PI) / 180);
+    return { x: (to.lng - from.lng) * scale, y: to.lat - from.lat };
+  }
+
+  function directionSimilarity(left, right) {
+    if (!left || !right) return 0;
+    const leftLength = Math.hypot(left.x, left.y);
+    const rightLength = Math.hypot(right.x, right.y);
+    if (!leftLength || !rightLength) return 0;
+    return (left.x * right.x + left.y * right.y) / (leftLength * rightLength);
+  }
+
+  function getTransferTemplatesForLine(lineNumber, stationName) {
+    const line = window.METRO_LINES?.[lineNumber];
+    if (!line) return [];
+    const templates = [];
+    Object.entries(line.courses).forEach(([courseId, course]) => {
+      getCourseDirections(course).forEach((direction) => {
+        const template = getDirectionTemplate(lineNumber, courseId, direction.id);
+        const startIndex = findStationIndex(template.stations, stationName, { requireOutgoing: true });
+        if (startIndex < 0 || startIndex >= template.stations.length - 1) return;
+        templates.push({ ...template, startIndex });
+      });
+    });
+    return templates;
+  }
+
+  function getInfiniteTransferLines(station) {
+    if (!station) return [];
+    return getPlayableLineNumbers()
+      .filter((lineNumber) => lineNumber !== ACTIVE_LINE_NUMBER)
+      .map((lineNumber) => {
+        const candidates = getTransferTemplatesForLine(lineNumber, station.name);
+        return candidates.length ? { lineNumber, line: window.METRO_LINES[lineNumber], candidates } : null;
+      })
+      .filter(Boolean);
+  }
+
+  function chooseTransferCandidate(transferLine) {
+    const travel = currentTravelVector();
+    return transferLine.candidates
+      .map((candidate) => {
+        const current = candidate.stations[candidate.startIndex];
+        const next = candidate.stations[candidate.startIndex + 1];
+        const scale = Math.cos((((current.lat + next.lat) / 2) * Math.PI) / 180);
+        const vector = { x: (next.lng - current.lng) * scale, y: next.lat - current.lat };
+        const remaining = candidate.stations.length - candidate.startIndex;
+        return { candidate, score: directionSimilarity(travel, vector) * 1000 + remaining };
+      })
+      .sort((a, b) => b.score - a.score)[0]?.candidate || transferLine.candidates[0];
+  }
+
+  function performInfiniteTransfer(lineNumber) {
+    if (!state.infinite.active || state.isAnimating) return;
+    const currentStation = getCurrentInfiniteStation();
+    const transferLine = getInfiniteTransferLines(currentStation).find((item) => item.lineNumber === lineNumber);
+    if (!transferLine) {
+      showToast("현재 역에서는 해당 노선으로 환승할 수 없습니다.");
+      return;
+    }
+    const candidate = chooseTransferCandidate(transferLine);
+    const transferStation = candidate.stations[candidate.startIndex];
+    const stationAlreadyCompleted = state.targetIndex > 0;
+    closeInfiniteLeg(currentStation?.name);
+    state.infinite.transfers += 1;
+    closeInfiniteTransferModal();
+    startInfiniteLeg({
+      template: candidate,
+      stationName: transferStation.name,
+      skipStartStation: stationAlreadyCompleted,
+      reason: "transfer"
+    });
+    setFeedback("TRANSFER", `${currentStation.name}에서 ${candidate.line.name} ${candidate.direction.name}으로 환승했습니다.`, "success");
+    showToast(`${candidate.line.name} 환승 · ${candidate.direction.name}`);
+    setTimeout(() => $("stationInput")?.focus(), 80);
+  }
+
+  function handleInfiniteTransferRequest() {
+    if (!state.infinite.active || state.screen !== "game" || state.isAnimating) return;
+    const currentStation = getCurrentInfiniteStation();
+    const lines = getInfiniteTransferLines(currentStation);
+    state.infinite.availableTransfers = lines;
+    if (!lines.length) {
+      showToast(`${currentStation?.name || "현재 역"}에서 환승 가능한 게임 내 노선이 없습니다.`);
+      return;
+    }
+    if (lines.length === 1) {
+      performInfiniteTransfer(lines[0].lineNumber);
+      return;
+    }
+    openInfiniteTransferModal(lines, currentStation);
+  }
+
+  function openInfiniteTransferModal(lines, station) {
+    const modal = $("infiniteTransferModal");
+    const container = $("infiniteTransferOptions");
+    $("infiniteTransferTitle").textContent = `${station.name}에서 환승할 노선을 선택하세요.`;
+    container.innerHTML = "";
+    lines.forEach((item) => {
+      const best = chooseTransferCandidate(item);
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "infinite-transfer-option";
+      button.style.setProperty("--transfer-line-color", item.line.color);
+      button.innerHTML = `<i>${escapeHtml(lineSymbol(item.line))}</i><span><strong>${escapeHtml(item.line.name)}</strong><small>${escapeHtml(best.course.name)} · ${escapeHtml(best.direction.name)}</small></span><em>환승 →</em>`;
+      button.addEventListener("click", () => performInfiniteTransfer(item.lineNumber));
+      container.appendChild(button);
+    });
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+  }
+
+  function closeInfiniteTransferModal() {
+    const modal = $("infiniteTransferModal");
+    if (!modal) return;
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+  }
+
+  function findReverseInfiniteTemplate() {
+    const currentNames = state.infinite.templateStations.map((station) => normalizeInfiniteStationName(station.name));
+    const reversedNames = currentNames.slice().reverse();
+    const course = window.METRO_LINES?.[ACTIVE_LINE_NUMBER]?.courses?.[ACTIVE_COURSE_ID];
+    const configured = getCourseDirections(course)
+      .map((direction) => getDirectionTemplate(ACTIVE_LINE_NUMBER, ACTIVE_COURSE_ID, direction.id))
+      .find((template) => {
+        const names = template.stations.map((station) => normalizeInfiniteStationName(station.name));
+        return names.length === reversedNames.length && names.every((name, index) => name === reversedNames[index]);
+      });
+    if (configured) return configured;
+    const reversedStations = state.infinite.templateStations.slice().reverse().map((station) => ({ ...station, isReturn: false }));
+    const destination = reversedStations.at(-1)?.name || "반대 종착역";
+    return {
+      lineNumber: ACTIVE_LINE_NUMBER,
+      line: LINE_CONFIG,
+      courseId: ACTIVE_COURSE_ID,
+      course: COURSE,
+      direction: { id: `infinite-reverse-${Date.now()}`, name: `${destination}행`, destination, mode: "custom" },
+      stations: reversedStations
+    };
+  }
+
+  function turnAroundInfiniteRoute(terminalStation) {
+    closeInfiniteLeg(terminalStation.name);
+    state.infinite.reversals += 1;
+    const reverseTemplate = findReverseInfiniteTemplate();
+    startInfiniteLeg({
+      template: reverseTemplate,
+      stationName: reverseTemplate.stations[0].name,
+      skipStartStation: true,
+      reason: "turnaround"
+    });
+    setFeedback("TURNAROUND", `${terminalStation.name} 종착 · ${currentDirectionLabel()} 방향으로 회차합니다.`, "success");
+    showToast(`${terminalStation.name} 종착 · 자동 회차`);
+    setTimeout(() => $("stationInput")?.focus(), 100);
+  }
+
+  function updateInfiniteControls() {
+    const active = state.infinite.active && state.playMode === "infinite";
+    document.body.classList.toggle("is-infinite-active", active);
+    const panel = $("infiniteRunPanel");
+    const badge = $("playModeBadge");
+    if (panel) panel.hidden = !active;
+    if (badge) badge.hidden = !active;
+    $("exitButton").textContent = active ? "운행 종료 및 요약" : "플레이 종료";
+    if (!active) return;
+    const leg = currentInfiniteLeg();
+    const currentStation = getCurrentInfiniteStation();
+    const transferLines = getInfiniteTransferLines(currentStation);
+    state.infinite.availableTransfers = transferLines;
+    $("infiniteCurrentLeg").textContent = `${LINE_CONFIG.name} · ${currentDirectionLabel()} · ${currentStation?.name || "출발"}`;
+    $("infiniteStationCount").textContent = String(state.infinite.totalStations);
+    $("infiniteDistance").textContent = `${state.infinite.distanceKm.toFixed(1)} km`;
+    $("infiniteTransferCount").textContent = String(state.infinite.transfers);
+    $("infiniteReversalCount").textContent = String(state.infinite.reversals);
+    const button = $("infiniteTransferButton");
+    button.disabled = state.isAnimating || transferLines.length === 0;
+    button.querySelector("span").textContent = transferLines.length === 0
+      ? "환승 가능한 노선 없음"
+      : transferLines.length === 1
+        ? `${transferLines[0].line.name}으로 환승`
+        : `${transferLines.length}개 노선 중 환승 선택`;
+    $("infiniteTransferHint").textContent = transferLines.length
+      ? `${currentStation.name} · ${transferLines.map((item) => item.line.name).join(" · ")}`
+      : `${currentStation?.name || "현재 역"}에서는 현재 게임에 등록된 다른 노선으로 환승할 수 없습니다.`;
+    if (leg) leg.endStation = currentStation?.name || leg.endStation;
+  }
+
+  function populateInfiniteLineOptions() {
+    const select = $("infiniteLineSelect");
+    const preferred = Number(select.value) || ACTIVE_LINE_NUMBER;
+    select.innerHTML = getPlayableLineNumbers().map((lineNumber) => {
+      const line = window.METRO_LINES[lineNumber];
+      return `<option value="${lineNumber}">${escapeHtml(line.name)}</option>`;
+    }).join("");
+    select.value = String(getPlayableLineNumbers().includes(preferred) ? preferred : getPlayableLineNumbers()[0]);
+    populateInfiniteCourseOptions();
+  }
+
+  function populateInfiniteCourseOptions() {
+    const lineNumber = Number($("infiniteLineSelect").value);
+    const line = window.METRO_LINES[lineNumber];
+    const select = $("infiniteCourseSelect");
+    const preferred = select.value;
+    select.innerHTML = Object.values(line.courses).map((course) => `<option value="${escapeHtml(course.id)}">${escapeHtml(course.name)}</option>`).join("");
+    if (line.courses[preferred]) select.value = preferred;
+    populateInfiniteStationOptions();
+  }
+
+  function populateInfiniteStationOptions() {
+    const lineNumber = Number($("infiniteLineSelect").value);
+    const course = window.METRO_LINES[lineNumber].courses[$("infiniteCourseSelect").value];
+    const select = $("infiniteStationSelect");
+    const preferred = normalizeInfiniteStationName(select.value);
+    const stations = uniqueStationsForCourse(course);
+    select.innerHTML = stations.map((station) => `<option value="${escapeHtml(station.name)}">${escapeHtml(station.name)} · ${escapeHtml(station.code)}</option>`).join("");
+    const match = stations.find((station) => normalizeInfiniteStationName(station.name) === preferred);
+    if (match) select.value = match.name;
+    populateInfiniteDirectionOptions();
+  }
+
+  function populateInfiniteDirectionOptions() {
+    const lineNumber = Number($("infiniteLineSelect").value);
+    const courseId = $("infiniteCourseSelect").value;
+    const stationName = $("infiniteStationSelect").value;
+    const course = window.METRO_LINES[lineNumber].courses[courseId];
+    const select = $("infiniteDirectionSelect");
+    const preferred = select.value;
+    let options = getCourseDirections(course).map((direction) => getDirectionTemplate(lineNumber, courseId, direction.id))
+      .filter((template) => findStationIndex(template.stations, stationName, { requireOutgoing: true }) >= 0);
+    if (!options.length) options = getCourseDirections(course).map((direction) => getDirectionTemplate(lineNumber, courseId, direction.id));
+    select.innerHTML = options.map((template) => `<option value="${escapeHtml(template.direction.id)}">${escapeHtml(template.direction.name)} · ${escapeHtml(template.stations.at(-1)?.name || "종착")}</option>`).join("");
+    if (options.some((template) => template.direction.id === preferred)) select.value = preferred;
+    renderInfiniteSetupSummary();
+  }
+
+  function renderInfiniteSetupSummary() {
+    const lineNumber = Number($("infiniteLineSelect").value);
+    const courseId = $("infiniteCourseSelect").value;
+    const stationName = $("infiniteStationSelect").value;
+    const directionId = $("infiniteDirectionSelect").value;
+    const template = getDirectionTemplate(lineNumber, courseId, directionId);
+    const leg = getInfiniteLeg(template, stationName);
+    if (!template || !leg) return;
+    $("infiniteSelectedLineBadge").textContent = lineSymbol(template.line);
+    $("infiniteSelectedLineBadge").style.background = template.line.color;
+    $("infiniteSelectedTitle").textContent = `${template.line.name} · ${leg.stations[0].name} 출발`;
+    $("infiniteSelectedDescription").textContent = `${template.course.name} · ${template.direction.name} · 첫 회차점 ${leg.stations.at(-1).name} · ${leg.stations.length}개 역`;
+  }
+
+  function openInfiniteSetup() {
+    closeRouteSetup();
+    closeInfiniteTransferModal();
+    populateInfiniteLineOptions();
+    const modal = $("infiniteSetupModal");
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+  }
+
+  function closeInfiniteSetup() {
+    const modal = $("infiniteSetupModal");
+    if (!modal) return;
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+  }
+
+  function startInfiniteFromConfig(config) {
+    const template = getDirectionTemplate(config.lineNumber, config.courseId, config.directionId);
+    const leg = getInfiniteLeg(template, config.stationName);
+    if (!template || !leg) return;
+    cancelHomeDemo();
+    stopTimer();
+    const returnConfig = state.infinite.returnConfig || {
+      lineNumber: ACTIVE_LINE_NUMBER,
+      courseId: ACTIVE_COURSE_ID,
+      directionId: ACTIVE_DIRECTION_ID
+    };
+    resetInfiniteState();
+    state.playMode = "infinite";
+    state.infinite.active = true;
+    state.infinite.startConfig = { ...config };
+    state.infinite.returnConfig = returnConfig;
+    state.attempts = 0;
+    state.errors = [];
+    state.stationErrors = {};
+    state.startedAt = null;
+    state.elapsedMs = 0;
+    state.isAnimating = false;
+    state.currentResult = null;
+    $("stationInput").value = "";
+    startInfiniteLeg({ template, stationName: config.stationName, reason: "start" });
+    setFeedback("INFINITE READY", "역명을 입력해 출발하세요. 환승은 버튼 또는 TAB으로 진행합니다.", "neutral");
+    state.autoFollow = true;
+    const followButton = $("toggleAutoFollowButton");
+    followButton.classList.add("is-active");
+    followButton.setAttribute("aria-pressed", "true");
+    followButton.textContent = "자동 추적 ON";
+    closeInfiniteSetup();
+    switchScreen("game");
+    renderGame();
+    setTimeout(() => {
+      focusCurrentStation(true);
+      $("stationInput").focus();
+    }, 180);
+  }
+
+  function startInfiniteFromSetup() {
+    startInfiniteFromConfig({
+      lineNumber: Number($("infiniteLineSelect").value),
+      courseId: $("infiniteCourseSelect").value,
+      stationName: $("infiniteStationSelect").value,
+      directionId: $("infiniteDirectionSelect").value
+    });
+  }
+
+  function restartInfiniteJourney() {
+    const config = state.infinite.startConfig;
+    if (config) startInfiniteFromConfig(config);
+  }
+
+  function restoreStandardRouteAfterInfinite() {
+    const config = state.infinite.returnConfig;
+    state.playMode = "standard";
+    state.infinite.active = false;
+    if (!config) return;
+    const template = getDirectionTemplate(config.lineNumber, config.courseId, config.directionId);
+    if (!template) return;
+    applyRouteContext(template.lineNumber, template.courseId, template.direction, template.stations);
+    state.targetIndex = 0;
+    state.completedIndex = -1;
+    state.routePosition = 0;
+  }
+
+  function finishInfiniteJourney() {
+    if (!state.infinite.active) return;
+    stopTimer();
+    const currentStation = getCurrentInfiniteStation();
+    closeInfiniteLeg(currentStation?.name);
+    const result = {
+      id: window.crypto?.randomUUID?.() || String(Date.now()),
+      mode: "infinite",
+      date: new Date().toISOString(),
+      durationMs: Math.max(0, state.elapsedMs),
+      attempts: state.attempts,
+      errors: state.errors.length,
+      accuracy: calculateAccuracy(),
+      typoCounts: countBy(state.errors.map((item) => item.type)),
+      stationErrors: { ...state.stationErrors },
+      totalStations: state.infinite.totalStations,
+      distanceKm: state.infinite.distanceKm,
+      transfers: state.infinite.transfers,
+      reversals: state.infinite.reversals,
+      visitedLines: [...state.infinite.visitedLines],
+      legs: state.infinite.legs.map((leg) => ({
+        ...leg,
+        path: (leg.path || []).map((station) => ({ ...station }))
+      }))
+    };
+    state.currentResult = result;
+    renderResult(result);
+    switchScreen("result");
+  }
+
+  function renderInfiniteJourneyMap(result) {
+    const svg = $("resultMapSvg");
+    if (!svg) return;
+    const legs = (result.legs || []).filter((leg) => Array.isArray(leg.path) && leg.path.length);
+    const allPoints = legs.flatMap((leg) => leg.path);
+    svg.innerHTML = "";
+    svg.setAttribute("viewBox", `0 0 ${MAP.width} ${MAP.height}`);
+    svg.setAttribute("aria-label", "무한모드에서 실제로 이동한 노선과 환승 경로");
+
+    const defs = svgElement("defs");
+    defs.innerHTML = `
+      <pattern id="infinite-result-grid" width="42" height="42" patternUnits="userSpaceOnUse">
+        <path d="M42 0H0V42" fill="none" stroke="#afa79b" stroke-opacity="0.11" stroke-width="1"/>
+      </pattern>
+      <filter id="infinite-result-shadow" x="-70%" y="-70%" width="240%" height="240%">
+        <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#3c352d" flood-opacity="0.18"/>
+      </filter>`;
+    svg.appendChild(defs);
+    svg.appendChild(svgElement("rect", { x: 0, y: 0, width: MAP.width, height: MAP.height, fill: "#f8f6f1" }));
+    svg.appendChild(svgElement("rect", { x: 0, y: 0, width: MAP.width, height: MAP.height, fill: "url(#infinite-result-grid)" }));
+
+    if (!allPoints.length) {
+      const empty = svgElement("text", { x: MAP.width / 2, y: MAP.height / 2, "text-anchor": "middle", class: "infinite-map-empty" });
+      empty.textContent = "입력한 역이 없어 표시할 운행 경로가 없습니다.";
+      svg.appendChild(empty);
+      return;
+    }
+
+    const rawBounds = computeGeoBounds(allPoints.map((point) => [point.lng, point.lat]));
+    const bounds = normalizeBoundsToAspect(expandBounds(rawBounds, 0.16, 0.2));
+    const width = Math.max(bounds.maxLng - bounds.minLng, 0.001);
+    const height = Math.max(bounds.maxLat - bounds.minLat, 0.001);
+    const projectSummary = (point) => ({
+      x: MAP.paddingX + ((point.lng - bounds.minLng) / width) * (MAP.width - MAP.paddingX * 2),
+      y: MAP.paddingY + ((bounds.maxLat - point.lat) / height) * (MAP.height - MAP.paddingY * 2)
+    });
+
+    const routeLayer = svgElement("g", { class: "infinite-summary-route-layer" });
+    const nodeLayer = svgElement("g", { class: "infinite-summary-node-layer" });
+    svg.appendChild(routeLayer);
+    svg.appendChild(nodeLayer);
+
+    legs.forEach((leg, legIndex) => {
+      const projected = leg.path.map(projectSummary);
+      if (projected.length > 1) {
+        const points = projected.map((point) => `${point.x.toFixed(2)},${point.y.toFixed(2)}`).join(" ");
+        routeLayer.appendChild(svgElement("polyline", {
+          points,
+          class: "infinite-summary-route-casing"
+        }));
+        const route = svgElement("polyline", {
+          points,
+          class: "infinite-summary-route",
+          stroke: leg.color || "#444"
+        });
+        route.style.setProperty("--journey-line-color", leg.color || "#444");
+        routeLayer.appendChild(route);
+      }
+
+      projected.forEach((point, pointIndex) => {
+        const isTransfer = legIndex > 0 && pointIndex === 0;
+        const isStart = legIndex === 0 && pointIndex === 0;
+        const isEnd = legIndex === legs.length - 1 && pointIndex === projected.length - 1;
+        if (!isStart && !isEnd && !isTransfer && pointIndex !== projected.length - 1) return;
+        const group = svgElement("g", { class: `infinite-summary-marker${isStart ? " is-start" : ""}${isTransfer ? " is-transfer" : ""}${isEnd ? " is-end" : ""}` });
+        group.setAttribute("transform", `translate(${point.x.toFixed(2)} ${point.y.toFixed(2)})`);
+        const circle = svgElement("circle", { r: isEnd ? 13 : 9, fill: leg.color || "#444" });
+        group.appendChild(circle);
+        if (isTransfer) {
+          const transferText = svgElement("text", { x: 0, y: 4, "text-anchor": "middle" });
+          transferText.textContent = "T";
+          group.appendChild(transferText);
+        }
+        if (isStart || isEnd || isTransfer) {
+          const station = leg.path[pointIndex];
+          const label = svgElement("text", {
+            x: isEnd ? -16 : 16,
+            y: isEnd ? -18 : -13,
+            "text-anchor": isEnd ? "end" : "start",
+            class: "infinite-summary-label"
+          });
+          label.textContent = isStart && isEnd
+            ? `출발 · 운행 종료 · ${station.name}`
+            : isStart
+              ? `출발 · ${station.name}`
+              : isEnd
+                ? `운행 종료 · ${station.name}`
+                : `환승 · ${station.name}`;
+          group.appendChild(label);
+        }
+        nodeLayer.appendChild(group);
+      });
+    });
+
+    const legend = svgElement("g", { class: "infinite-summary-legend" });
+    let legendX = 34;
+    const uniqueLines = [];
+    legs.forEach((leg) => {
+      if (!uniqueLines.some((item) => item.line === leg.line)) uniqueLines.push(leg);
+    });
+    uniqueLines.slice(0, 7).forEach((leg) => {
+      const group = svgElement("g", { transform: `translate(${legendX} 36)` });
+      group.appendChild(svgElement("circle", { cx: 0, cy: 0, r: 10, fill: leg.color || "#444" }));
+      const symbol = svgElement("text", { x: 0, y: 4, "text-anchor": "middle", class: "infinite-summary-legend-symbol" });
+      symbol.textContent = leg.lineSymbol;
+      group.appendChild(symbol);
+      const name = svgElement("text", { x: 16, y: 4, class: "infinite-summary-legend-name" });
+      name.textContent = leg.lineName;
+      group.appendChild(name);
+      legend.appendChild(group);
+      legendX += 32 + Math.max(78, leg.lineName.length * 13);
+    });
+    svg.appendChild(legend);
+  }
+
+  function renderInfiniteJourneySummary(result) {
+    $("infiniteResultStations").textContent = String(result.totalStations);
+    $("infiniteResultDistance").textContent = `${result.distanceKm.toFixed(1)} km`;
+    $("infiniteResultLines").textContent = String(result.visitedLines.length);
+    $("infiniteResultTransfers").textContent = String(result.transfers);
+    const list = $("infiniteJourneyList");
+    const legs = result.legs.filter((leg) => leg.stations > 0 || leg.reason !== "start" || result.legs.length === 1);
+    list.innerHTML = legs.length ? legs.map((leg) => `
+      <li style="--journey-color:${escapeHtml(leg.color)}">
+        <i>${escapeHtml(leg.lineSymbol)}</i>
+        <span><strong>${escapeHtml(leg.lineName)} · ${escapeHtml(leg.directionName)}</strong><small>${escapeHtml(leg.startStation)} → ${escapeHtml(leg.endStation)} · ${escapeHtml(leg.courseName)}</small></span>
+        <em>${leg.stations}개 역 · ${leg.distanceKm.toFixed(1)} km</em>
+      </li>`).join("") : `<li class="empty-state"><strong>출발 전 종료</strong><small>입력한 역이 없습니다.</small></li>`;
+  }
 
 
   const TRANSFER_INFO_BY_LINE = {
@@ -1315,6 +2052,19 @@
     $("gameMapSvg").setAttribute("aria-label", `현재까지 완성된 ${LINE_CONFIG.name} ${currentDirectionLabel()}`);
     $("resultMapSvg").setAttribute("aria-label", `완성된 ${LINE_CONFIG.name} ${currentDirectionLabel()} 인포그래픽`);
     document.title = `RAILTYPE KOREA — ${LINE_CONFIG.name} ${currentDirectionLabel()}`;
+    updatePlayModeCopy();
+  }
+
+
+  function updatePlayModeCopy() {
+    const infinite = state.playMode === "infinite" && state.infinite.active;
+    const badge = $("playModeBadge");
+    if (badge) badge.hidden = !infinite;
+    if (!infinite) return;
+    $("gameRouteTitle").textContent = `∞ ${journeyStart()} → ${journeyEnd()} · ${currentDirectionLabel()}`;
+    $("gameLineNumber").textContent = lineSymbol();
+    $("resultMapTitle").textContent = "오늘 이동한 무한 운행 경로";
+    document.title = `RAILTYPE KOREA — 무한모드 · ${LINE_CONFIG.name}`;
   }
 
   function activateCourse(lineNumber, courseId, { directionId = null, start = false, openSetup = false } = {}) {
@@ -1325,6 +2075,8 @@
     cancelHomeDemo();
     cancelRouteSetupDemo();
     stopTimer();
+    state.playMode = "standard";
+    state.infinite.active = false;
     ACTIVE_LINE_NUMBER = lineNumber;
     ACTIVE_COURSE_ID = courseId;
     LINE_CONFIG = nextLine;
@@ -1372,10 +2124,19 @@
 
   function openRouteSetup() {
     const modal = $("routeSetupModal");
+    cancelRouteSetupDemo();
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     renderRouteSetup();
-    startRouteSetupDemo();
+    // display:none 상태에서 생성한 SVG path는 일부 브라우저에서 길이가 0으로
+    // 계산됩니다. 모달이 실제로 배치된 다음 데모 지도를 다시 만들고 재생합니다.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (!modal.classList.contains("is-open")) return;
+        state.maps.setup = buildMap($("routeDemoMapSvg"), { mode: "setup" });
+        startRouteSetupDemo();
+      });
+    });
   }
 
   function closeRouteSetup() {
@@ -1478,8 +2239,14 @@
 
   function startRouteSetupDemo() {
     cancelRouteSetupDemo();
-    const map = state.maps.setup;
     const demoStations = STATIONS.slice();
+    const svg = $("routeDemoMapSvg");
+    let map = state.maps.setup;
+    const invalidLengths = !map?.segmentLengths?.length || map.segmentLengths.some((length) => !Number.isFinite(length) || length <= 0);
+    if (svg && invalidLengths && $("routeSetupModal")?.classList.contains("is-open")) {
+      map = buildMap(svg, { mode: "setup" });
+      state.maps.setup = map;
+    }
     if (!map || !demoStations.length) return;
     const runId = state.setupDemoRunId;
     state.setupDemoRunning = true;
@@ -1534,17 +2301,31 @@
   }
 
   function bindEvents() {
-    $("brandButton").addEventListener("click", goHome);
+    $("brandButton").addEventListener("click", () => {
+      if (state.screen === "game" && state.infinite.active) finishInfiniteJourney();
+      else goHome();
+    });
     $("startButton").addEventListener("click", () => openRouteSetupForLine(ACTIVE_LINE_NUMBER));
+    $("infiniteModeButton").addEventListener("click", openInfiniteSetup);
     $("demoButton").addEventListener("click", runHomeDemo);
     $("submitButton").addEventListener("click", submitStation);
     $("stationInput").addEventListener("input", startTimerIfNeeded);
     $("stationInput").addEventListener("keydown", (event) => {
       if (event.key === "Enter" && !event.isComposing) submitStation();
     });
-    $("exitButton").addEventListener("click", goHome);
-    $("retryButton").addEventListener("click", startGame);
+    $("exitButton").addEventListener("click", () => {
+      if (state.infinite.active) finishInfiniteJourney();
+      else goHome();
+    });
+    $("retryButton").addEventListener("click", () => {
+      if (state.currentResult?.mode === "infinite") restartInfiniteJourney();
+      else startGame();
+    });
     $("finishButton").addEventListener("click", () => {
+      if (state.currentResult?.mode === "infinite") {
+        goHome();
+        return;
+      }
       showToast(`홈 지도에서 완성된 ${LINE_CONFIG.name} ${COURSE.name}을 확인할 수 있습니다.`);
       goHome();
     });
@@ -1564,11 +2345,40 @@
     $("routeSetupModal").addEventListener("click", (event) => {
       if (event.target === $("routeSetupModal")) closeRouteSetup();
     });
+    $("closeInfiniteSetupButton").addEventListener("click", closeInfiniteSetup);
+    $("cancelInfiniteSetupButton").addEventListener("click", closeInfiniteSetup);
+    $("startInfiniteButton").addEventListener("click", startInfiniteFromSetup);
+    $("infiniteSetupModal").addEventListener("click", (event) => {
+      if (event.target === $("infiniteSetupModal")) closeInfiniteSetup();
+    });
+    $("infiniteLineSelect").addEventListener("change", populateInfiniteCourseOptions);
+    $("infiniteCourseSelect").addEventListener("change", populateInfiniteStationOptions);
+    $("infiniteStationSelect").addEventListener("change", populateInfiniteDirectionOptions);
+    $("infiniteDirectionSelect").addEventListener("change", renderInfiniteSetupSummary);
+    $("infiniteTransferButton").addEventListener("click", handleInfiniteTransferRequest);
+    $("closeInfiniteTransferButton").addEventListener("click", closeInfiniteTransferModal);
+    $("cancelInfiniteTransferButton").addEventListener("click", closeInfiniteTransferModal);
+    $("infiniteTransferModal").addEventListener("click", (event) => {
+      if (event.target === $("infiniteTransferModal")) closeInfiniteTransferModal();
+    });
     document.addEventListener("keydown", (event) => {
+      if (event.key === "Tab" && !event.isComposing && state.screen === "game" && state.infinite.active && !$("infiniteTransferModal").classList.contains("is-open")) {
+        event.preventDefault();
+        handleInfiniteTransferRequest();
+        return;
+      }
       if (event.key === "Escape") {
+        if ($("infiniteTransferModal").classList.contains("is-open")) {
+          closeInfiniteTransferModal();
+          return;
+        }
         closeStats();
         closeRouteSetup();
-        if (state.screen === "game") goHome();
+        closeInfiniteSetup();
+        if (state.screen === "game") {
+          if (state.infinite.active) finishInfiniteJourney();
+          else goHome();
+        }
       }
     });
   }
@@ -2375,6 +3185,8 @@
   }
 
   function startGame() {
+    state.playMode = "standard";
+    state.infinite.active = false;
     cancelHomeDemo();
     stopTimer();
     state.targetIndex = 0;
@@ -2412,17 +3224,24 @@
   function switchScreen(name) {
     Object.entries(screens).forEach(([key, screen]) => screen.classList.toggle("is-active", key === name));
     state.screen = name;
+    document.body.classList.toggle("is-game-active", name === "game");
+    document.body.classList.toggle("is-result-active", name === "result");
+    if (name !== "game") document.body.classList.remove("is-infinite-active");
     window.scrollTo({ top: 0, behavior: "smooth" });
     updateStatsHeader();
   }
 
   function goHome() {
     stopTimer();
+    closeInfiniteSetup();
+    closeInfiniteTransferModal();
     if (state.viewAnimation) cancelAnimationFrame(state.viewAnimation);
     state.viewAnimation = null;
+    if (state.playMode === "infinite") restoreStandardRouteAfterInfinite();
     switchScreen("home");
     buildLineButtons();
     renderHomeMap();
+    updateInfiniteControls();
     window.RAILTYPE_COMMUNITY?.refresh?.();
   }
 
@@ -2440,7 +3259,9 @@
     $("targetName").textContent = target.name;
     $("targetEnglish").textContent = target.en;
     $("targetIndexLabel").textContent = `${String(state.targetIndex + 1).padStart(2, "0")} / ${STATIONS.length}`;
-    $("fromStation").textContent = state.targetIndex === 0 ? "START" : STATIONS[state.targetIndex - 1].name;
+    $("fromStation").textContent = state.targetIndex === 0
+      ? (state.infinite.active && currentInfiniteLeg()?.reason === "transfer" ? "TRANSFER" : "START")
+      : STATIONS[state.targetIndex - 1].name;
     $("toStation").textContent = target.name;
     $("coordinateBadge").textContent = `${target.lat.toFixed(6)}° N · ${target.lng.toFixed(6)}° E`;
 
@@ -2451,6 +3272,7 @@
     $("progressBar").style.width = `${Math.max(0, percent)}%`;
     renderNearbyStations();
     updateLiveMetrics();
+    updateInfiniteControls();
     if (state.autoFollow && !state.isAnimating) focusMapOnStation(state.maps.game, Math.min(state.targetIndex, STATIONS.length - 1), true);
   }
 
@@ -2566,6 +3388,7 @@
       input.value = "";
       const typedIndex = state.targetIndex;
       const isFinalStation = typedIndex >= STATIONS.length - 1;
+      if (state.infinite.active) recordInfiniteStation(typedIndex);
 
       if (isFinalStation) {
         state.isAnimating = true;
@@ -2577,21 +3400,31 @@
           showAllLabels: false,
           justCompletedIndex: typedIndex
         });
-        setFeedback("CORRECT", `${expected}역까지 모든 역명을 확인했습니다.`, "success");
+        setFeedback("CORRECT", state.infinite.active
+          ? `${expected} 종착 · 잠시 후 반대 방향으로 회차합니다.`
+          : `${expected}역까지 모든 역명을 확인했습니다.`, "success");
         window.setTimeout(() => {
           state.isAnimating = false;
-          finishGame();
-        }, 360);
+          if (state.infinite.active) turnAroundInfiniteRoute(STATIONS[typedIndex]);
+          else finishGame();
+        }, state.infinite.active ? 520 : 360);
         return;
       }
 
       const destinationIndex = typedIndex + 1;
       const destinationName = STATIONS[destinationIndex].name;
       setFeedback("CORRECT", `${expected} 확인 · ${destinationName}역으로 이동합니다.`, "success");
+
+      // 입력 UI를 다음 행선지로 먼저 전환한 뒤 열차와 선로가 그 역까지
+      // 이동하게 합니다. 애니메이션이 끝나면 입력 대상·열차·환승 판정이
+      // 모두 destinationIndex 하나를 기준으로 일치합니다.
+      state.isAnimating = true;
+      state.completedIndex = typedIndex;
+      state.targetIndex = destinationIndex;
+      renderGame();
       animateToStation(destinationIndex, typedIndex, () => {
-        state.completedIndex = typedIndex;
-        state.targetIndex = destinationIndex;
         state.routePosition = destinationIndex;
+        if (state.infinite.active) appendInfiniteJourneyPoint(STATIONS[destinationIndex]);
         maybeAnnounceCityEntry(typedIndex, destinationIndex);
         renderGame();
         input.focus();
@@ -2692,7 +3525,9 @@
     const elapsed = state.screen === "game" || state.screen === "result" ? state.elapsedMs : 0;
     $("headerTimer").textContent = formatTime(elapsed).slice(0, 5);
     $("headerAccuracy").textContent = `${calculateAccuracy().toFixed(1)}%`;
-    $("headerProgress").textContent = `${Math.max(0, state.completedIndex + 1)} / ${STATIONS.length}`;
+    $("headerProgress").textContent = state.infinite.active
+      ? `${state.infinite.totalStations} · ∞`
+      : `${Math.max(0, state.completedIndex + 1)} / ${STATIONS.length}`;
   }
 
   function calculateAccuracy() {
@@ -2775,12 +3610,31 @@
   }
 
   function renderResult(result) {
+    const infinite = result.mode === "infinite";
     $("resultTime").textContent = formatTime(result.durationMs);
     $("resultAccuracy").textContent = `${result.accuracy.toFixed(1)}%`;
     $("resultErrors").textContent = String(result.errors);
-    fitMapToRoute(state.maps.result, false);
-    setMapProgress(state.maps.result, 0, { currentIndex: 0, completedIndex: -1, showAllLabels: true });
-    animateMapCompletion(state.maps.result, 2200);
+    $("infiniteSummaryPanel").hidden = !infinite;
+    if (infinite) {
+      $("resultLineEyebrow").textContent = "INFINITE JOURNEY · PRIVATE SUMMARY";
+      $("resultMapEyebrow").textContent = "JOURNEY MAP";
+      $("resultTitle").innerHTML = "오늘의 무한 운행을<br>정리했습니다.";
+      $("resultDescription").textContent = `${result.visitedLines.length}개 노선에서 ${result.totalStations}개 역을 입력하고 ${result.distanceKm.toFixed(1)}km의 철도축을 따라 이동했습니다. 시간 기록은 공개되지 않습니다.`;
+      $("resultLineChip").innerHTML = `<i>∞</i> PRIVATE`;
+      $("resultMapTitle").textContent = "오늘 이동한 무한 운행 경로";
+      $("retryButton").textContent = "같은 출발점으로 다시";
+      $("finishButton").innerHTML = `홈으로 돌아가기 <span>→</span>`;
+      renderInfiniteJourneyMap(result);
+      renderInfiniteJourneySummary(result);
+    } else {
+      $("resultMapEyebrow").textContent = "COMPLETED INFOGRAPHIC";
+      $("resultTitle").innerHTML = "서울의 한 줄을<br>완성했습니다.";
+      $("retryButton").textContent = "다시 플레이";
+      $("finishButton").innerHTML = `홈에서 완성 노선 보기 <span>→</span>`;
+      fitMapToRoute(state.maps.result, false);
+      setMapProgress(state.maps.result, 0, { currentIndex: 0, completedIndex: -1, showAllLabels: true });
+      animateMapCompletion(state.maps.result, 2200);
+    }
     renderTypoChart(result.typoCounts);
     renderTroubleStations(result.stationErrors);
   }

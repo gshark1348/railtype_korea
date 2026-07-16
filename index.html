@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#f7f4ef" />
   <meta name="description" content="대한민국 철도 노선과 종착역 방향을 선택하고 역명을 입력해 지도 위에 선로를 완성하는 타자 연습 프로토타입" />
   <title>RAILTYPE KOREA — Type the Stations, Trace the Rails</title>
-  <link rel="stylesheet" href="./styles.css?v=27.0.0" />
+  <link rel="stylesheet" href="./styles.css?v=28.2.0" />
 </head>
 <body>
   <div class="app-shell">
@@ -39,6 +39,7 @@
             </p>
             <div class="hero-actions">
               <button class="primary-button" id="startButton" type="button">3호선 시작하기 <span>→</span></button>
+              <button class="infinite-mode-button" id="infiniteModeButton" type="button"><b>∞</b> 무한모드</button>
               <button class="secondary-button" id="demoButton" type="button">모션 데모</button>
             </div>
             <div class="hero-meta">
@@ -120,7 +121,7 @@
               <span class="section-label">SELECT LINE</span>
               <h2 id="selectLineTitle">노선을 선택하세요.</h2>
             </div>
-            <p>대한민국 철도 노선을 지역과 운영 체계별로 살펴볼 수 있습니다. 현재 완성된 1·2·3·4·5·6·7·8·9호선은 바로 주행할 수 있으며, 나머지 노선은 향후 순차적으로 추가됩니다.</p>
+            <p>대한민국 철도 노선을 지역과 운영 체계별로 살펴볼 수 있습니다. 현재 완성된 1·2·3·4·5·6·7·8·9호선과 수인분당선은 바로 주행할 수 있으며, 무한모드에서는 이 노선들을 출발·환승 대상으로 이용할 수 있습니다.</p>
           </div>
           <div class="line-buttons" id="lineButtons"></div>
         </section>
@@ -162,7 +163,7 @@
           <aside class="control-column">
             <article class="typing-panel panel" id="typingPanel">
               <div class="typing-topline">
-                <span class="section-label">NEXT STATION</span>
+                <span class="section-label">CURRENT STATION</span>
                 <span class="station-code" id="stationCode">309</span>
               </div>
 
@@ -232,6 +233,26 @@
               </div>
             </article>
 
+            <article class="infinite-run-panel panel" id="infiniteRunPanel" hidden>
+              <div class="infinite-run-head">
+                <div>
+                  <span class="section-label">INFINITE JOURNEY</span>
+                  <strong id="infiniteCurrentLeg">현재 노선에서 계속 주행 중</strong>
+                </div>
+                <span class="infinite-symbol">∞</span>
+              </div>
+              <div class="infinite-run-metrics">
+                <span><small>STATIONS</small><b id="infiniteStationCount">0</b></span>
+                <span><small>DISTANCE</small><b id="infiniteDistance">0.0 km</b></span>
+                <span><small>TRANSFERS</small><b id="infiniteTransferCount">0</b></span>
+                <span><small>REVERSALS</small><b id="infiniteReversalCount">0</b></span>
+              </div>
+              <button class="infinite-transfer-button" id="infiniteTransferButton" type="button" disabled>
+                <span>환승 가능한 노선 없음</span><kbd>TAB</kbd>
+              </button>
+              <p id="infiniteTransferHint">환승역에 도착하면 버튼 또는 TAB으로 노선을 바꿀 수 있습니다.</p>
+            </article>
+
             <article class="station-window panel">
               <div class="station-window-head">
                 <span class="section-label">ROUTE WINDOW</span>
@@ -250,7 +271,7 @@
           <article class="result-summary panel">
             <span class="complete-check">✓</span>
             <p class="eyebrow" id="resultLineEyebrow">LINE 03 COMPLETED</p>
-            <h1>서울의 한 줄을<br>완성했습니다.</h1>
+            <h1 id="resultTitle">서울의 한 줄을<br>완성했습니다.</h1>
             <p class="result-description" id="resultDescription">대화역부터 오금역까지 실제 역 위치를 따라 완성한 노선이 자동으로 저장되었습니다.</p>
 
             <div class="result-metrics">
@@ -268,7 +289,7 @@
           <article class="map-panel panel result-map-panel">
             <div class="map-heading">
               <div>
-                <span class="section-label">COMPLETED INFOGRAPHIC</span>
+                <span class="section-label" id="resultMapEyebrow">COMPLETED INFOGRAPHIC</span>
                 <h2 id="resultMapTitle">서울 지하철 3호선</h2>
               </div>
               <span class="line-chip" id="resultLineChip"><i>3</i> COMPLETE</span>
@@ -276,6 +297,24 @@
             <div class="map-stage result-map-stage">
               <svg id="resultMapSvg" class="geo-map" viewBox="0 0 1200 760" role="img" aria-label="완성된 3호선 노선 인포그래픽"></svg>
             </div>
+          </article>
+
+          <article class="infinite-summary-panel panel" id="infiniteSummaryPanel" hidden>
+            <div class="analysis-heading">
+              <div>
+                <span class="section-label">INFINITE JOURNEY SUMMARY</span>
+                <h2>무한 운행 여정</h2>
+              </div>
+              <span class="infinite-result-badge">PRIVATE</span>
+            </div>
+            <div class="infinite-result-metrics">
+              <div><span>STATIONS</span><strong id="infiniteResultStations">0</strong></div>
+              <div><span>DISTANCE</span><strong id="infiniteResultDistance">0.0 km</strong></div>
+              <div><span>LINES</span><strong id="infiniteResultLines">0</strong></div>
+              <div><span>TRANSFERS</span><strong id="infiniteResultTransfers">0</strong></div>
+            </div>
+            <ol class="infinite-journey-list" id="infiniteJourneyList"></ol>
+            <p class="infinite-private-note">무한모드의 시간과 여정은 커뮤니티 기록판에 공개되지 않으며, 현재 운행 종료 화면에서만 분석됩니다.</p>
           </article>
 
           <article class="analysis-panel panel">
@@ -402,6 +441,68 @@
     </section>
   </div>
 
+
+  <div class="modal-backdrop infinite-setup-backdrop" id="infiniteSetupModal" aria-hidden="true">
+    <section class="infinite-setup-modal panel" role="dialog" aria-modal="true" aria-labelledby="infiniteSetupTitle">
+      <button class="modal-close" id="closeInfiniteSetupButton" type="button" aria-label="무한모드 설정 닫기">×</button>
+      <div class="infinite-setup-heading">
+        <div>
+          <span class="section-label">INFINITE MODE</span>
+          <h2 id="infiniteSetupTitle">출발 여정을 설정하세요.</h2>
+          <p>노선·운행 코스·출발역·진행 방향을 정한 뒤, 환승과 종착역 회차를 반복하며 원하는 만큼 달릴 수 있습니다.</p>
+        </div>
+        <span class="infinite-setup-symbol">∞</span>
+      </div>
+      <div class="infinite-setup-grid">
+        <label>
+          <span>LINE</span>
+          <select id="infiniteLineSelect" aria-label="무한모드 출발 노선"></select>
+        </label>
+        <label>
+          <span>COURSE</span>
+          <select id="infiniteCourseSelect" aria-label="무한모드 운행 코스"></select>
+        </label>
+        <label>
+          <span>START STATION</span>
+          <select id="infiniteStationSelect" aria-label="무한모드 출발역"></select>
+        </label>
+        <label>
+          <span>HEADING</span>
+          <select id="infiniteDirectionSelect" aria-label="무한모드 진행 방향"></select>
+        </label>
+      </div>
+      <div class="infinite-selected-summary" id="infiniteSelectedSummary">
+        <span class="infinite-selected-line" id="infiniteSelectedLineBadge">3</span>
+        <div>
+          <small>SELECTED DEPARTURE</small>
+          <strong id="infiniteSelectedTitle">3호선 · 대화 출발</strong>
+          <p id="infiniteSelectedDescription">오금 방향으로 무한 운행을 시작합니다.</p>
+        </div>
+      </div>
+      <div class="infinite-rules">
+        <div><b>TAB</b><span>환승 가능한 노선이 1개면 즉시 환승합니다.</span></div>
+        <div><b>CHOICE</b><span>2개 이상이면 노선 선택창을 표시합니다.</span></div>
+        <div><b>TURN</b><span>종착역에서는 자동으로 방향을 바꿔 계속 운행합니다.</span></div>
+        <div><b>PRIVATE</b><span>시간 기록은 공개하지 않고 종료 시 오타와 여정만 요약합니다.</span></div>
+      </div>
+      <div class="route-setup-actions">
+        <button class="secondary-button" id="cancelInfiniteSetupButton" type="button">취소</button>
+        <button class="primary-button" id="startInfiniteButton" type="button">무한 운행 시작 <span>→</span></button>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-backdrop infinite-transfer-backdrop" id="infiniteTransferModal" aria-hidden="true">
+    <section class="infinite-transfer-modal panel" role="dialog" aria-modal="true" aria-labelledby="infiniteTransferTitle">
+      <button class="modal-close" id="closeInfiniteTransferButton" type="button" aria-label="환승 선택 닫기">×</button>
+      <span class="section-label">TRANSFER</span>
+      <h2 id="infiniteTransferTitle">환승할 노선을 선택하세요.</h2>
+      <p id="infiniteTransferDescription">현재 역에서 이용 가능한 게임 내 노선입니다. 진행 방향은 현재 주행 방향과 가장 자연스럽게 이어지는 쪽으로 자동 설정됩니다.</p>
+      <div class="infinite-transfer-options" id="infiniteTransferOptions"></div>
+      <button class="secondary-button infinite-transfer-cancel" id="cancelInfiniteTransferButton" type="button">현재 노선 계속 주행</button>
+    </section>
+  </div>
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="./js/line1-data.js?v=24.0.0"></script>
@@ -417,6 +518,6 @@
   <script src="./js/geo-boundaries.js?v=27.1.0"></script>
   <script src="./js/community-config.js?v=27.0.0"></script>
   <script src="./js/community.js?v=27.0.0"></script>
-  <script src="./js/app.js?v=27.1.0"></script>
+  <script src="./js/app.js?v=28.2.0"></script>
 </body>
 </html>
