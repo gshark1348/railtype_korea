@@ -1041,8 +1041,8 @@
     COURSE = nextCourse;
     DIRECTION = direction || { id: "infinite", name: `${stations.at(-1)?.name || "종착역"}행`, mode: "custom" };
     STATIONS = stations.map((station) => ({ ...station }));
-    LINE_COLOR = LINE_CONFIG.color;
-    MAJOR_STATION_NAMES = new Set(LINE_CONFIG.majorStations || []);
+    LINE_COLOR = COURSE.color || LINE_CONFIG.color;
+    MAJOR_STATION_NAMES = new Set(COURSE.majorStations || LINE_CONFIG.majorStations || []);
     setActiveTheme();
     updateDynamicCopy();
     rebuildMaps();
@@ -1996,13 +1996,16 @@
 
   function setActiveTheme() {
     const root = document.documentElement;
-    root.style.setProperty("--orange", LINE_CONFIG.color);
-    root.style.setProperty("--orange-dark", LINE_CONFIG.darkColor);
-    root.style.setProperty("--orange-soft", LINE_CONFIG.softColor);
+    const color = COURSE.color || LINE_CONFIG.color;
+    const darkColor = COURSE.darkColor || LINE_CONFIG.darkColor;
+    const softColor = COURSE.softColor || LINE_CONFIG.softColor;
+    root.style.setProperty("--orange", color);
+    root.style.setProperty("--orange-dark", darkColor);
+    root.style.setProperty("--orange-soft", softColor);
     const brandMark = document.querySelector(".brand-mark");
     if (brandMark) {
-      brandMark.style.background = `linear-gradient(180deg, ${LINE_CONFIG.color}, ${LINE_CONFIG.darkColor})`;
-      brandMark.style.boxShadow = `0 10px 22px ${LINE_CONFIG.softColor}`;
+      brandMark.style.background = `linear-gradient(180deg, ${color}, ${darkColor})`;
+      brandMark.style.boxShadow = `0 10px 22px ${softColor}`;
     }
   }
 
@@ -2089,8 +2092,8 @@
     ACTIVE_DIRECTION_ID = directions.some((item) => item.id === directionId) ? directionId : directions[0].id;
     DIRECTION = directions.find((item) => item.id === ACTIVE_DIRECTION_ID) || directions[0];
     STATIONS = createJourneyStations(COURSE, DIRECTION);
-    LINE_COLOR = LINE_CONFIG.color;
-    MAJOR_STATION_NAMES = new Set(LINE_CONFIG.majorStations || []);
+    LINE_COLOR = COURSE.color || LINE_CONFIG.color;
+    MAJOR_STATION_NAMES = new Set(COURSE.majorStations || LINE_CONFIG.majorStations || []);
     state.targetIndex = 0;
     state.completedIndex = -1;
     state.routePosition = 0;
@@ -2156,9 +2159,9 @@
     $("routeSetupTitle").textContent = `${LINE_CONFIG.name} 주행을 설정하세요.`;
     $("routeSetupDescription").textContent = "코스와 종착역 방향을 고른 뒤 모션 데모를 확인하고 START를 누르세요.";
     $("routeSetupLineBadge").textContent = String(lineNo);
-    $("routeSetupLineBadge").style.background = LINE_CONFIG.color;
+    $("routeSetupLineBadge").style.background = LINE_COLOR;
 
-    const train = LINE_CONFIG.train || {};
+    const train = COURSE.train || LINE_CONFIG.train || {};
     const trainImage = $("routeTrainImage");
     const trainImageWrap = trainImage.closest(".route-train-image-wrap");
     const plannedTrain = $("routeTrainPlanned");
@@ -2171,9 +2174,9 @@
       $("routeTrainPlannedDescription").textContent = train.plannedDescription || "영업 운행 차량 사진은 개통 후 제공됩니다.";
     } else {
       trainImage.src = train.src || "";
-      trainImage.alt = train.alt || `${LINE_CONFIG.name} 전동차`;
+      trainImage.alt = train.alt || `${COURSE.serviceName || LINE_CONFIG.name} 전동차`;
     }
-    $("routeTrainCaption").textContent = train.caption || `${LINE_CONFIG.name} 전동차`;
+    $("routeTrainCaption").textContent = train.caption || `${COURSE.serviceName || LINE_CONFIG.name} 전동차`;
     const trainCredit = $("routeTrainCredit");
     trainCredit.href = train.sourceUrl || "https://commons.wikimedia.org/";
     trainCredit.textContent = [train.credit, train.license].filter(Boolean).join(" · ") || "사진 출처";
@@ -2222,12 +2225,13 @@
   }
 
   function renderLineHistory() {
-    const history = LINE_CONFIG.history || {};
+    const history = COURSE.history || LINE_CONFIG.history || {};
     const events = Array.isArray(history.events) ? history.events : [];
     const sources = Array.isArray(history.sources) ? history.sources : [];
 
-    $("lineHistoryTitle").textContent = `${LINE_CONFIG.name}이 만들어진 과정`;
-    $("lineHistorySummary").textContent = history.summary || `${LINE_CONFIG.name}의 기획부터 개통과 연장 과정을 정리했습니다.`;
+    const historyName = COURSE.serviceName || LINE_CONFIG.name;
+    $("lineHistoryTitle").textContent = `${historyName}이 만들어진 과정`;
+    $("lineHistorySummary").textContent = history.summary || `${historyName}의 기획부터 개통과 연장 과정을 정리했습니다.`;
     $("lineHistoryPeriod").textContent = history.period || (events.length
       ? `${events[0].year} — ${events.at(-1).year}`
       : "HISTORY");
@@ -2235,7 +2239,7 @@
     const timeline = $("lineHistoryTimeline");
     timeline.innerHTML = events.map((event, index) => `
       <li class="line-history-event">
-        <div class="line-history-marker"><i style="background:${LINE_CONFIG.color}"></i><span>${String(index + 1).padStart(2, "0")}</span></div>
+        <div class="line-history-marker"><i style="background:${LINE_COLOR}"></i><span>${String(index + 1).padStart(2, "0")}</span></div>
         <div class="line-history-copy">
           <time>${escapeHtml(event.year || "")}</time>
           <strong>${escapeHtml(event.label || "")}</strong>
@@ -2469,21 +2473,10 @@
       region: "전국",
       title: "고속철도",
       description: "KTX·SRT로 연결되는 대한민국 고속철도 간선",
+      unit: "SERVICES",
       lines: [
-        { id: "ktx-gyeongbu", symbol: "K", name: "KTX 경부고속선", detail: "서울·대전·동대구·경주·울산·부산", color: "#1B5EAA", lineNumber: 10 },
-        { id: "ktx-honam", symbol: "K", name: "KTX 호남고속선", detail: "용산·공주·익산·광주송정·목포", color: "#2D68B2", lineNumber: 11 },
-        { id: "ktx-gangneung", symbol: "K", name: "KTX 강릉선", detail: "서울·청량리·강릉·동해", color: "#2878C8", lineNumber: 16 },
-        { id: "ktx-eum-jungang", symbol: "이", name: "KTX-이음 중앙선", detail: "청량리·원주·안동·부전", color: "#178A8A", lineNumber: 17 },
-        { id: "ktx-eum-jungbunaeryuk", symbol: "이", name: "KTX-이음 중부내륙선", detail: "판교·충주·수안보·문경", color: "#2F8F6B", lineNumber: 18 },
-        { id: "ktx-jeolla", symbol: "K", name: "KTX 전라선", detail: "용산·전주·순천·여수엑스포", color: "#436FB3", lineNumber: 19 },
-        { id: "ktx-gyeongjeon", symbol: "K", name: "KTX 경전선", detail: "서울·밀양·창원·진주", color: "#3F72A8", lineNumber: 20 },
-        { id: "ktx-donghae", symbol: "K", name: "KTX 동해선(포항)", detail: "서울·동대구·포항", color: "#346C9E", lineNumber: 21 },
-        { id: "ktx-eum-east-coast", symbol: "이", name: "KTX-이음 동해선", detail: "강릉·울진·포항·부전", color: "#0D7C9E", lineNumber: 22 },
-        { id: "srt-gyeongbu", symbol: "S", name: "SRT 경부선", detail: "수서·대전·동대구·부산", color: "#8A1733", lineNumber: 23 },
-        { id: "srt-honam", symbol: "S", name: "SRT 호남선", detail: "수서·익산·광주송정·목포", color: "#7A1838", lineNumber: 24 },
-        { id: "srt-jeolla", symbol: "S", name: "SRT 전라선", detail: "수서·전주·순천·여수엑스포", color: "#992447", lineNumber: 25 },
-        { id: "srt-gyeongjeon", symbol: "S", name: "SRT 경전선", detail: "수서·밀양·창원·진주", color: "#861B3A", lineNumber: 26 },
-        { id: "srt-donghae", symbol: "S", name: "SRT 동해선", detail: "수서·동대구·포항", color: "#75152F", lineNumber: 27 }
+        { id: "ktx", symbol: "K", name: "KTX", detail: "경부·호남·강릉·중앙·중부내륙·전라·경전·동해 10개 코스", color: "#1B5EAA", lineNumber: 10 },
+        { id: "srt", symbol: "S", name: "SRT", detail: "경부·호남·전라·경전·동해 5개 코스", color: "#8A1733", lineNumber: 23 }
       ]
     },
     {
@@ -2576,7 +2569,7 @@
           <strong>${escapeHtml(group.title)}</strong>
           <small>${escapeHtml(group.description)}</small>
         </span>
-        <span class="catalog-group-count">${group.lines.length} LINES</span>
+        <span class="catalog-group-count">${group.lines.length} ${escapeHtml(group.unit || "LINES")}</span>
         <i class="catalog-chevron" aria-hidden="true"></i>
       `;
       details.appendChild(summary);
@@ -3781,7 +3774,12 @@
     }
     history.innerHTML = sessions.slice(0, 8).map((session) => {
       const date = new Date(session.date);
-      const lineConfig = window.METRO_LINES[session.line] || window.METRO_LINES[3];
+      const legacyServiceLine = [11, 16, 17, 18, 19, 20, 21, 22].includes(Number(session.line))
+        ? 10
+        : [24, 25, 26, 27].includes(Number(session.line))
+          ? 23
+          : Number(session.line);
+      const lineConfig = window.METRO_LINES[legacyServiceLine] || window.METRO_LINES[3];
       const courseName = session.courseName || lineConfig.courses[session.course]?.name || "본선";
       return `
         <article class="history-item">
@@ -3958,6 +3956,145 @@
     }
   }
 
+  // v30.3 · 고속열차는 운영 브랜드를 대표 노선으로 사용하고 세부 운행계통을
+  // 코스로 묶습니다. 노선 선택·무한모드·환승 목록에서는 KTX/SRT만 한 번씩
+  // 표시하고, 실제 주행 경로는 설정 창의 코스 선택에서 유지합니다.
+  function configureGroupedHighSpeedServicesV303() {
+    const serviceSpecs = [
+      {
+        targetLineNumber: 10,
+        number: "K",
+        code: "KTX",
+        name: "KTX",
+        color: "#1B5EAA",
+        darkColor: "#0B3F78",
+        softColor: "rgba(27,94,170,.16)",
+        areaLabel: "KTX NATIONAL NETWORK",
+        heroRegion: "대한민국 위에",
+        sources: [
+          { lineNumber: 10, routes: { main: ["gyeongbu", "경부고속선"] } },
+          { lineNumber: 11, routes: { main: ["honam", "호남고속선"] } },
+          { lineNumber: 16, routes: { gangneung: ["gangneung", "강릉선 · 서울–강릉"], donghae: ["gangneung-donghae", "강릉선 · 서울–동해"] } },
+          { lineNumber: 17, routes: { main: ["jungang", "KTX-이음 중앙선"] } },
+          { lineNumber: 18, routes: { main: ["jungbunaeryuk", "KTX-이음 중부내륙선"] } },
+          { lineNumber: 19, routes: { main: ["jeolla", "전라선"] } },
+          { lineNumber: 20, routes: { main: ["gyeongjeon", "경전선"] } },
+          { lineNumber: 21, routes: { main: ["donghae-pohang", "동해선 · 서울–포항"] } },
+          { lineNumber: 22, routes: { main: ["east-coast", "KTX-이음 동해선 · 강릉–부전"] } }
+        ]
+      },
+      {
+        targetLineNumber: 23,
+        number: "S",
+        code: "SRT",
+        name: "SRT",
+        color: "#8A1733",
+        darkColor: "#5B0D21",
+        softColor: "rgba(138,23,51,.17)",
+        areaLabel: "SRT NATIONAL NETWORK",
+        heroRegion: "수서에서 대한민국 위에",
+        sources: [
+          { lineNumber: 23, routes: { main: ["gyeongbu", "경부선"] } },
+          { lineNumber: 24, routes: { main: ["honam", "호남선"] } },
+          { lineNumber: 25, routes: { main: ["jeolla", "전라선"] } },
+          { lineNumber: 26, routes: { main: ["gyeongjeon", "경전선"] } },
+          { lineNumber: 27, routes: { main: ["donghae", "동해선"] } }
+        ]
+      }
+    ];
+
+    const originalLines = new Map(Object.entries(window.METRO_LINES || {}).map(([lineNumber, line]) => [Number(lineNumber), line]));
+    const groupedContexts = {};
+
+    serviceSpecs.forEach((service) => {
+      const courses = {};
+      const contexts = {};
+      let representative = null;
+
+      service.sources.forEach((sourceSpec) => {
+        const sourceLine = originalLines.get(sourceSpec.lineNumber);
+        if (!sourceLine) return;
+        representative ||= sourceLine;
+        Object.entries(sourceSpec.routes).forEach(([sourceCourseId, routeMeta]) => {
+          const sourceCourse = sourceLine.courses?.[sourceCourseId];
+          if (!sourceCourse) return;
+          const [courseId, courseName] = routeMeta;
+          courses[courseId] = {
+            ...sourceCourse,
+            id: courseId,
+            name: courseName,
+            subtitle: `${sourceLine.name} · ${sourceCourse.subtitle || `${sourceCourse.start}–${sourceCourse.end}`}`,
+            serviceName: sourceLine.name,
+            serviceCode: sourceLine.code,
+            color: sourceLine.color,
+            darkColor: sourceLine.darkColor,
+            softColor: sourceLine.softColor,
+            train: sourceLine.train,
+            history: sourceLine.history,
+            majorStations: sourceLine.majorStations,
+            legacyLineNumber: sourceSpec.lineNumber,
+            legacyCourseId: sourceCourseId
+          };
+
+          sourceCourse.stations.forEach((station) => {
+            const sourceContext = window.NATIONAL_HIGH_SPEED_CONTEXTS?.[sourceSpec.lineNumber]?.[station.name];
+            contexts[station.name] ||= sourceContext || {
+              title: station.en || station.name,
+              subtitle: `${service.name} ${courseName} 대표 정차 코스의 ${station.name}역입니다. 실제 열차별 정차 여부는 시간표에 따라 다릅니다.`,
+              icon: service.name === "SRT" ? "🚅" : "🚄",
+              badge: `${service.name} STATION`,
+              area: service.areaLabel,
+              keywords: "고속철도 · 전국 연결 · 환승"
+            };
+          });
+        });
+      });
+
+      const majorStations = [...new Set(Object.values(courses).flatMap((course) => course.stations.map((station) => station.name)))];
+      window.METRO_LINES[service.targetLineNumber] = {
+        ...representative,
+        number: service.number,
+        code: service.code,
+        name: service.name,
+        color: service.color,
+        darkColor: service.darkColor,
+        softColor: service.softColor,
+        areaLabel: service.areaLabel,
+        heroRegion: service.heroRegion,
+        courses,
+        majorStations
+      };
+      groupedContexts[service.targetLineNumber] = contexts;
+    });
+
+    [11, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27].forEach((lineNumber) => delete window.METRO_LINES[lineNumber]);
+    try {
+      const cleared = new Set(JSON.parse(localStorage.getItem(STORAGE.cleared)) || []);
+      let migrated = false;
+      [10, 23].forEach((lineNumber) => {
+        Object.values(window.METRO_LINES[lineNumber]?.courses || {}).forEach((course) => {
+          getCourseDirections(course).forEach((direction) => {
+            const legacyKey = `${course.legacyLineNumber}-${course.legacyCourseId}-${direction.id}`;
+            const groupedKey = `${lineNumber}-${course.id}-${direction.id}`;
+            if (cleared.has(legacyKey) && !cleared.has(groupedKey)) {
+              cleared.add(groupedKey);
+              migrated = true;
+            }
+          });
+        });
+      });
+      if (migrated) localStorage.setItem(STORAGE.cleared, JSON.stringify([...cleared]));
+    } catch (_error) {
+      // 저장소 접근 제한 또는 이전 데이터 손상은 현재 플레이를 방해하지 않습니다.
+    }
+    window.NATIONAL_HIGH_SPEED_CONTEXTS = groupedContexts;
+    window.NATIONAL_HIGH_SPEED_META = {
+      ...(window.NATIONAL_HIGH_SPEED_META || {}),
+      newLineNumbers: [10, 23],
+      groupedServices: { KTX: 10, SRT: 5 }
+    };
+  }
+
   // v30.0 전국 KTX·KTX-이음·SRT 확장.
   function configureNationalHighSpeedV30() {
     CITY_REGION_META.southKorea = { id: "southKorea", label: "대한민국", en: "SOUTH KOREA", short: "전국" };
@@ -3977,13 +4114,48 @@
       });
     });
 
+    const detailedTransferInfo = getTransferInfo;
+    getTransferInfo = (stationName) => {
+      const compacted = detailedTransferInfo(stationName).flatMap((item) => {
+        const name = String(item.name || "");
+        const hasKtx = /KTX/i.test(name);
+        const hasSrt = /SRT/i.test(name);
+        if (!hasKtx && !hasSrt) return [item];
+        const grouped = [];
+        if (hasKtx && ACTIVE_LINE_NUMBER !== 10) grouped.push({ kind: "rail", tag: "KTX", name: "KTX" });
+        if (hasSrt && ACTIVE_LINE_NUMBER !== 23) grouped.push({ kind: "rail", tag: "SRT", name: "SRT" });
+        return grouped;
+      }).filter((item) => !(
+        (ACTIVE_LINE_NUMBER === 10 && item.name === "KTX") ||
+        (ACTIVE_LINE_NUMBER === 23 && item.name === "SRT")
+      ));
+      return compacted.filter((item, index, all) =>
+        all.findIndex((candidate) => `${candidate.kind}:${candidate.tag}:${candidate.name}` === `${item.kind}:${item.tag}:${item.name}`) === index
+      );
+    };
+
     const catalogDescription = document.querySelector(".line-select-copy > p");
     if (catalogDescription) {
-      catalogDescription.textContent = "1–9호선·수인분당선, GTX-A·B·C와 전국 KTX·KTX-이음·SRT 14개 운행계통을 주행할 수 있습니다. 모든 플레이 노선은 무한모드의 출발·환승 대상에 자동 연결됩니다.";
+      catalogDescription.textContent = "1–9호선·수인분당선, GTX-A·B·C와 전국 KTX·SRT를 주행할 수 있습니다. KTX 10개·SRT 5개 세부 운행코스는 각 대표 항목의 설정 화면에서 선택하며, 환승 목록에는 운영 브랜드만 간결하게 표시됩니다.";
     }
   }
 
   configureGtxV29();
+  configureGroupedHighSpeedServicesV303();
   configureNationalHighSpeedV30();
-  init();
+  window.__RAILTYPE_SERVICE_GROUP_TEST__ = () => ({
+    playableLineNumbers: getPlayableLineNumbers(),
+    ktx: {
+      name: window.METRO_LINES[10]?.name,
+      courseIds: Object.keys(window.METRO_LINES[10]?.courses || {})
+    },
+    srt: {
+      name: window.METRO_LINES[23]?.name,
+      courseIds: Object.keys(window.METRO_LINES[23]?.courses || {})
+    },
+    catalogHighSpeedItems: RAIL_NETWORK_CATALOG.find((group) => group.id === "high-speed-rail")?.lines.map((item) => item.name) || [],
+    transferNamesAtOsong: getTransferInfo("오송").map((item) => item.name),
+    infiniteTransferNamesAtOsong: getInfiniteTransferLines({ name: "오송" }).map((item) => item.line.name)
+  });
+  if (!window.__RAILTYPE_SKIP_INIT__) init();
 })();

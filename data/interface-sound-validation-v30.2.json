@@ -1,0 +1,31 @@
+{
+  "version": "30.2",
+  "feature": "quiet synthesized typing and interface sounds",
+  "implementation": {
+    "engine": "Web Audio API",
+    "externalAudioAssets": 0,
+    "defaultEnabled": true,
+    "preferenceKey": "railtype.interfaceSound.enabled.v1",
+    "lazyAudioContext": true,
+    "keyThrottleMilliseconds": 24,
+    "masterGain": 0.42
+  },
+  "interactionCoverage": [
+    "editable text keydown",
+    "button click",
+    "link click",
+    "select click",
+    "checkbox and radio click"
+  ],
+  "accessibility": {
+    "toggleElement": "soundToggleButton",
+    "ariaPressed": true,
+    "dynamicKoreanLabel": true,
+    "worksWithoutAudioContext": true
+  },
+  "regression": {
+    "playableLines": 27,
+    "realTrainPhotoAssetsPreserved": 3,
+    "plannedTrainPlaceholdersPreserved": 2
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "version": "30.3",
+  "audio": {
+    "primaryEngine": "pooled HTMLAudioElement",
+    "fallbackEngine": "Web Audio API",
+    "files": [
+      "assets/audio/key-soft.wav",
+      "assets/audio/click-soft.wav"
+    ],
+    "format": "PCM 16-bit mono 44100 Hz",
+    "preloaded": true,
+    "preferenceKey": "railtype.interfaceSound.enabled.v2"
+  },
+  "serviceGroups": {
+    "playableRepresentatives": 15,
+    "KTX": {
+      "lineNumber": 10,
+      "courses": 10
+    },
+    "SRT": {
+      "lineNumber": 23,
+      "courses": 5
+    },
+    "legacyStandaloneHighSpeedLinesRemoved": [11, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27],
+    "transferChipLabels": ["KTX", "SRT"]
+  },
+  "preserved": {
+    "highSpeedCourses": 15,
+    "bidirectionalRouteData": true,
+    "courseSpecificTrainMedia": true,
+    "courseSpecificHistory": true
+  }
+}
