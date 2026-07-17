@@ -1,0 +1,35 @@
+{
+  "version": "29.0.0",
+  "asOf": "2026-07-16",
+  "coordinateSystem": "WGS84 / EPSG:4326",
+  "routes": {
+    "GTX-A:full": 11,
+    "GTX-B:full": 14,
+    "GTX-C:main": 13,
+    "GTX-C:sangnoksu": 12
+  },
+  "uniqueStations": {
+    "GTX-A": 11,
+    "GTX-B": 14,
+    "GTX-C": 14
+  },
+  "crossLineTransfers": {
+    "GTX-A/GTX-B": ["서울역"],
+    "GTX-A/GTX-C": ["삼성"],
+    "GTX-B/GTX-C": ["청량리"]
+  },
+  "checks": {
+    "finiteCoordinates": true,
+    "endpointsMatchCourse": true,
+    "twoDirectionsPerCourse": true,
+    "gtxWaterIntersections": [],
+    "pajuBoundaryLoaded": true,
+    "catalogCardsPlayable": true,
+    "infiniteModeListsAllGtxLines": true
+  },
+  "notes": [
+    "Planned station coordinates are learning-map references, not construction survey points.",
+    "GTX-B and GTX-C remain clearly labeled as planned simulations.",
+    "GTX-A Changneung and Samseong are distinguished from open stations."
+  ]
+}

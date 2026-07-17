@@ -1,0 +1,40 @@
+line,course,code,name,en,lat,lng,status,coordinate_note
+GTX-A,full,A01,운정중앙,Unjeong Jungang,37.716670,126.728330,open,station_reference
+GTX-A,full,A02,킨텍스,KINTEX,37.665000,126.748060,open,station_reference
+GTX-A,full,A03,대곡,Daegok,37.631626,126.811024,open,existing_station_reference
+GTX-A,full,A04,창릉,Changneung,37.622000,126.880000,planned,design_reference_not_survey
+GTX-A,full,A05,연신내,Yeonsinnae,37.618855,126.920859,open,existing_station_reference
+GTX-A,full,A06,서울역,Seoul Station,37.555980,126.972091,open,existing_station_reference
+GTX-A,full,A07,삼성,Samseong,37.508827,127.063203,passThrough,planned_station_reference
+GTX-A,full,A08,수서,Suseo,37.487507,127.101324,open,existing_station_reference
+GTX-A,full,A09,성남,Seongnam,37.394720,127.119440,open,station_reference
+GTX-A,full,A10,구성,Guseong,37.298977,127.105696,open,existing_station_reference
+GTX-A,full,A11,동탄,Dongtan,37.199300,127.097040,open,station_reference
+GTX-B,full,B01,인천대입구,Incheon National University,37.385900,126.639000,planned,existing_station_reference
+GTX-B,full,B02,인천시청,Incheon City Hall,37.457611,126.700016,planned,existing_station_reference
+GTX-B,full,B03,부평,Bupyeong,37.489449,126.724331,planned,existing_station_reference
+GTX-B,full,B04,부천종합운동장,Bucheon Stadium,37.505380,126.797350,planned,existing_station_reference
+GTX-B,full,B05,신도림,Sindorim,37.508908,126.891313,planned,existing_station_reference
+GTX-B,full,B06,여의도,Yeouido,37.521578,126.924318,planned,existing_station_reference
+GTX-B,full,B07,용산,Yongsan,37.529774,126.964630,planned,existing_station_reference
+GTX-B,full,B08,서울역,Seoul Station,37.555980,126.972091,planned,existing_station_reference
+GTX-B,full,B09,청량리,Cheongnyangni,37.580039,127.044727,planned,existing_station_reference
+GTX-B,full,B10,상봉,Sangbong,37.595673,127.085708,planned,existing_station_reference
+GTX-B,full,B11,별내,Byeollae,37.642320,127.127600,planned,existing_station_reference
+GTX-B,full,B12,왕숙,Wangsuk,37.650000,127.166000,planned,design_reference_not_survey
+GTX-B,full,B13,평내호평,Pyeongnae Hopyeong,37.653330,127.243610,planned,existing_station_reference
+GTX-B,full,B14,마석,Maseok,37.652220,127.312220,planned,existing_station_reference
+GTX-C,shared,C01,덕정,Deokjeong,37.843188,127.061559,planned,existing_station_reference
+GTX-C,shared,C02,의정부,Uijeongbu,37.738362,127.045957,planned,existing_station_reference
+GTX-C,shared,C03,창동,Chang-dong,37.653339,127.047645,planned,existing_station_reference
+GTX-C,shared,C04,광운대,Kwangwoon University,37.623837,127.061695,planned,existing_station_reference
+GTX-C,shared,C05,청량리,Cheongnyangni,37.580039,127.044727,planned,existing_station_reference
+GTX-C,shared,C06,왕십리,Wangsimni,37.561159,127.035505,planned,existing_station_reference
+GTX-C,shared,C07,삼성,Samseong,37.508827,127.063203,planned,existing_station_reference
+GTX-C,shared,C08,양재,Yangjae,37.484660,127.035130,planned,existing_station_reference
+GTX-C,shared,C09,정부과천청사,Government Complex Gwacheon,37.426513,126.989780,planned,existing_station_reference
+GTX-C,shared,C10,인덕원,Indeogwon,37.401901,126.976708,planned,existing_station_reference
+GTX-C,shared,C11,금정,Geumjeong,37.372337,126.943271,planned,existing_station_reference
+GTX-C,main,C12,의왕,Uiwang,37.320342,126.947977,planned,existing_station_reference
+GTX-C,main,C13,수원,Suwon,37.265682,127.000050,planned,existing_station_reference
+GTX-C,branch,C14,상록수,Sangnoksu,37.302802,126.866178,planned,existing_station_reference

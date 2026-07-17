@@ -1,0 +1,37 @@
+{
+  "version": "29.1.0",
+  "boundaryDate": "2026-04-01",
+  "coordinateSystem": "WGS84 / EPSG:4326",
+  "source": "Statistics Korea SGIS; modified by vuski/admdongkor",
+  "sourceFeature": {
+    "sggcd": "41480",
+    "name": "파주시",
+    "areaSquareMeters": 685757968.0491061
+  },
+  "geometry": {
+    "type": "Polygon",
+    "oldVertexCount": 19,
+    "newVertexCount": 289,
+    "closedRing": true,
+    "bounds": {
+      "minLng": 126.659349,
+      "maxLng": 127.017044,
+      "minLat": 37.689113,
+      "maxLat": 38.004687
+    },
+    "oldApproxAreaSquareKm": 934.21,
+    "newApproxAreaSquareKm": 682.42,
+    "pajuPublishedAreaSquareKm": 674.4
+  },
+  "topologyChecks": {
+    "unjeongJungangInside": true,
+    "closestPajuGoyangSeamMeters": 4.34,
+    "pajuVerticesWithin50mOfGoyang": 13,
+    "runtimeFeatureLoaded": true
+  },
+  "license": {
+    "upstream": "KOGL Type 1",
+    "modifiedDataset": "CC BY 4.0"
+  },
+  "disclaimer": "Learning-map geometry; not for cadastral, survey, or legal boundary decisions."
+}

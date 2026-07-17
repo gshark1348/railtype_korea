@@ -1,7 +1,7 @@
 /*
  * METROTYPE SEOUL 노선 데이터
  * 좌표계: WGS84 위도·경도
- * 1호선은 네 개의 대표 광역 운행축, 2호선은 순환·지선, 3호선은 종착역별 운행으로 구성합니다.
+ * 수도권 전철·GTX와 KTX 경부·호남고속선의 대표 주행축을 구성합니다.
  */
 window.METRO_LINES = {
   1: {
@@ -816,6 +816,128 @@ window.METRO_LINES = {
       "봉은사", "종합운동장", "석촌", "올림픽공원", "중앙보훈병원"
     ]
   },
+  10: {
+    number: "K",
+    code: "KTX",
+    name: "KTX 경부고속선",
+    color: "#1B5EAA",
+    darkColor: "#0B3F78",
+    softColor: "rgba(27,94,170,.16)",
+    areaLabel: "NATIONAL HIGH-SPEED RAIL",
+    heroRegion: "대한민국 위에",
+    train: {
+      src: "./assets/trains/ktx-gyeongbu.jpg",
+      alt: "KTX-I 고속열차가 고속철도 선로를 주행하는 모습",
+      caption: "KTX-I 고속열차",
+      credit: "Subway06 · Wikimedia Commons",
+      license: "CC BY 3.0",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:KTX_(Korea_Train_eXpress).jpg"
+    },
+    history: {
+      period: "1989 — 2022",
+      summary: "경부고속철도는 서울과 부산을 고속철도로 연결하기 위해 추진된 대한민국의 핵심 철도 인프라입니다. 1992년 공사를 시작해 2004년 서울–동대구 1단계와 기존 경부선 연계 구간을 개통했고, 2010년 동대구–부산 2단계 개통으로 전 구간 고속선 운행 체계를 완성했습니다. 이후 대전·대구 도심 구간과 서대구역이 차례로 문을 열며 현재의 경부고속축이 형성되었습니다.",
+      events: [
+        { year: "1989.05", label: "고속철도 추진 방침", detail: "정부가 서울–부산 간 고속철도 건설 추진 방침을 결정하며 국가 고속철도 사업이 본격화되었습니다." },
+        { year: "1990.06", label: "기본계획 확정", detail: "경부고속철도 노선과 단계별 건설 방향을 담은 기본계획이 확정되었습니다." },
+        { year: "1992.06", label: "경부고속철도 착공", detail: "천안아산 시험선 구간을 시작으로 경부고속철도 건설 공사가 시작되었습니다." },
+        { year: "2004.04.01", label: "KTX 상업 운행 시작", detail: "서울–동대구 고속선 1단계와 동대구–부산 기존선 연계 운행이 개통하며 KTX 상업 운행이 시작되었습니다." },
+        { year: "2010.11.01", label: "동대구–부산 2단계 개통", detail: "동대구에서 경주·울산을 거쳐 부산까지 이어지는 고속선이 개통해 경부고속철도 2단계가 완성되었습니다." },
+        { year: "2015.08.01", label: "대전·대구 도심 구간 개통", detail: "대전과 대구 도심 통과 구간이 고속선으로 연결되어 운행 동선과 선로 용량이 개선되었습니다." },
+        { year: "2022.03.31", label: "서대구역 개통", detail: "대구 서부권의 고속철도 접근성을 높이는 서대구역이 개통했습니다." }
+      ],
+      sources: [
+        { name: "국가철도공단 · 경부고속철도 건설 연혁", url: "https://www.kr.or.kr/sub/info.do?m=05010201" },
+        { name: "한국철도공사 · 철도 노선도", url: "https://info.korail.com/info/contents.do?key=1005" },
+        { name: "공공데이터포털 · 국가철도공단 역사정보", url: "https://www.data.go.kr/data/15093755/fileData.do" },
+        { name: "Wikimedia Commons · KTX-I 사진", url: "https://commons.wikimedia.org/wiki/File:KTX_(Korea_Train_eXpress).jpg" }
+      ]
+    },
+    courses: {
+      main: {
+        id: "main",
+        name: "경부고속선 대표 정차축",
+        subtitle: "서울에서 대전·대구·경주·울산을 지나 부산까지",
+        start: "서울",
+        end: "부산",
+        mapBounds: { minLng: 125.9, maxLng: 129.6, minLat: 33.0, maxLat: 38.7 },
+        cornerLabels: { northWest: "SEOUL", southEast: "BUSAN" },
+        mapLabels: [
+          { text: "SEOUL", lng: 126.78, lat: 37.70 },
+          { text: "DAEJEON", lng: 127.18, lat: 36.25, muted: true },
+          { text: "DAEGU", lng: 128.36, lat: 35.95, muted: true },
+          { text: "GYEONGJU · ULSAN", lng: 129.34, lat: 35.70, muted: true },
+          { text: "BUSAN", lng: 129.22, lat: 35.02 }
+        ],
+        directions: [
+          { id: "busan", name: "부산행", destination: "부산", subtitle: "서울 출발 · 부산 종착", mode: "forward" },
+          { id: "seoul", name: "서울행", destination: "서울", subtitle: "부산 출발 · 서울 종착", mode: "reverse" }
+        ],
+        stations: window.KTX_GYEONGBU_ROUTES.main
+      }
+    },
+    majorStations: ["서울", "광명", "천안아산", "오송", "대전", "김천구미", "서대구", "동대구", "경주", "울산", "부산"]
+  },
+  11: {
+    number: "K",
+    code: "KTX-HN",
+    name: "KTX 호남고속선",
+    color: "#2D68B2",
+    darkColor: "#163E70",
+    softColor: "rgba(45,104,178,.16)",
+    areaLabel: "HONAM HIGH-SPEED RAIL",
+    heroRegion: "대한민국 서남축 위에",
+    train: {
+      src: "./assets/trains/ktx-honam.jpg",
+      alt: "KTX-I 고속열차가 고속철도 선로를 주행하는 모습",
+      caption: "KTX-I 고속열차",
+      credit: "Subway06 · Wikimedia Commons",
+      license: "CC BY 3.0",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:KTX_(Korea_Train_eXpress).jpg"
+    },
+    history: {
+      period: "2006 — 현재",
+      summary: "호남고속철도는 수도권과 충청·호남권을 빠르게 연결하는 대한민국의 두 번째 고속철도 축입니다. 2006년 기본계획이 확정되고 2009년 오송–광주송정 구간 공사가 시작되어 2015년 1단계가 개통했습니다. 현재 KTX는 광주송정 이후 기존 호남선을 따라 나주와 목포까지 운행하며, 고막원–목포 구간을 포함한 2단계 사업이 진행 중입니다.",
+      events: [
+        { year: "2006.08.28", label: "건설기본계획 확정", detail: "오송에서 광주송정과 목포 방향으로 이어지는 호남고속철도 건설기본계획이 확정·고시되었습니다." },
+        { year: "2009.05.22", label: "오송–광주송정 착공", detail: "오송–광주송정 구간의 노반 공사가 시작되며 호남고속철도 1단계 건설이 본격화되었습니다." },
+        { year: "2015.04.02", label: "1단계 개통", detail: "오송–공주–익산–정읍–광주송정을 잇는 호남고속철도 1단계가 개통해 수도권과 광주 사이 이동 시간이 크게 단축되었습니다." },
+        { year: "2019.06", label: "광주송정–고막원 고속화", detail: "광주송정–고막원 기존선 고속화 구간이 사용을 시작해 나주·목포 방향 운행 기반이 개선되었습니다." },
+        { year: "2020.12", label: "고막원–목포 공사 착수", detail: "호남고속철도 2단계의 고막원–목포 구간 공사가 시작되었습니다." },
+        { year: "2026.03", label: "2단계 사업 진행", detail: "국가철도공단 공개 현황 기준 호남고속철도 사업이 계속 진행 중이며, 향후 무안국제공항을 경유해 목포까지 고속철도 축을 확장할 예정입니다." }
+      ],
+      sources: [
+        { name: "국가철도공단 · 호남고속철도 사업현황", url: "https://www.kr.or.kr/sub/info.do?m=05010202" },
+        { name: "한국철도공사 · 열차시간표·노선도", url: "https://info.korail.com/info/contents.do?key=857" },
+        { name: "공공데이터포털 · 국가철도공단 철도역 정보", url: "https://www.data.go.kr/data/15067652/fileData.do" },
+        { name: "Wikimedia Commons · KTX-I 사진", url: "https://commons.wikimedia.org/wiki/File:KTX_(Korea_Train_eXpress).jpg" }
+      ]
+    },
+    courses: {
+      main: {
+        id: "main",
+        name: "호남고속축 대표 정차 코스",
+        subtitle: "용산에서 공주·익산·광주송정을 지나 목포까지",
+        start: "용산",
+        end: "목포",
+        mapBounds: { minLng: 125.9, maxLng: 129.6, minLat: 33.0, maxLat: 38.7 },
+        cornerLabels: { northWest: "YONGSAN", southEast: "MOKPO" },
+        mapLabels: [
+          { text: "YONGSAN", lng: 126.75, lat: 37.70 },
+          { text: "OSONG", lng: 127.48, lat: 36.72, muted: true },
+          { text: "GONGJU", lng: 126.85, lat: 36.28, muted: true },
+          { text: "IKSAN · JEONGEUP", lng: 126.55, lat: 35.72, muted: true },
+          { text: "GWANGJU · NAJU", lng: 126.55, lat: 35.12, muted: true },
+          { text: "MOKPO", lng: 126.18, lat: 34.68 }
+        ],
+        directions: [
+          { id: "mokpo", name: "목포행", destination: "목포", subtitle: "용산 출발 · 목포 종착", mode: "forward" },
+          { id: "yongsan", name: "용산행", destination: "용산", subtitle: "목포 출발 · 용산 종착", mode: "reverse" }
+        ],
+        stations: window.KTX_HONAM_ROUTES.main
+      }
+    },
+    majorStations: ["용산", "광명", "천안아산", "오송", "공주", "익산", "정읍", "광주송정", "나주", "목포"]
+  },
   12: {
     number: "수",
     code: "SUIN-BUNDANG",
@@ -897,6 +1019,197 @@ window.METRO_LINES = {
       }
     },
     majorStations: ["청량리", "왕십리", "서울숲", "강남구청", "선정릉", "선릉", "수서", "복정", "모란", "이매", "서현", "정자", "미금", "죽전", "기흥", "영통", "수원시청", "수원", "한대앞", "중앙", "초지", "안산", "오이도", "소래포구", "원인재", "인하대", "신포", "인천"]
+  },
+  13: {
+    number: "A",
+    code: "GTX-A",
+    name: "GTX-A",
+    color: "#8A3FFC",
+    darkColor: "#5D24B7",
+    softColor: "rgba(138,63,252,.16)",
+    areaLabel: "CAPITAL EXPRESS · A",
+    heroRegion: "수도권 남북을 빠르게",
+    train: {
+      src: "./assets/trains/gtx-a.jpg",
+      alt: "GTX-A A702 전동차 선두부 실제 사진",
+      caption: "GTX-A A702 전동차 · 실제 차량",
+      credit: "Trainholic · Wikimedia Commons",
+      license: "CC BY-SA 4.0",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:GTX-A_Class_A702.jpg"
+    },
+    history: {
+      period: "2018 — 2030",
+      summary: "GTX-A는 운정중앙에서 서울 도심과 수서·성남·용인을 지나 동탄을 잇는 수도권광역급행철도입니다. 2024년 수서–동탄과 운정중앙–서울역이 차례로 개통했고, 이 코스는 개통역에 창릉·삼성 계획역까지 더한 전 구간 학습용 노선입니다.",
+      events: [
+        { year: "2018.12", label: "민자 구간 착공", detail: "파주 운정–서울 삼성 구간 건설이 시작되었습니다." },
+        { year: "2024.03.30", label: "수서–동탄 개통", detail: "수서·성남·구성·동탄을 잇는 남쪽 구간이 먼저 운행을 시작했습니다." },
+        { year: "2024.12.28", label: "운정중앙–서울역 개통", detail: "운정중앙에서 킨텍스·대곡·연신내를 거쳐 서울역까지 북쪽 구간이 개통했습니다." },
+        { year: "2025.03", label: "창릉역 공사 시작", detail: "고양 창릉지구의 추가 정거장 공사가 시작되었으며 2030년 개통을 목표로 합니다." },
+        { year: "2026.06", label: "서울역–수서 연결", detail: "삼성역을 정차하지 않고 통과해 북쪽과 남쪽 구간이 하나의 운행축으로 이어졌습니다." },
+        { year: "2028–2030", label: "삼성·창릉 계획", detail: "삼성역과 창릉역의 단계적 개통이 계획되어 있으며 사업 일정은 변경될 수 있습니다." }
+      ],
+      sources: [
+        { name: "GTX-A 공식 홈페이지", url: "https://www.gtx-a.com/" },
+        { name: "경기도 · GTX 추진 현황", url: "https://www.gg.go.kr/contents/contents.do?ciIdx=497&menuId=1850" },
+        { name: "국토교통부 · GTX-A 정책자료", url: "https://www.molit.go.kr/" }
+      ]
+    },
+    courses: {
+      full: {
+        id: "full",
+        name: "운정중앙 · 동탄 전 구간",
+        subtitle: "개통 구간과 창릉·삼성 계획역을 포함한 11개 역 학습 코스",
+        start: "운정중앙",
+        end: "동탄",
+        mapBounds: { minLng: 126.68, maxLng: 127.16, minLat: 37.15, maxLat: 37.76 },
+        cornerLabels: { northWest: "UNJEONG", southEast: "DONGTAN" },
+        mapLabels: [
+          { text: "PAJU · GOYANG", lng: 126.77, lat: 37.70 },
+          { text: "SEOUL", lng: 126.99, lat: 37.57 },
+          { text: "SEONGNAM · YONGIN", lng: 127.11, lat: 37.35, muted: true },
+          { text: "DONGTAN", lng: 127.10, lat: 37.19, muted: true }
+        ],
+        directions: [
+          { id: "dongtan", name: "동탄행", destination: "동탄", subtitle: "운정중앙 출발 · 동탄 종착", mode: "forward" },
+          { id: "unjeong", name: "운정중앙행", destination: "운정중앙", subtitle: "동탄 출발 · 운정중앙 종착", mode: "reverse" }
+        ],
+        stations: window.GTX_ROUTES.a.full
+      }
+    },
+    majorStations: ["운정중앙", "대곡", "연신내", "서울역", "삼성", "수서", "성남", "구성", "동탄"]
+  },
+  14: {
+    number: "B",
+    code: "GTX-B",
+    name: "GTX-B",
+    color: "#0067A0",
+    darkColor: "#004A75",
+    softColor: "rgba(0,103,160,.16)",
+    areaLabel: "CAPITAL EXPRESS · B",
+    heroRegion: "인천에서 남양주까지",
+    train: {
+      status: "planned",
+      caption: "GTX-B · 개통 예정",
+      plannedDescription: "영업 운행 차량이 없어 실제 사진을 표시하지 않습니다.",
+      credit: "경기도 GTX 추진 현황",
+      license: "개통 예정",
+      sourceUrl: "https://www.gg.go.kr/contents/contents.do?ciIdx=497&menuId=1850"
+    },
+    history: {
+      period: "2019 — 2030",
+      summary: "GTX-B는 인천대입구에서 부평·여의도·용산·서울역·청량리를 지나 남양주 마석까지 잇는 14개 역 계획 노선입니다. 아직 건설 단계이므로 이 코스는 공식 사업계획을 바탕으로 만든 사전 학습 시뮬레이션입니다.",
+      events: [
+        { year: "2019.08", label: "예비타당성조사 통과", detail: "인천 송도에서 서울 도심을 거쳐 남양주까지 잇는 사업의 추진 기반이 마련되었습니다." },
+        { year: "2022.03", label: "기본계획 고시", detail: "인천대입구–마석 82.7km, 14개 정거장의 기본 노선이 확정되었습니다." },
+        { year: "2024–2025", label: "재정·민자 구간 추진", detail: "용산–상봉 재정구간과 인천대입구–용산·상봉–마석 민자구간이 설계·공사 단계로 들어갔습니다." },
+        { year: "2030 목표", label: "전 구간 개통 목표", detail: "경기도 추진 현황 기준 목표이며 실제 일정과 역 계획은 사업 진행에 따라 달라질 수 있습니다." }
+      ],
+      sources: [
+        { name: "국토교통부 · GTX-B 기본계획", url: "https://www.molit.go.kr/" },
+        { name: "경기도 · GTX 추진 현황", url: "https://www.gg.go.kr/contents/contents.do?ciIdx=497&menuId=1850" },
+        { name: "인천광역시 · GTX-B 사업 현황", url: "https://www.incheon.go.kr/IC010205/view?curPage=6&repSeq=DOM_0000000012858612" }
+      ]
+    },
+    courses: {
+      full: {
+        id: "full",
+        name: "인천대입구 · 마석 전 구간",
+        subtitle: "공식 기본계획 14개 역을 잇는 GTX-B 계획 노선 학습 코스",
+        start: "인천대입구",
+        end: "마석",
+        mapBounds: { minLng: 126.60, maxLng: 127.34, minLat: 37.35, maxLat: 37.70 },
+        cornerLabels: { northWest: "INCHEON", southEast: "MASEOK" },
+        mapLabels: [
+          { text: "INCHEON", lng: 126.66, lat: 37.43 },
+          { text: "SEOUL", lng: 126.99, lat: 37.57 },
+          { text: "NAMYANGJU", lng: 127.22, lat: 37.66, muted: true }
+        ],
+        directions: [
+          { id: "maseok", name: "마석행", destination: "마석", subtitle: "인천대입구 출발 · 마석 종착", mode: "forward" },
+          { id: "incheon", name: "인천대입구행", destination: "인천대입구", subtitle: "마석 출발 · 인천대입구 종착", mode: "reverse" }
+        ],
+        stations: window.GTX_ROUTES.b.full
+      }
+    },
+    majorStations: ["인천대입구", "부평", "부천종합운동장", "신도림", "여의도", "용산", "서울역", "청량리", "상봉", "마석"]
+  },
+  15: {
+    number: "C",
+    code: "GTX-C",
+    name: "GTX-C",
+    color: "#5B8C3A",
+    darkColor: "#3E6526",
+    softColor: "rgba(91,140,58,.16)",
+    areaLabel: "CAPITAL EXPRESS · C",
+    heroRegion: "덕정에서 수원·상록수까지",
+    train: {
+      status: "planned",
+      caption: "GTX-C · 개통 예정",
+      plannedDescription: "영업 운행 차량이 없어 실제 사진을 표시하지 않습니다.",
+      credit: "경기도 GTX 추진 현황",
+      license: "개통 예정",
+      sourceUrl: "https://www.gg.go.kr/contents/contents.do?ciIdx=497&menuId=1850"
+    },
+    history: {
+      period: "2018 — 2028",
+      summary: "GTX-C는 양주 덕정에서 서울 동북권과 강남을 지나 수원까지 이어지고 금정에서 상록수로 분기하는 14개 역 계획 노선입니다. 이 게임은 수원 본선과 상록수 분기를 각각 연습할 수 있는 사전 학습 코스를 제공합니다.",
+      events: [
+        { year: "2018.12", label: "예비타당성조사 통과", detail: "덕정–수원 광역급행철도 사업의 경제성과 정책성이 인정되었습니다." },
+        { year: "2020.12", label: "시설사업기본계획 고시", detail: "민간투자 방식의 노선과 사업 조건이 구체화되었습니다." },
+        { year: "2023.08", label: "실시협약 체결", detail: "사업 시행을 위한 실시협약이 체결되고 후속 절차가 진행되었습니다." },
+        { year: "2024.01", label: "착공 기념식", detail: "의정부에서 사업 착공을 알리는 기념식이 열렸습니다." },
+        { year: "2026.04", label: "사업비 협의 진전", detail: "총사업비 쟁점 협의가 진전되어 후속 공정 추진 기반이 마련되었습니다." },
+        { year: "2028 목표", label: "전 구간 개통 목표", detail: "경기도 추진 현황 기준 목표이며 실제 일정은 후속 공정에 따라 달라질 수 있습니다." }
+      ],
+      sources: [
+        { name: "국토교통부 · GTX-C 추진 자료", url: "https://www.molit.go.kr/USR/NEWS/m_71/dtl.jsp?id=95091856" },
+        { name: "경기도 · GTX 추진 현황", url: "https://www.gg.go.kr/contents/contents.do?ciIdx=497&menuId=1850" },
+        { name: "의왕시 · GTX-C 노선 안내", url: "https://www.uiwang.go.kr/GTXC" }
+      ]
+    },
+    courses: {
+      main: {
+        id: "main",
+        name: "덕정 · 수원 본선",
+        subtitle: "서울 도심과 강남·과천·의왕을 잇는 13개 역 계획 코스",
+        start: "덕정",
+        end: "수원",
+        mapBounds: { minLng: 126.90, maxLng: 127.12, minLat: 37.22, maxLat: 37.88 },
+        cornerLabels: { northWest: "DEOKJEONG", southEast: "SUWON" },
+        mapLabels: [
+          { text: "YANGJU · UIJEONGBU", lng: 127.06, lat: 37.78 },
+          { text: "SEOUL", lng: 127.05, lat: 37.57 },
+          { text: "GWACHEON", lng: 126.99, lat: 37.43, muted: true },
+          { text: "SUWON", lng: 127.00, lat: 37.27, muted: true }
+        ],
+        directions: [
+          { id: "suwon", name: "수원행", destination: "수원", subtitle: "덕정 출발 · 수원 종착", mode: "forward" },
+          { id: "deokjeong", name: "덕정행", destination: "덕정", subtitle: "수원 출발 · 덕정 종착", mode: "reverse" }
+        ],
+        stations: window.GTX_ROUTES.c.main
+      },
+      sangnoksu: {
+        id: "sangnoksu",
+        name: "덕정 · 상록수 분기",
+        subtitle: "금정에서 안산 상록수로 이어지는 12개 역 계획 코스",
+        start: "덕정",
+        end: "상록수",
+        mapBounds: { minLng: 126.82, maxLng: 127.12, minLat: 37.26, maxLat: 37.88 },
+        cornerLabels: { northWest: "DEOKJEONG", southEast: "SANGNOKSU" },
+        mapLabels: [
+          { text: "YANGJU · UIJEONGBU", lng: 127.06, lat: 37.78 },
+          { text: "SEOUL", lng: 127.05, lat: 37.57 },
+          { text: "GWACHEON", lng: 126.99, lat: 37.43, muted: true },
+          { text: "SANGNOKSU", lng: 126.87, lat: 37.30, muted: true }
+        ],
+        directions: [
+          { id: "sangnoksu", name: "상록수행", destination: "상록수", subtitle: "덕정 출발 · 상록수 종착", mode: "forward" },
+          { id: "deokjeong", name: "덕정행", destination: "덕정", subtitle: "상록수 출발 · 덕정 종착", mode: "reverse" }
+        ],
+        stations: window.GTX_ROUTES.c.sangnoksu
+      }
+    },
+    majorStations: ["덕정", "의정부", "창동", "광운대", "청량리", "왕십리", "삼성", "양재", "정부과천청사", "인덕원", "금정", "수원", "상록수"]
   }
 
 };

@@ -1,0 +1,42 @@
+{
+  "version": "30.0",
+  "asOf": "2026-07-16",
+  "coordinateSystem": "WGS84 / EPSG:4326",
+  "playableLines": 27,
+  "highSpeedCatalogLines": 14,
+  "newLines": 12,
+  "newCourses": 13,
+  "newLineNumbers": [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27],
+  "routes": [
+    { "line": 16, "name": "KTX 강릉선", "courses": { "gangneung": 10, "donghae": 12 } },
+    { "line": 17, "name": "KTX-이음 중앙선", "courses": { "main": 15 } },
+    { "line": 18, "name": "KTX-이음 중부내륙선", "courses": { "main": 10 } },
+    { "line": 19, "name": "KTX 전라선", "courses": { "main": 13 } },
+    { "line": 20, "name": "KTX 경전선", "courses": { "main": 14 } },
+    { "line": 21, "name": "KTX 동해선(포항)", "courses": { "main": 9 } },
+    { "line": 22, "name": "KTX-이음 동해선(강릉–부전)", "courses": { "main": 11 } },
+    { "line": 23, "name": "SRT 경부선", "courses": { "main": 12 } },
+    { "line": 24, "name": "SRT 호남선", "courses": { "main": 11 } },
+    { "line": 25, "name": "SRT 전라선", "courses": { "main": 14 } },
+    { "line": 26, "name": "SRT 경전선", "courses": { "main": 15 } },
+    { "line": 27, "name": "SRT 동해선", "courses": { "main": 10 } }
+  ],
+  "checks": {
+    "javascriptSyntax": "PASS",
+    "routeCards": "PASS",
+    "bidirectionalCourses": "PASS",
+    "nationalBoundary": "PASS",
+    "infiniteModeRegistration": "PASS",
+    "sharedStationTransfers": "PASS",
+    "staticReferences": "PASS",
+    "browserConsoleErrors": 0
+  },
+  "sources": [
+    "https://info.korail.com/info/selectBbsNttView.do?bbsNo=199&integrDeptCode=&key=911&nttNo=24441",
+    "https://info.korail.com/info/selectBbsNttView.do?bbsNo=199&key=911&nttNo=25981",
+    "https://www.srail.or.kr/cms/archive.do?pageId=KR0405000000",
+    "https://www.srail.or.kr/cms/article/view.do?pageId=KR0502000000&postNo=1009",
+    "https://www.data.go.kr/data/15127532/fileData.do"
+  ],
+  "note": "대표 정차 코스이며 실제 열차별 정차역은 시간표에 따라 다릅니다."
+}

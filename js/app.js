@@ -742,6 +742,8 @@
     "8:byeollaeMoran": ["namyangju", "guri", "seoul", "seongnam"],
     "9:local": ["seoul"],
     "9:express": ["seoul"],
+    "10:main": ["southKorea"],
+    "11:main": ["southKorea"],
     "12:full": ["seoul", "seongnam", "yongin", "suwon", "hwaseong", "ansan", "siheung", "incheon"],
     "12:regular": ["seoul", "seongnam", "yongin", "suwon", "hwaseong", "ansan", "siheung", "incheon"],
   };
@@ -2158,8 +2160,19 @@
 
     const train = LINE_CONFIG.train || {};
     const trainImage = $("routeTrainImage");
-    trainImage.src = train.src || "";
-    trainImage.alt = train.alt || `${LINE_CONFIG.name} 전동차`;
+    const trainImageWrap = trainImage.closest(".route-train-image-wrap");
+    const plannedTrain = $("routeTrainPlanned");
+    const isPlannedTrain = train.status === "planned";
+    trainImageWrap?.classList.toggle("is-planned", isPlannedTrain);
+    trainImage.hidden = isPlannedTrain;
+    plannedTrain.hidden = !isPlannedTrain;
+    if (isPlannedTrain) {
+      trainImage.removeAttribute("src");
+      $("routeTrainPlannedDescription").textContent = train.plannedDescription || "영업 운행 차량 사진은 개통 후 제공됩니다.";
+    } else {
+      trainImage.src = train.src || "";
+      trainImage.alt = train.alt || `${LINE_CONFIG.name} 전동차`;
+    }
     $("routeTrainCaption").textContent = train.caption || `${LINE_CONFIG.name} 전동차`;
     const trainCredit = $("routeTrainCredit");
     trainCredit.href = train.sourceUrl || "https://commons.wikimedia.org/";
@@ -2457,12 +2470,20 @@
       title: "고속철도",
       description: "KTX·SRT로 연결되는 대한민국 고속철도 간선",
       lines: [
-        { id: "ktx-gyeongbu", symbol: "K", name: "KTX 경부고속선", detail: "서울·대전·동대구·경주·울산·부산", color: "#1B5EAA" },
-        { id: "ktx-honam", symbol: "K", name: "KTX 호남고속선", detail: "용산·공주·익산·광주송정·목포", color: "#2D68B2" },
-        { id: "ktx-gangneung", symbol: "K", name: "KTX 강릉선", detail: "서울·청량리·강릉", color: "#2D74DA" },
-        { id: "ktx-eum", symbol: "이", name: "KTX-이음 중앙선", detail: "청량리·원주·안동·부전", color: "#2C7A7B" },
-        { id: "srt-gyeongbu", symbol: "S", name: "SRT 경부선", detail: "수서·대전·동대구·부산", color: "#7A0019" },
-        { id: "srt-honam", symbol: "S", name: "SRT 호남선", detail: "수서·익산·광주송정·목포", color: "#7A0019" }
+        { id: "ktx-gyeongbu", symbol: "K", name: "KTX 경부고속선", detail: "서울·대전·동대구·경주·울산·부산", color: "#1B5EAA", lineNumber: 10 },
+        { id: "ktx-honam", symbol: "K", name: "KTX 호남고속선", detail: "용산·공주·익산·광주송정·목포", color: "#2D68B2", lineNumber: 11 },
+        { id: "ktx-gangneung", symbol: "K", name: "KTX 강릉선", detail: "서울·청량리·강릉·동해", color: "#2878C8", lineNumber: 16 },
+        { id: "ktx-eum-jungang", symbol: "이", name: "KTX-이음 중앙선", detail: "청량리·원주·안동·부전", color: "#178A8A", lineNumber: 17 },
+        { id: "ktx-eum-jungbunaeryuk", symbol: "이", name: "KTX-이음 중부내륙선", detail: "판교·충주·수안보·문경", color: "#2F8F6B", lineNumber: 18 },
+        { id: "ktx-jeolla", symbol: "K", name: "KTX 전라선", detail: "용산·전주·순천·여수엑스포", color: "#436FB3", lineNumber: 19 },
+        { id: "ktx-gyeongjeon", symbol: "K", name: "KTX 경전선", detail: "서울·밀양·창원·진주", color: "#3F72A8", lineNumber: 20 },
+        { id: "ktx-donghae", symbol: "K", name: "KTX 동해선(포항)", detail: "서울·동대구·포항", color: "#346C9E", lineNumber: 21 },
+        { id: "ktx-eum-east-coast", symbol: "이", name: "KTX-이음 동해선", detail: "강릉·울진·포항·부전", color: "#0D7C9E", lineNumber: 22 },
+        { id: "srt-gyeongbu", symbol: "S", name: "SRT 경부선", detail: "수서·대전·동대구·부산", color: "#8A1733", lineNumber: 23 },
+        { id: "srt-honam", symbol: "S", name: "SRT 호남선", detail: "수서·익산·광주송정·목포", color: "#7A1838", lineNumber: 24 },
+        { id: "srt-jeolla", symbol: "S", name: "SRT 전라선", detail: "수서·전주·순천·여수엑스포", color: "#992447", lineNumber: 25 },
+        { id: "srt-gyeongjeon", symbol: "S", name: "SRT 경전선", detail: "수서·밀양·창원·진주", color: "#861B3A", lineNumber: 26 },
+        { id: "srt-donghae", symbol: "S", name: "SRT 동해선", detail: "수서·동대구·포항", color: "#75152F", lineNumber: 27 }
       ]
     },
     {
@@ -2565,10 +2586,13 @@
 
       group.lines.forEach((item) => {
         const playable = Number.isInteger(item.lineNumber) && Boolean(window.METRO_LINES[item.lineNumber]);
+        const openingPlanned = playable && window.METRO_LINES[item.lineNumber]?.train?.status === "planned";
         const journeyKeys = playable ? getLineJourneyKeys(item.lineNumber) : [];
         const completedJourneyCount = journeyKeys.filter((key) => cleared.has(key)).length;
         const lineCleared = playable && journeyKeys.length > 0 && completedJourneyCount === journeyKeys.length;
-        const status = lineCleared
+        const status = openingPlanned
+          ? "개통 예정"
+          : lineCleared
           ? "CLEARED"
           : playable
             ? `${completedJourneyCount}/${journeyKeys.length} ROUTES`
@@ -2576,7 +2600,7 @@
 
         const button = document.createElement("button");
         button.type = "button";
-        button.className = `network-line-card ${playable ? "playable" : "planned"} ${lineCleared ? "cleared" : ""} ${item.lineNumber === ACTIVE_LINE_NUMBER ? "selected" : ""}`;
+        button.className = `network-line-card ${playable ? "playable" : "planned"} ${openingPlanned ? "is-opening-planned" : ""} ${lineCleared ? "cleared" : ""} ${item.lineNumber === ACTIVE_LINE_NUMBER ? "selected" : ""}`;
         button.style.setProperty("--line-color", item.color);
         button.innerHTML = `
           <span class="network-line-symbol ${item.darkText ? "has-dark-text" : ""}">${escapeHtml(item.symbol)}</span>
@@ -2588,7 +2612,7 @@
         `;
 
         if (playable) {
-          button.setAttribute("aria-label", `${item.name} 주행 설정 열기`);
+          button.setAttribute("aria-label", `${item.name}${openingPlanned ? " 개통 예정 노선" : ""} 주행 설정 열기`);
           button.addEventListener("click", () => openRouteSetupForLine(item.lineNumber));
         } else {
           button.disabled = true;
@@ -3828,5 +3852,138 @@
     });
   };
 
+  // v29.0 GTX 확장. 기존 앱의 공통 노선·지도·환승 엔진에 A·B·C를 등록합니다.
+  function configureGtxV29() {
+    CITY_REGION_META.paju = { id: "paju", label: "파주시", en: "PAJU", short: "파주" };
+
+    Object.assign(COURSE_CITY_SEGMENTS, {
+      "13:full": [
+        { id: "paju", stations: ["운정중앙"] },
+        { id: "goyang", stations: ["킨텍스", "대곡", "창릉"] },
+        { id: "seoul", stations: ["연신내", "서울역", "삼성", "수서"] },
+        { id: "seongnam", stations: ["성남"] },
+        { id: "yongin", stations: ["구성"] },
+        { id: "hwaseong", stations: ["동탄"] }
+      ],
+      "14:full": [
+        { id: "incheon", stations: ["인천대입구", "인천시청", "부평"] },
+        { id: "bucheon", stations: ["부천종합운동장"] },
+        { id: "seoul", stations: ["신도림", "여의도", "용산", "서울역", "청량리", "상봉"] },
+        { id: "namyangju", stations: ["별내", "왕숙", "평내호평", "마석"] }
+      ],
+      "15:main": [
+        { id: "yangju", stations: ["덕정"] },
+        { id: "uijeongbu", stations: ["의정부"] },
+        { id: "seoul", stations: ["창동", "광운대", "청량리", "왕십리", "삼성", "양재"] },
+        { id: "gwacheon", stations: ["정부과천청사"] },
+        { id: "anyang", stations: ["인덕원"] },
+        { id: "gunpo", stations: ["금정"] },
+        { id: "uiwang", stations: ["의왕"] },
+        { id: "suwon", stations: ["수원"] }
+      ],
+      "15:sangnoksu": [
+        { id: "yangju", stations: ["덕정"] },
+        { id: "uijeongbu", stations: ["의정부"] },
+        { id: "seoul", stations: ["창동", "광운대", "청량리", "왕십리", "삼성", "양재"] },
+        { id: "gwacheon", stations: ["정부과천청사"] },
+        { id: "anyang", stations: ["인덕원"] },
+        { id: "gunpo", stations: ["금정"] },
+        { id: "ansan", stations: ["상록수"] }
+      ]
+    });
+
+    Object.assign(COURSE_REGION_IDS, {
+      "13:full": ["paju", "goyang", "seoul", "seongnam", "yongin", "hwaseong"],
+      "14:full": ["incheon", "bucheon", "seoul", "namyangju"],
+      "15:main": ["yangju", "uijeongbu", "seoul", "gwacheon", "anyang", "gunpo", "uiwang", "suwon"],
+      "15:sangnoksu": ["yangju", "uijeongbu", "seoul", "gwacheon", "anyang", "gunpo", "ansan"]
+    });
+
+    const gtxDistricts = {
+      운정중앙: "운정신도시", 킨텍스: "일산동구", 창릉: "덕양구", 성남: "분당구",
+      구성: "기흥구", 동탄: "동탄권", 인천대입구: "연수구", 인천시청: "남동구",
+      왕숙: "진건읍", 평내호평: "평내동", 마석: "화도읍", 덕정: "회천동",
+      의정부: "의정부동", 정부과천청사: "중앙동", 금정: "군포시", 의왕: "삼동"
+    };
+    Object.entries(gtxDistricts).forEach(([name, district]) => STATION_ADMIN_DISTRICTS.set(name, district));
+
+    Object.entries(window.GTX_CONTEXTS || {}).forEach(([lineNumber, contexts]) => {
+      Object.entries(contexts).forEach(([stationName, context]) => {
+        LINE_SPECIFIC_CONTEXTS[`${lineNumber}:${stationName}`] = context;
+      });
+    });
+
+    const gtxGroup = RAIL_NETWORK_CATALOG.find((group) => group.id === "gtx");
+    const gtxCatalog = {
+      "gtx-a": { lineNumber: 13, detail: "운정중앙–동탄 · 개통·계획역 11개" },
+      "gtx-b": { lineNumber: 14, detail: "인천대입구–마석 · 계획역 14개" },
+      "gtx-c": { lineNumber: 15, detail: "덕정–수원·상록수 · 계획 노선" }
+    };
+    gtxGroup?.lines.forEach((item) => Object.assign(item, gtxCatalog[item.id] || {}));
+
+    const originalTransferInfo = getTransferInfo;
+    getTransferInfo = (stationName) => {
+      const selected = originalTransferInfo(stationName);
+      const normalized = normalizeInfiniteStationName(stationName);
+      const dynamic = getPlayableLineNumbers()
+        .filter((lineNumber) => lineNumber !== ACTIVE_LINE_NUMBER)
+        .filter((lineNumber) => Object.values(window.METRO_LINES[lineNumber].courses || {}).some((course) =>
+          (course.stations || []).some((station) => normalizeInfiniteStationName(station.name) === normalized)
+        ))
+        .map((lineNumber) => {
+          const config = window.METRO_LINES[lineNumber];
+          return {
+            kind: config.code?.startsWith("GTX-") ? "gtx" : lineNumber <= 9 ? "subway" : "rail",
+            tag: config.code || String(config.number),
+            name: config.name
+          };
+        });
+      const names = new Set(dynamic.map((item) => item.name));
+      const base = selected.filter((item) => ![...names].some((name) => item.name.includes(name)));
+      return [...base, ...dynamic].filter((item, index, all) =>
+        all.findIndex((candidate) => `${candidate.kind}:${candidate.tag}:${candidate.name}` === `${item.kind}:${item.tag}:${item.name}`) === index
+      );
+    };
+
+    const originalTransferVisual = getTransferVisual;
+    getTransferVisual = (item) => ({
+      "GTX-A": { color: "#8A3FFC", icon: "A" },
+      "GTX-B": { color: "#0067A0", icon: "B" },
+      "GTX-C": { color: "#5B8C3A", icon: "C" }
+    })[item.tag] || originalTransferVisual(item);
+
+    const catalogDescription = document.querySelector(".line-select-copy > p");
+    if (catalogDescription) {
+      catalogDescription.textContent = "1–9호선·수인분당선과 GTX-A·B·C를 주행할 수 있습니다. GTX의 미개통 역과 B·C노선은 계획 노선 학습 시뮬레이션으로 구분하며, 모든 플레이 노선은 무한모드의 출발·환승 대상에 자동 연결됩니다.";
+    }
+  }
+
+  // v30.0 전국 KTX·KTX-이음·SRT 확장.
+  function configureNationalHighSpeedV30() {
+    CITY_REGION_META.southKorea = { id: "southKorea", label: "대한민국", en: "SOUTH KOREA", short: "전국" };
+
+    (window.NATIONAL_HIGH_SPEED_META?.newLineNumbers || []).forEach((lineNumber) => {
+      const line = window.METRO_LINES[lineNumber];
+      Object.values(line.courses || {}).forEach((course) => {
+        const key = `${lineNumber}:${course.id}`;
+        COURSE_CITY_SEGMENTS[key] = [{ id: "southKorea", stations: course.stations.map((station) => station.name) }];
+        COURSE_REGION_IDS[key] = ["southKorea"];
+      });
+    });
+
+    Object.entries(window.NATIONAL_HIGH_SPEED_CONTEXTS || {}).forEach(([lineNumber, contexts]) => {
+      Object.entries(contexts).forEach(([stationName, context]) => {
+        LINE_SPECIFIC_CONTEXTS[`${lineNumber}:${stationName}`] = context;
+      });
+    });
+
+    const catalogDescription = document.querySelector(".line-select-copy > p");
+    if (catalogDescription) {
+      catalogDescription.textContent = "1–9호선·수인분당선, GTX-A·B·C와 전국 KTX·KTX-이음·SRT 14개 운행계통을 주행할 수 있습니다. 모든 플레이 노선은 무한모드의 출발·환승 대상에 자동 연결됩니다.";
+    }
+  }
+
+  configureGtxV29();
+  configureNationalHighSpeedV30();
   init();
 })();

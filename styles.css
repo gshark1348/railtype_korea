@@ -472,6 +472,43 @@ main { padding-top: 14px; }
   object-position: center;
   transition: transform .45s ease;
 }
+.route-train-image-wrap img[hidden] { display: none; }
+.route-train-image-wrap.is-planned {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--orange) 28%, transparent), transparent 42%),
+    linear-gradient(135deg, #272a30, #111318);
+}
+.route-train-image-wrap.is-planned::after { display: none; }
+.planned-train-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 18px 64px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+.planned-train-placeholder[hidden] { display: none; }
+.planned-train-placeholder span {
+  font-size: .52rem;
+  font-weight: 900;
+  letter-spacing: .16em;
+  color: color-mix(in srgb, var(--orange) 68%, white);
+}
+.planned-train-placeholder strong {
+  margin-top: 4px;
+  font-size: 1.25rem;
+  line-height: 1.1;
+}
+.planned-train-placeholder small {
+  margin-top: 6px;
+  color: rgba(255,255,255,.68);
+  font-size: .54rem;
+  line-height: 1.35;
+}
 .route-train-card:hover img { transform: scale(1.035); }
 .route-setup-line-badge {
   position: absolute;
@@ -507,6 +544,11 @@ main { padding-top: 14px; }
   text-decoration: none;
 }
 .route-train-card figcaption a:hover { color: var(--orange-dark); text-decoration: underline; }
+.network-line-card.is-opening-planned .network-line-status {
+  color: #8a5a00;
+  background: #fff0bd;
+  border-color: rgba(138,90,0,.2);
+}
 .route-setup-grid {
   display: grid;
   grid-template-columns: minmax(310px, .72fr) minmax(520px, 1.28fr);

@@ -1,0 +1,47 @@
+{
+  "version": "30.1",
+  "asOf": "2026-07-16",
+  "actualPhotos": [
+    {
+      "vehicle": "GTX-A A702",
+      "projectFile": "assets/trains/gtx-a.jpg",
+      "author": "Trainholic",
+      "license": "CC BY-SA 4.0",
+      "source": "https://commons.wikimedia.org/wiki/File:GTX-A_Class_A702.jpg"
+    },
+    {
+      "vehicle": "KTX-이음",
+      "projectFile": "assets/trains/ktx-eum.jpg",
+      "author": "Takeshi Aida",
+      "license": "CC BY-SA 2.0",
+      "source": "https://commons.wikimedia.org/wiki/File:Korail_KTX-Eum,_Yongsan_(20240404)_(54220932565).jpg"
+    },
+    {
+      "vehicle": "SRT 130000호대",
+      "projectFile": "assets/trains/srt.jpg",
+      "author": "jmk2765",
+      "license": "CC BY-SA 3.0",
+      "source": "https://commons.wikimedia.org/wiki/File:SRT_train_130000_Series.jpg"
+    }
+  ],
+  "openingPlanned": [
+    {
+      "line": "GTX-B",
+      "image": null,
+      "display": "개통 예정 · 영업 운행 차량 사진 없음"
+    },
+    {
+      "line": "GTX-C",
+      "image": null,
+      "display": "개통 예정 · 영업 운행 차량 사진 없음"
+    }
+  ],
+  "checks": {
+    "playableLines": 27,
+    "removedConceptSvgRuntimeReferences": 0,
+    "actualPhotoFileValidation": "PASS",
+    "plannedPlaceholderSwitching": "PASS",
+    "staticReferences": "PASS",
+    "browserConsoleErrors": 0
+  }
+}

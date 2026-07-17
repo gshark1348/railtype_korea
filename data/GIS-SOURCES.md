@@ -29,3 +29,14 @@ Municipal geometry was not arbitrarily redrawn. All 25 stored features passed to
 - 서울·성남·수원·화성·안산·시흥·인천: 프로젝트의 KOSTAT 기반 시·군 경계 피처
 - 용인: KOSTAT 센서스용 행정구역경계의 수지구·기흥구·처인구를 dissolve한 시 외곽선
 - 웹 렌더링을 위해 위상을 보존하는 범위에서 정점을 단순화하며, 법적 경계 판정·측량 용도로 사용하지 않습니다.
+
+## v29.1 파주시 경계
+
+- 원자료: 국가데이터처·통계청 통계지리정보서비스(SGIS) 센서스용 시군구 행정경계
+- 기준 시점: 2026-04-01
+- 가공본: `vuski/admdongkor` 시군구 light 경계
+- 좌표계: WGS84 / EPSG:4326
+- 적용: 289개 정점을 소수점 6자리로 정규화해 `js/gtx-boundary-data.js`와 `data/paju-boundary-v29.1.geojson`에 저장
+- 라이선스: SGIS 원자료 공공누리 제1유형, `admdongkor` 가공분 CC BY 4.0
+- 검증: 폐합 링, 운정중앙 포함, 파주–고양 접경 최근접 4.34m, 런타임 지도 적재
+- 용도 제한: 교육용 SVG 지도이며 법적 경계·지적·측량 판정용이 아닙니다.

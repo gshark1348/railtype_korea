@@ -1,12 +1,12 @@
-<!doctype html>
+<!doctype html><!-- RAILTYPE KOREA v30.1 -->
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#f7f4ef" />
-  <meta name="description" content="대한민국 철도 노선과 종착역 방향을 선택하고 역명을 입력해 지도 위에 선로를 완성하는 타자 연습 프로토타입" />
+  <meta name="description" content="수도권 전철·GTX와 전국 KTX·KTX-이음·SRT 노선을 선택하고 역명을 입력해 지도 위에 선로를 완성하는 철도 타자 게임" />
   <title>RAILTYPE KOREA — Type the Stations, Trace the Rails</title>
-  <link rel="stylesheet" href="./styles.css?v=28.2.0" />
+  <link rel="stylesheet" href="./styles.css?v=30.1.0" />
 </head>
 <body>
   <div class="app-shell">
@@ -121,7 +121,7 @@
               <span class="section-label">SELECT LINE</span>
               <h2 id="selectLineTitle">노선을 선택하세요.</h2>
             </div>
-            <p>대한민국 철도 노선을 지역과 운영 체계별로 살펴볼 수 있습니다. 현재 완성된 1·2·3·4·5·6·7·8·9호선과 수인분당선은 바로 주행할 수 있으며, 무한모드에서는 이 노선들을 출발·환승 대상으로 이용할 수 있습니다.</p>
+            <p>1–9호선·수인분당선, GTX-A·B·C와 전국 KTX·KTX-이음·SRT 14개 운행계통을 주행할 수 있습니다. 모든 플레이 노선은 무한모드의 출발·환승 대상에 자동 연결됩니다.</p>
           </div>
           <div class="line-buttons" id="lineButtons"></div>
         </section>
@@ -146,7 +146,7 @@
             </div>
 
             <div class="map-stage game-map-stage" id="mapStage">
-              <svg id="gameMapSvg" class="geo-map" viewBox="0 0 1200 760" role="img" aria-label="현재까지 완성된 서울 지하철 노선"></svg>
+              <svg id="gameMapSvg" class="geo-map" viewBox="0 0 1200 760" role="img" aria-label="선택한 수도권 철도 노선과 현재 주행 경로"></svg>
               <div class="map-corner-label north-west" id="northWestLabel">GOYANG</div>
               <div class="map-corner-label south-east" id="southEastLabel">SEOUL</div>
               <div class="map-controls" aria-label="지도 보기 설정">
@@ -374,6 +374,11 @@
         <figure class="route-train-card">
           <div class="route-train-image-wrap">
             <img id="routeTrainImage" src="./assets/trains/line3.jpg" alt="서울 지하철 3호선 전동차" />
+            <div class="planned-train-placeholder" id="routeTrainPlanned" hidden>
+              <span>OPENING PLANNED</span>
+              <strong>개통 예정</strong>
+              <small id="routeTrainPlannedDescription">영업 운행 차량 사진은 개통 후 제공됩니다.</small>
+            </div>
             <span class="route-setup-line-badge" id="routeSetupLineBadge">3</span>
           </div>
           <figcaption>
@@ -514,10 +519,16 @@
   <script src="./js/line8-data.js?v=24.0.0"></script>
   <script src="./js/line9-data.js?v=24.0.0"></script>
   <script src="./js/suin-bundang-data.js?v=27.1.0"></script>
-  <script src="./js/metro-lines.js?v=27.1.0"></script>
+  <script src="./js/ktx-gyeongbu-data.js?v=29.2.0"></script>
+  <script src="./js/ktx-honam-data.js?v=29.2.0"></script>
+  <script src="./js/gtx-data.js?v=29.0.0"></script>
+  <script src="./js/metro-lines.js?v=30.1.0"></script>
+  <script src="./js/national-high-speed-data.js?v=30.1.0"></script>
   <script src="./js/geo-boundaries.js?v=27.1.0"></script>
+  <script src="./js/national-boundary.js?v=29.2.0"></script>
+  <script src="./js/gtx-boundary-data.js?v=29.1.0"></script>
   <script src="./js/community-config.js?v=27.0.0"></script>
   <script src="./js/community.js?v=27.0.0"></script>
-  <script src="./js/app.js?v=28.2.0"></script>
+  <script src="./js/app.js?v=30.1.0"></script>
 </body>
 </html>
